@@ -11,6 +11,7 @@ export default defineConfig({
       '@app': resolve(__dirname, './src/app'),
       '@features': resolve(__dirname, './src/features'),
       '@ui': resolve(__dirname, './src/ui'),
+      '@lib': resolve(__dirname, './src/lib'),
     },
   },
 });

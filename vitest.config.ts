@@ -11,6 +11,16 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+      '@app': resolve(__dirname, './src/app'),
+      '@features': resolve(__dirname, './src/features'),
+      '@shared': resolve(__dirname, './src/shared'),
+      '@ui': resolve(__dirname, './src/ui'),
+      '@lib': resolve(__dirname, './src/lib'),
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
@@ -19,6 +29,13 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
     },
     projects: [
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          include: ['src/**/*.test.{ts,tsx}'],
+        },
+      },
       {
         extends: true,
         plugins: [
@@ -44,13 +61,5 @@ export default defineConfig({
         },
       },
     ],
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-      '@app': resolve(__dirname, './src/app'),
-      '@features': resolve(__dirname, './src/features'),
-      '@shared': resolve(__dirname, './src/shared'),
-    },
   },
 });
