@@ -17,7 +17,7 @@ En cuanto al setup básico del proyecto he utilizado:
 He apostado por Vite por varios motivos:
 
 - Proyecto: Por un lado el proyecto no es un proyecto grande, tiene un par de rutas y funcionalidades muy específicas, eso
-hace que Vite sea la opción en términos de simplicidad de instalación y mantenimiento
+  hace que Vite sea la opción en términos de simplicidad de instalación y mantenimiento
 
 - Agilidad: Tener una estructura sencilla lista para funcionar con su soporte nativo en typescript y la potencia del HMR hace que trabajar sobre el sea una experiencia rápida y sencilla
 
@@ -37,13 +37,22 @@ Herramienta centrada en el estilo y formateo del código según las reglas defin
 
 Herramienta que utiliza scripts antes de un commit. En este caso lo hemos usado como barrera y evitar que pueda pasar algun error que ya haya pasado ESLint y se nos haya podido pasar. También, para mantener una coherencia en el git history, he añadido commitlint para que sigan conventional commits
 
+#### Vitest
+
+Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción idonea, aparte de por su ya rapidez de por si.
+
 ### Estructura del proyecto (TBD)
 
-La elección de estructura del directorio esta basada principalmente en las funcionalidades tan marcadas, no así tanto de sus dominios.  
+La elección de estructura del directorio esta basada principalmente en las funcionalidades tan marcadas, no así tanto de sus dominios.
 
-```
-- src
-  |- app: Aquí alojamos todo el bootstrap de la aplicacion, routers, providers, etc
-  |- features: Todo lo relacionado con la feature, components, hooks, etc
-  |- shared: UI generica, hooks, utils, types comunes
-```
+<!-- ```
+myinvestor-challenge/
+├─ src/
+│  ├─ ui/                      # Componentes UI más atómicos
+│  ├─ components/              # Componentes complejos compuestos por ui
+│  ├─ features/                # Pantallas / secciones
+│  └─ main.tsx                 # Entry point
+│
+├─ e2e/                        # Tests E2E
+
+``` -->
