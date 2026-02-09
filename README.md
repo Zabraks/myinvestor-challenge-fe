@@ -37,9 +37,24 @@ Herramienta centrada en el estilo y formateo del código según las reglas defin
 
 Herramienta que utiliza scripts antes de un commit. En este caso lo hemos usado como barrera y evitar que pueda pasar algun error que ya haya pasado ESLint y se nos haya podido pasar. También, para mantener una coherencia en el git history, he añadido commitlint para que sigan conventional commits
 
+#### Tailwind
+
+Herramienta rapida y sencilla para añadir estilos asi como la base para el tema de la aplicación y la tokenización de estilos
+
+#### Shadcn/ui
+
+Uso Shadcn/UI como base de componentes para disponer de una libreria de componentes, permitiendo más agilidad en el desarrollo sin perder el control total de los estilos del diseño. Además utilizan la accesibilidad de los primitivos de Radix, lo cual permite el desarrollo más sencillo.
+Los componentes forman parte del código del proyecto, se nutren de los estilos de Tailwind y del sistema de tokenizacion en CSS.
+
 #### Vitest
 
 Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción idonea, aparte de por su ya rapidez de por si.
+
+#### React-testing-library (TBD)
+
+#### playwright(TBD)
+
+#### Storybook(TBD)
 
 ### Estructura del proyecto (TBD)
 

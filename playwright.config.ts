@@ -9,6 +9,6 @@ export default defineConfig({
     headless: true,
     baseURL: 'http://localhost:5173',
     viewport: { width: 1280, height: 720 },
-    trace: 'on-first-retry'
-  }
-})
+    trace: 'on-first-retry',
+  },
+});

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../App.css';
+import { Button } from '@ui/Button/Button.tsx';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -7,8 +7,11 @@ function App() {
   return (
     <>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+      <Button>Click me</Button>
+      <div className="card flex items-center gap-4">
+        <button className="btn " onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
