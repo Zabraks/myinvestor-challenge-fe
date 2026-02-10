@@ -58,16 +58,22 @@ Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción ido
 
 ### Estructura del proyecto (TBD)
 
-La elección de estructura del directorio esta basada principalmente en las funcionalidades tan marcadas, no así tanto de sus dominios.
+La elección de estructura del directorios esta centrada en una aquitectura modular por responsabilidades, relativamente rápida, permite una mayor claridad de los distintos aspectos de la aplicación y permite una escalabilidad para el futuro.
 
-<!-- ```
-myinvestor-challenge/
+```
+myinvestor-challenge/ (TBD)
 ├─ src/
-│  ├─ ui/                      # Componentes UI más atómicos
-│  ├─ components/              # Componentes complejos compuestos por ui
-│  ├─ features/                # Pantallas / secciones
+│  ├─ app/                     # Bootstrap de la aplicación
+│  ├─ components/              # Componentes reutilizables de la aplicación
+│  │  └─ ui/                   # Componentes primitivos
+│  ├─ domain/                  # Tipos y reglas compartidas
+│  ├─ features/                # Casos de uso de la aplicación
+│  ├─ lib/                     # utilidades genéricas
+│  ├─ pages/                   # Páginas de la aplicación
+│  ├─ services/                # gestión de peticiones y adaptadores externos
+│  ├─ styles/                  # estilos globales y conf de Tailwind
 │  └─ main.tsx                 # Entry point
 │
 ├─ e2e/                        # Tests E2E
 
-``` -->
+```
