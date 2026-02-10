@@ -17,6 +17,7 @@
     "react",
     "react-hooks",
     "import",
+    "@tanstack/query",
     "prettier"
   ],
   "extends": [
@@ -27,6 +28,7 @@
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:@tanstack/query/recommended",
     "plugin:prettier/recommended",
     "plugin:storybook/recommended"
   ],
@@ -37,7 +39,8 @@
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
-        "project": "./tsconfig.app.json"
+        "project": "./tsconfig.app.json",
+        "extensions": [".ts", ".tsx", ".js", ".jsx"]
       }
     }
   },
