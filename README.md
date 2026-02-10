@@ -56,6 +56,10 @@ Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción ido
 
 #### Storybook(TBD)
 
+### Librerias
+
+#### React-router-dom (TBD)
+
 ### Estructura del proyecto (TBD)
 
 La elección de estructura del directorios esta centrada en una aquitectura modular por responsabilidades, relativamente rápida, permite una mayor claridad de los distintos aspectos de la aplicación y permite una escalabilidad para el futuro.
