@@ -1,23 +1,20 @@
-import { useState } from 'react';
-import { Button } from '@ui/Button/Button.tsx';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Layout from '@components/Layout.tsx';
+
+import Portfolio from '@pages/Portfolio.tsx';
+import Funds from '@pages/Funds.tsx';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <Button>Click me</Button>
-      <div className="card flex items-center gap-4">
-        <button className="btn " onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/portfolio" />} />
+        <Route path="portfolio" element={<Portfolio />} />
+        <Route path="funds" element={<Funds />} />
+
+        <Route path="*" element={<Navigate to="/portfolio" />} />
+      </Route>
+    </Routes>
   );
 }
 
