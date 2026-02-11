@@ -10,6 +10,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@app': resolve(__dirname, './src/app'),
       '@components': resolve(__dirname, './src/components'),
+      '@context': resolve(__dirname, './src/context'),
       '@ui': resolve(__dirname, './src/components/ui'),
       '@domain': resolve(__dirname, './src/domain'),
       '@features': resolve(__dirname, './src/features'),

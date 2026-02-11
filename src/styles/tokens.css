@@ -1,0 +1,69 @@
+/* ================================
+   Design Tokens
+   ================================ */
+
+/* --------- Light theme --------- */
+:root {
+  /* Radius */
+  --radius: 0.625rem;
+
+  /* Backgrounds */
+  --background: oklch(98.511% 0.00011 271.152);
+  --foreground: oklch(0.145 0 0);
+
+  --card: oklch(100% 0.00011 271.152);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  /* Brand */
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(42.061% 0.20681 262.757);
+  --secondary-foreground: oklch(0.205 0 0);
+
+  /* Neutral */
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+
+  /* Borders */
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  /* Icon sizes */
+  --icon-xs: 0.75rem;
+  --icon-sm: 1rem;
+  --icon-md: 1.25rem;
+
+    /* Icon colors */
+  --icon-base: var(--muted-foreground);
+  --icon-selected: var(--secondary);
+}
+
+/* --------- Dark theme --------- */
+/* .dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+} */

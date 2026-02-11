@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@domain/*": ["./src/domain/*"],
       "@features/*": ["./src/features/*"],
