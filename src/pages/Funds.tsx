@@ -10,6 +10,7 @@ const Funds = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const columns = useColumns();
 
   const { data: response } = useFundsList({
     page,
