@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '@components/Header/Header.tsx';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { Toaster } from '@ui/Sonner/Sonner';
 
 const Layout = () => {
   return (
@@ -11,6 +12,7 @@ const Layout = () => {
           <Outlet />
         </main>
       </div>
+      <Toaster />
     </FundActionDialogProvider>
   );
 };

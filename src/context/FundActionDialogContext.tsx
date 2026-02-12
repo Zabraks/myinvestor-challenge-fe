@@ -8,11 +8,11 @@ import {
 interface FundActionDialogState {
   open: boolean;
   action: FundAction | null;
-  fund: Fund | null;
+  data: Fund | null;
 }
 
 interface FundActionDialogContextType {
-  openDialog: (action: FundAction, fund?: Fund) => void;
+  openDialog: (action: FundAction, data?: Fund) => void;
   closeDialog: () => void;
 }
 
@@ -26,15 +26,15 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
   const [state, setState] = useState<FundActionDialogState>({
     open: false,
     action: null,
-    fund: null,
+    data: null,
   });
 
-  const openDialog = (action: FundAction, fund?: Fund) => {
-    setState({ open: true, action, fund: fund ?? null });
+  const openDialog = (action: FundAction, data?: Fund) => {
+    setState({ open: true, action, data: data ?? null });
   };
 
   const closeDialog = () => {
-    setState({ open: false, action: null, fund: null });
+    setState({ open: false, action: null, data: null });
   };
 
   return (
@@ -43,7 +43,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
       <FundActionDialog
         open={state.open}
         action={state.action}
-        fund={state.fund}
+        data={state.data}
         onClose={closeDialog}
       />
     </FundActionDialogContext.Provider>

@@ -9,8 +9,10 @@ import {
   DropdownMenuSeparator,
 } from '@ui/DropdownMenu/DropdownMenu';
 
-export const RowActionsMenu = () => {
+export const RowActionsMenu = ({ data }) => {
   const { openDialog } = useFundActionDialog();
+
+  const rowData = data.original;
 
   return (
     <DropdownMenu>
@@ -21,12 +23,12 @@ export const RowActionsMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => openDialog('buy')}>
+        <DropdownMenuItem onClick={() => openDialog('buy', rowData)}>
           <ArrowRightToLine />
           Comprar
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => openDialog('show')}>
+        <DropdownMenuItem onClick={() => openDialog('show', rowData)}>
           <Eye />
           Ver Detalle
         </DropdownMenuItem>

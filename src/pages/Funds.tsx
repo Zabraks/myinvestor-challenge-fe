@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { columns } from '@/features/fundsList/components/FundsTable/columns';
+import { useColumns } from '@/features/fundsList/components/FundsTable/columns';
 import { FundsTable } from '@features/fundsList/components/FundsTable/FundsTable';
 import { LimitPageSelector } from '@features/fundsList/components/FundsTable/LimitPageSelector/LimitPageSelector';
 import { TablePagination } from '@features/fundsList/components/FundsTable/TablePagination/TablePagination';
@@ -11,6 +11,7 @@ const Funds = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const columns = useColumns();
 
   const { data: response } = useFundsList({
     page,
