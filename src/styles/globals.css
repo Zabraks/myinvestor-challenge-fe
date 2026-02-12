@@ -47,6 +47,7 @@
   /* Icon colors */
   --color-icon-base: var(--icon-base);
   --color-icon-selected: var(--icon-selected);
+  --color-button-primary: var(--color-secondary);
 }
 
 /* ================================
