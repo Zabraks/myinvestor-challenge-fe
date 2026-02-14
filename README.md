@@ -50,41 +50,31 @@ Los componentes forman parte del código del proyecto, se nutren de los estilos 
 
 Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción idonea, aparte de por su ya rapidez de por si.
 
-#### React-testing-library (TBD)
+#### React Testing Library + Tests de Integración
+
+Para los tests de componentes hemos optado por **React Testing Library** junto con **@testing-library/user-event** para simular interacciones reales del usuario.
+
+**Estrategia de Tests de Integración para FundsTable**
+
+Hemos priorizado los tests de **integridad estructural** y **navegación** (ordenación/paginación) sobre otros aspectos por las siguientes razones:
+
 
 #### Playwright
 
 He implementado Playwright como herramienta de testing E2E y visual regression. Aunque es una tecnología relativamente nueva para mí, he aplicado los mismos principios de ingeniería de software que uso en cualquier otro código: **DRY**, **Clean Code** y **Single Responsibility**.
 
-**¿Por qué Playwright sobre Cypress o Selenium?**
-
-| Criterio | Playwright | Cypress | Selenium |
-|----------|------------|---------|----------|
-| Soporte multi-navegador | ✅ Chromium, Firefox, WebKit | ⚠️ Limitado | ✅ Todos |
-| Visual Regression nativo | ✅ `toHaveScreenshot()` | ❌ Requiere plugin | ❌ Requiere herramientas externas |
-| Velocidad | ✅ Muy rápido | ✅ Rápido | ⚠️ Más lento |
-| API moderna | ✅ Async/await nativo | ⚠️ Cadena de comandos | ⚠️ API verbosa |
-| Auto-wait | ✅ Inteligente | ✅ Sí | ❌ Manual |
-
 **Arquitectura de tests:**
 
 ```
 tests/
-├── e2e/                           # Tests funcionales end-to-end
-│   ├── funds-list.smoke.spec.ts   # Verificación rápida de funcionalidad crítica
-│   ├── funds-list.sorting.spec.ts # Tests de ordenación de columnas
-│   └── funds-list.pagination.spec.ts # Tests de navegación paginada
-├── visual/                        # Tests de regresión visual
-│   ├── funds-table.visual.spec.ts # Screenshots para detectar cambios UI
-│   └── __snapshots__/             # Baselines por proyecto (desktop/mobile)
-├── fixtures/                      # Configuración reutilizable
-│   └── funds-api.fixture.ts       # Interceptación de API con datos mock
-└── utils/                         # Utilidades compartidas
-    ├── selectors.ts               # Selectores centralizados (accesibles)
-    └── mock-data.ts               # Generador de datos determinísticos
+├── e2e/                                # Tests funcionales end-to-end
+├── visual/                             # Tests de regresión visual
+│   └── __snapshots__/                  # Baselines por proyecto (desktop/mobile)
+├── fixtures/                           # Configuración reutilizable
+└── utils/                              # Utilidades compartidas
 ```
 
-**Decisiones técnicas clave:**
+**Decisiones técnicas:**
 
 1. **Fixtures personalizados**: Extiendo `test` de Playwright con `fundsPage` y `mockFundsApi` para que cada test tenga la API mockeada automáticamente. Esto sigue el principio DRY - la configuración del mock se hace una vez y se reutiliza.
 
@@ -94,74 +84,15 @@ tests/
 
 4. **Separación de responsabilidades**: Cada archivo de test tiene un propósito claro (smoke, sorting, pagination, visual). Facilita ejecutar subconjuntos según necesidad.
 
-**Ejecución de tests:**
-
-```bash
-# Ejecutar todos los tests E2E
-npx playwright test --project=desktop-chrome
-
-# Ejecutar solo smoke tests (rápido, ideal para CI en PRs)
-npx playwright test funds-list.smoke
-
-# Ejecutar tests visuales y actualizar baselines si hay cambios intencionales
-npx playwright test --project=visual-desktop --update-snapshots
-
-# Ver el reporte HTML tras la ejecución
-npx playwright show-report
-
-# Modo UI interactivo para debugging
-npx playwright test --ui
-```
-
-**Estrategia de screenshots:**
-
-Los tests visuales capturan screenshots de:
-- Tabla completa de fondos
-- Página completa (viewport)
-- Controles de paginación
-- Estados específicos (menú abierto, columna ordenada, lista vacía)
-
-Los baselines se guardan en `tests/visual/__snapshots__/{project-name}/` separados por dispositivo (desktop vs mobile) para comparaciones precisas.
-
-**Nota de honestidad profesional:** Aunque mi experiencia con la sintaxis específica de Playwright es reciente, he aplicado los mismos principios de diseño que uso en código de producción. La suite es mantenible, los tests siguen el flujo real del usuario, y la estructura permite escalar sin fricción.
-
 #### Storybook (TBD)
 
-#### MSW (Mock Service Worker)
+#### MSW (Mock Service Worker) (TBD)
 
-Para el mocking de peticiones HTTP he elegido MSW frente a otras alternativas como `nock` o mocks manuales de `fetch`. Las razones principales:
+Para el mocking de peticiones HTTP he elegido MSW
 
-- **Intercepción a nivel de red**: MSW intercepta las peticiones a nivel del Service Worker, lo que significa que el código de producción no necesita ninguna modificación. Las llamadas a `fetch` funcionan exactamente igual que en producción.
+#### Fishery + Faker.js (TBD)
 
-- **Compartido entre tests y Storybook**: Los mismos handlers se reutilizan tanto en tests unitarios con Vitest como en Storybook para desarrollo visual. Esto evita duplicar código de mocks y mantiene consistencia.
-
-- **API declarativa**: Los handlers se definen de forma clara y legible, facilitando el mantenimiento.
-
-- **Soporte para MSW v2**: He usado la API moderna con `http` y `HttpResponse` en lugar de la API legacy (`rest`), preparando el proyecto para el futuro.
-
-#### Fishery + Faker.js
-
-Para la generación de datos de prueba he optado por la combinación de **fishery** (factories tipadas) + **@faker-js/faker** (generación de datos realistas). Esta decisión se tomó tras evaluar varias alternativas:
-
-| Alternativa | Evaluación |
-|-------------|------------|
-| Datos hardcodeados | ❌ Poco mantenible, difícil de escalar, propenso a errores cuando cambian los tipos |
-| Solo Faker.js | ⚠️ Funciona bien pero no tiene soporte nativo para factories ni traits |
-| Zod + zod-mock | ⚠️ Interesante pero requiere migrar todos los tipos a schemas Zod |
-| @mswjs/data | ⚠️ Potente para simular bases de datos pero excesivo para este caso de uso |
-| **Fishery + Faker** | ✅ Balance ideal entre tipado, flexibilidad y simplicidad |
-
-**Beneficios de esta combinación:**
-
-1. **Type-safe por defecto**: Las factories están tipadas con los interfaces del dominio (`ApiFund`, etc.). Si cambia el tipo, TypeScript detecta inmediatamente qué factories necesitan actualizarse.
-
-2. **Datos realistas**: Faker genera nombres de empresas, valores numéricos en rangos coherentes, y símbolos bursátiles que hacen los tests más representativos.
-
-3. **Tests determinísticos**: La función `generateDeterministicFunds()` usa un seed fijo, garantizando que los mismos datos se generen siempre. Esto es crítico para tests de snapshot y debugging.
-
-4. **Traits para escenarios específicos**: Fishery permite definir variantes (fondos con alta rentabilidad, fondos en pérdidas, etc.) sin duplicar código.
-
-5. **Sequences automáticos**: Los IDs se generan secuencialmente (`fund-001`, `fund-002`...), evitando colisiones y facilitando la trazabilidad.
+Para la generación de datos de prueba he optado por la combinación de **fishery** (factories tipadas) + **@faker-js/faker** (generación de datos realistas).
 
 **Ejemplo de uso:**
 

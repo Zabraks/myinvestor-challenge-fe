@@ -30,7 +30,19 @@ export default defineConfig({
   test: {
     globals: true,
     coverage: {
-      reporter: ['text', 'json', 'html'],
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.test.{ts,tsx}',
+        'src/**/*.stories.{ts,tsx}',
+        'src/**/*.d.ts',
+        'src/mocks/**',
+        'src/main.tsx',
+        'src/setupTests.ts',
+        'src/**/__tests__/**',
+      ],
     },
     projects: [
       {
