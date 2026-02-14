@@ -1,6 +1,15 @@
 import { ArrowDownUp, ArrowUp, ArrowDown } from 'lucide-react';
+import type { Column } from '@tanstack/react-table';
 
-export const ColumnHeader = ({ column, title }) => {
+interface ColumnHeaderProps<TData, TValue> {
+  column: Column<TData, TValue>;
+  title: string;
+}
+
+export const ColumnHeader = <TData, TValue>({
+  column,
+  title,
+}: ColumnHeaderProps<TData, TValue>) => {
   return (
     <button className="flex items-center gap-1" onClick={column.getToggleSortingHandler()}>
       {title}

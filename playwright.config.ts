@@ -1,14 +1,95 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
+/**
+ * Configuración de Playwright para tests E2E y Visual Regression.
+ *
+ * Decisiones técnicas:
+ * - Separamos tests por proyecto (desktop, mobile, visual) para ejecutarlos de forma independiente
+ * - Los snapshots se guardan por proyecto/dispositivo para mantener comparaciones consistentes
+ * - Usamos webServer para levantar la app automáticamente antes de los tests
+ */
 export default defineConfig({
-  testDir: './tests/e2e',
+  /* Directorio raíz de tests */
+  testDir: './tests',
+
+  /* Directorio para resultados (traces, videos, screenshots de fallos) */
   outputDir: './tests/test-results',
+
+  /* Timeout por test - 30s es suficiente para una app de este tamaño */
   timeout: 30 * 1000,
-  retries: 0,
+
+  /* Timeout para expect() - evita falsos positivos por renders lentos */
+  expect: {
+    timeout: 10 * 1000,
+    /* Configuración de snapshots visuales */
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.01, // Tolerancia del 1% para diferencias menores (antialiasing, etc.)
+    },
+  },
+
+  /* Sin reintentos en desarrollo para feedback rápido */
+  retries: process.env.CI ? 2 : 0,
+
+  /* Ejecutar tests en paralelo - máximo de workers según entorno */
+  workers: process.env.CI ? 1 : undefined,
+
+  /* Reporter: lista en desarrollo, HTML en CI para análisis detallado */
+  reporter: process.env.CI ? 'html' : 'list',
+
+  /* Configuración compartida entre todos los proyectos */
   use: {
     headless: true,
     baseURL: 'http://localhost:5173',
-    viewport: { width: 1280, height: 720 },
+
+    /* Capturar trace solo en primer reintento para debugging */
     trace: 'on-first-retry',
+
+    /* Screenshot en caso de fallo */
+    screenshot: 'only-on-failure',
+  },
+
+  /* Proyectos: Desktop, Mobile y Visual Regression */
+  projects: [
+    {
+      name: 'desktop-chrome',
+      testDir: './tests/e2e',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+      },
+    },
+    {
+      name: 'mobile-chrome',
+      testDir: './tests/e2e',
+      use: {
+        ...devices['Pixel 5'],
+      },
+    },
+    {
+      name: 'visual-desktop',
+      testDir: './tests/visual',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+      },
+      /* Los tests visuales necesitan snapshots de referencia */
+      snapshotDir: './tests/visual/__snapshots__',
+    },
+    {
+      name: 'visual-mobile',
+      testDir: './tests/visual',
+      use: {
+        ...devices['Pixel 5'],
+      },
+      snapshotDir: './tests/visual/__snapshots__',
+    },
+  ],
+
+  /* Levantar servidor de desarrollo antes de ejecutar tests */
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:5173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000, // 2 minutos para el build inicial
   },
 });

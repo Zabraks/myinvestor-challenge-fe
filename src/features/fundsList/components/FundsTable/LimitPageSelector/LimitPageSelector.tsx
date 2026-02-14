@@ -8,10 +8,15 @@ import {
   SelectValue,
 } from '@ui/Select/Select';
 
-export const LimitPageSelector = ({ setPage, setLimit }) => {
-  const handleSetLimit = (value) => {
+interface LimitPageSelectorProps {
+  setPage: (page: number) => void;
+  setLimit: (limit: number) => void;
+}
+
+export const LimitPageSelector = ({ setPage, setLimit }: LimitPageSelectorProps) => {
+  const handleSetLimit = (value: string) => {
     setPage(1);
-    setLimit(value);
+    setLimit(Number(value));
   };
 
   return (

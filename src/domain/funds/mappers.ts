@@ -1,6 +1,6 @@
-import type { FundTableItem } from '@domain/funds/types';
+import type { FundTableItem, ApiFund } from '@domain/funds/types';
 
-export const mapFundFromApi = (apiFund): FundTableItem => ({
+export const mapFundFromApi = (apiFund: ApiFund): FundTableItem => ({
   id: apiFund.id,
   name: apiFund.name,
   category: apiFund.category,

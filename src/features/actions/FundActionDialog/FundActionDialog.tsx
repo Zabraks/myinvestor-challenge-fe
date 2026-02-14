@@ -1,6 +1,21 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/Dialog/Dialog';
 
-export function FundActionDialog({ open, action, fund, onClose }) {
+export type FundAction = 'buy' | 'sell' | 'transfer' | 'show';
+
+export interface Fund {
+  id: string;
+  name: string;
+  [key: string]: string | number | boolean | undefined;
+}
+
+interface FundActionDialogProps {
+  readonly open: boolean;
+  readonly action: FundAction | null;
+  readonly fund: Fund | null;
+  readonly onClose: () => void;
+}
+
+export function FundActionDialog({ open, action, fund, onClose }: FundActionDialogProps) {
   if (!fund || !action) return null;
 
   return (

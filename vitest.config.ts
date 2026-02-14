@@ -21,6 +21,7 @@ export default defineConfig({
       '@domain': resolve(__dirname, './src/domain'),
       '@features': resolve(__dirname, './src/features'),
       '@lib': resolve(__dirname, './src/lib'),
+      '@mocks': resolve(__dirname, './src/mocks'),
       '@pages': resolve(__dirname, './src/pages'),
       '@services': resolve(__dirname, './src/services'),
       '@styles': resolve(__dirname, './src/styles'),
@@ -28,8 +29,6 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
     coverage: {
       reporter: ['text', 'json', 'html'],
     },
@@ -38,7 +37,9 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'unit',
+          environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: './src/setupTests.ts',
         },
       },
       {
