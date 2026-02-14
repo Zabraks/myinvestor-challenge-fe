@@ -24,6 +24,7 @@ export const BuyFundForm = ({ action, onSuccess, data }: FundActionFormProps) =>
     buyFund({
       fundId: data.id,
       amount: formData.amount,
+      fundName: data.name,
     });
   };
 

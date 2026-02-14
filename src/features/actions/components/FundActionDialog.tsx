@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import {
   Dialog,
   DialogDescription,
@@ -9,6 +10,15 @@ import {
 import { BuyFundForm } from '@features/actions/components/BuyFundForm';
 import { SellFundForm } from '@features/actions/components/SellFundForm';
 import { FundDetails } from '@features/actions/components/FundDetails';
+import { TransferFundForm } from '@features/actions/components/TransferFundForm';
+
+import type { DialogAction } from '@context/FundActionDialogContext';
+import type { FundTableItem } from '@domain/funds/types';
+
+interface ConfigItem {
+  title: string;
+  component: ComponentType<FundActionProps>;
+}
 
 const ACTION_CONFIG = {
   buy: {
@@ -19,18 +29,25 @@ const ACTION_CONFIG = {
     title: 'Vender fondo',
     component: SellFundForm,
   },
-  // transfer: {
-  //   title: 'Traspasar fondo',
-  //   component: TransferFundForm,
-  // },
+  transfer: {
+    title: 'Traspasar fondo',
+    component: TransferFundForm,
+  },
   show: {
     title: 'Detalles del fondo',
     component: FundDetails,
   },
-} as const;
+} as const satisfies Record<DialogAction, ConfigItem>;
 
-export function FundActionDialog({ open, action, data, onClose }) {
-  if (!data || !action) return null;
+export interface FundActionProps {
+  fundId: string;
+  action?: DialogAction;
+  onSuccess?: () => void;
+  data?: FundTableItem;
+}
+
+export function FundActionDialog({ open, action, data, fundId, onClose }) {
+  if (!fundId || !action) return null;
 
   const config = ACTION_CONFIG[action];
   const ContentComponent = config.component;
@@ -42,7 +59,7 @@ export function FundActionDialog({ open, action, data, onClose }) {
           <DialogTitle>{config.title}</DialogTitle>
           <DialogDescription>{data?.name}</DialogDescription>
         </DialogHeader>
-        <ContentComponent data={data} onSuccess={onClose} action={action} />
+        <ContentComponent data={data} onSuccess={onClose} action={action} fundId={fundId} />
       </DialogContent>
     </Dialog>
   );

@@ -23,6 +23,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
   const [state, setState] = useState<FundActionDialogState>({
     open: false,
     action: null,
+    id: null,
     data: null,
   });
 
@@ -31,7 +32,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
   };
 
   const closeDialog = () => {
-    setState({ open: false, action: null, data: null });
+    setState({ open: false, action: null, id: null, data: null });
   };
 
   const contextValue = useMemo(() => ({ openDialog, closeDialog }), []);
@@ -42,6 +43,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
       <FundActionDialog
         open={state.open}
         action={state.action}
+        fundId={state.id}
         data={state.data}
         onClose={closeDialog}
       />

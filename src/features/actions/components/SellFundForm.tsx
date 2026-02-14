@@ -26,13 +26,19 @@ export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) =
 
   const onSubmit = (formData: SellFundFormData) => {
     sellFund({
-      fundId: data.id,
+      fundId: fundId,
       amount: formData.amount,
+      fundName: data.name,
     });
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-end">
+        <p className="text-sm">
+          Cantidad disponible: <span className="font-bold">{data.quantity}</span>
+        </p>
+      </div>
       <form id={`form-${action}-fund`} onSubmit={form.handleSubmit(onSubmit)}>
         <Controller
           name="amount"
@@ -68,6 +74,6 @@ export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) =
           Enviar
         </Button>
       </DialogFooter>
-    </>
+    </div>
   );
 };
