@@ -2,6 +2,8 @@ import { usePortfolio } from '../queries/usePortfolio';
 import { useFundsCatalog } from '@features/portfolio/queries/useFundsCatalog';
 import { sortByName } from '@domain/portfolio/utils/sortByName';
 import { groupByCategory } from '@domain/portfolio/utils/groupByCategory';
+import { CATEGORY_LABELS } from '@/domain/portfolio/constants';
+import type { CategoryKey } from '@/domain/portfolio/constants';
 
 import type { FundTableItem } from '@/domain/funds/types';
 
@@ -26,10 +28,12 @@ export function usePortfolioViewModel() {
   const enriched = portfolioQuery.data.items.map((item) => {
     const fund = fundsById.get(item.id);
 
+    const rawCategory = fund?.category as CategoryKey;
+
     return {
       ...item,
-      name: fund?.name ?? 'Unknown fund',
-      category: fund?.category ?? 'Other',
+      name: fund?.name ?? 'fondo desconocido',
+      category: CATEGORY_LABELS[rawCategory] ?? rawCategory ?? 'Otros',
     };
   });
 

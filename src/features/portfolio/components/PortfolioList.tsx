@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { PortfolioItemType } from '@domain/portfolio/models';
 import { ItemGroup } from '@ui/Item/Item';
 
@@ -7,6 +8,7 @@ import type { CategoryGroup } from '@domain/portfolio/utils/groupByCategory';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
 import { BanknoteX } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { SubHeader } from '@ui/SubHeader/SubHeader';
 
 export const PortfolioList = ({ items }: { items: CategoryGroup<PortfolioItemType>[] }) => {
   const navigate = useNavigate();
@@ -16,12 +18,12 @@ export const PortfolioList = ({ items }: { items: CategoryGroup<PortfolioItemTyp
       <ItemGroup className="gap-4">
         {items.length ? (
           items.map(({ nameCategory, items: subItems }) => (
-            <>
-              <h3>{nameCategory}</h3>
+            <Fragment key={nameCategory}>
+              <SubHeader>{nameCategory}</SubHeader>
               {subItems.map((item) => (
                 <PortfolioItem key={item.id} item={item} />
               ))}
-            </>
+            </Fragment>
           ))
         ) : (
           <InfoSection
