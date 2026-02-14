@@ -33,6 +33,7 @@ export const BuyFundForm = ({ action, onSuccess, data }) => {
     buyFund({
       fundId: data.id,
       amount: formData.amount,
+      fundName: data.name,
     });
   };
 

@@ -8,8 +8,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useSellFund } from '@features/actions/queries/useSellFund';
+import type { FundActionProps } from './FundActionDialog';
 
-export const SellFundForm = ({ action, onSuccess, data }) => {
+export const SellFundForm = ({ action, onSuccess, data, fundId }: FundActionProps) => {
   const formSchema = z.object({
     amount: z
       .number({
@@ -17,7 +18,7 @@ export const SellFundForm = ({ action, onSuccess, data }) => {
         invalid_type_error: 'El valor introducido ha de ser un número',
       })
       .nonnegative('La cantidad no puede ser negativa')
-      .max(10000, 'La cuantía no puede superar los 10000€'),
+      .max(data.quantity, 'El valor no puede ser superior a la cantidad disponible'),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,13 +32,19 @@ export const SellFundForm = ({ action, onSuccess, data }) => {
 
   const onSubmit = (formData: z.infer<typeof formSchema>) => {
     sellFund({
-      fundId: data.id,
+      fundId: fundId,
       amount: formData.amount,
+      fundName: data.name,
     });
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-end">
+        <p className="text-sm">
+          Cantidad disponible: <span className="font-bold">{data.quantity}</span>
+        </p>
+      </div>
       <form id={`form-${action}-fund`} onSubmit={form.handleSubmit(onSubmit)}>
         <Controller
           name="amount"
@@ -73,6 +80,6 @@ export const SellFundForm = ({ action, onSuccess, data }) => {
           Enviar
         </Button>
       </DialogFooter>
-    </>
+    </div>
   );
 };

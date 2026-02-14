@@ -1,6 +1,7 @@
 export interface BuyFundInput {
   fundId: string;
   amount: number;
+  fundName: string;
 }
 
 export interface BuyFundResult {
