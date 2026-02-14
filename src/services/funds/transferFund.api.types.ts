@@ -1,8 +1,10 @@
-export interface BuyFundApiRequest {
+export interface TransferFundApiRequest {
+  fromFundId: string;
+  toFundId: string;
   quantity: number;
 }
 
-export interface BuyFundApiResponse {
+export interface TransferFundApiResponse {
   message: string;
   data: {
     portfolio: Array<{

@@ -44,10 +44,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
       <FundActionDialog
         open={state.open}
         action={state.action}
-<<<<<<< HEAD
         fundId={state.id}
-=======
->>>>>>> 099eb30 (feat(actions): create buy, sell & show detail actions)
         data={state.data}
         onClose={closeDialog}
       />

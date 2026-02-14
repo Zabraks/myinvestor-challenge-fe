@@ -1,4 +1,3 @@
-// services/funds/buyFund.api.types.ts
 export interface SellFundApiRequest {
   quantity: number;
 }

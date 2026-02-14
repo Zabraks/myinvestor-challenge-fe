@@ -1,5 +1,5 @@
 type Category = 'GLOBAL' | 'TECH' | 'HEALTH' | 'MONEY_MARKET';
-type Currency = 'USD' | 'EUR';
+export type Currency = 'USD' | 'EUR';
 
 export interface FundTableItem {
   id: string;

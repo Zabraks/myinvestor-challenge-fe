@@ -1,7 +1,11 @@
 import type { SellFundApiRequest, SellFundApiResponse } from '@services/funds/sellFund.api.types';
+import type { SellFundResult } from '@domain/funds/sell';
 import { mapSellFundFromApi } from '@services/funds/sellFund.adapter';
 
-export const sellFundApi = async (fundId: string, payload: SellFundApiRequest) => {
+export const sellFundApi = async (
+  fundId: string,
+  payload: SellFundApiRequest
+): Promise<SellFundResult> => {
   const res = await fetch(`http://localhost:3000/funds/${fundId}/sell`, {
     method: 'POST',
     headers: {

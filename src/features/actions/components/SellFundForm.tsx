@@ -28,7 +28,7 @@ export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) =
 
   const onSubmit = (formData: SellFormData) => {
     sellFund({
-      fundId: data.id,
+      fundId: fundId,
       amount: formData.amount,
       fundName: data.name,
     });
