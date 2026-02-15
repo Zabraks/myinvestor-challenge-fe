@@ -1,7 +1,10 @@
-import type { SellFundApiRequest, SellFundApiResponse } from '@services/funds/sellFund.api.types';
+import type {
+  FundActionApiRequest,
+  FundActionApiResponse,
+} from '@services/funds/fundAction.api.types';
 import { mapSellFundFromApi } from '@services/funds/sellFund.adapter';
 
-export const sellFundApi = async (fundId: string, payload: SellFundApiRequest) => {
+export const sellFundApi = async (fundId: string, payload: FundActionApiRequest) => {
   const res = await fetch(`http://localhost:3000/funds/${fundId}/sell`, {
     method: 'POST',
     headers: {
@@ -14,7 +17,7 @@ export const sellFundApi = async (fundId: string, payload: SellFundApiRequest) =
     throw new Error('Error selling fund');
   }
 
-  const data: SellFundApiResponse = await res.json();
+  const data: FundActionApiResponse = await res.json();
 
   return mapSellFundFromApi(data);
 };

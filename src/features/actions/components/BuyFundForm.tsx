@@ -3,33 +3,24 @@ import { DialogFooter, DialogClose } from '@ui/Dialog/Dialog';
 import { Field, FieldError, FieldLabel } from '@ui/Field/Field';
 import { Input } from '@ui/Input/Input';
 
-import * as z from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useBuyFund } from '@features/actions/queries/useBuyFund';
+import { buyFundSchema, type BuyFundFormData } from '@domain/funds/validation';
+import type { FundActionFormProps } from '@features/actions/types';
 
-export const BuyFundForm = ({ action, onSuccess, data }) => {
-  const formSchema = z.object({
-    amount: z
-      .number({
-        required_error: 'El campo debe ser obligatorio',
-        invalid_type_error: 'El valor introducido ha de ser un número',
-      })
-      .nonnegative('La cantidad no puede ser negativa')
-      .max(10000, 'La cuantía no puede superar los 10000€'),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export const BuyFundForm = ({ action, onSuccess, data }: FundActionFormProps) => {
+  const form = useForm<BuyFundFormData>({
+    resolver: zodResolver(buyFundSchema),
     defaultValues: {
       amount: 0,
     },
   });
 
-  const { mutate: buyFund } = useBuyFund(onSuccess);
+  const { mutate: buyFund } = useBuyFund({ onSuccess });
 
-  const onSubmit = (formData: z.infer<typeof formSchema>) => {
+  const onSubmit = (formData: BuyFundFormData) => {
     buyFund({
       fundId: data.id,
       amount: formData.amount,

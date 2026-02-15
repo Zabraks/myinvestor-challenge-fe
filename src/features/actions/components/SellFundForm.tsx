@@ -1,35 +1,30 @@
+import { useMemo } from 'react';
 import { Button } from '@ui/Button/Button';
 import { DialogFooter, DialogClose } from '@ui/Dialog/Dialog';
 import { Field, FieldError, FieldLabel } from '@ui/Field/Field';
 import { Input } from '@ui/Input/Input';
 
-import * as z from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useSellFund } from '@features/actions/queries/useSellFund';
+import { sellFundSchemaType, type SellFundFormData } from '@domain/funds/validation';
+import type { FundActionFormProps } from '@features/actions/types';
 
-export const SellFundForm = ({ action, onSuccess, data }) => {
-  const formSchema = z.object({
-    amount: z
-      .number({
-        required_error: 'El campo debe ser obligatorio',
-        invalid_type_error: 'El valor introducido ha de ser un número',
-      })
-      .nonnegative('La cantidad no puede ser negativa')
-      .max(10000, 'La cuantía no puede superar los 10000€'),
-  });
+export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) => {
+  const maxPosition = data.position ?? 0;
+  const sellFundSchema = useMemo(() => sellFundSchemaType(maxPosition), [maxPosition]);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<SellFundFormData>({
+    resolver: zodResolver(sellFundSchema),
     defaultValues: {
       amount: 0,
     },
   });
 
-  const { mutate: sellFund } = useSellFund(onSuccess);
+  const { mutate: sellFund } = useSellFund({ onSuccess });
 
-  const onSubmit = (formData: z.infer<typeof formSchema>) => {
+  const onSubmit = (formData: SellFundFormData) => {
     sellFund({
       fundId: data.id,
       amount: formData.amount,
