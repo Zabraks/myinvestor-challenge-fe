@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { http, HttpResponse } from 'msw';
 import { FundsTable } from './FundsTable';
-import { columns } from './columns';
+import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
 import { fundFactory } from '@/mocks/factories';
 import { mapFundFromApi } from '@/domain/funds/mappers';
 import type { GetFundsApiResponse } from '@/domain/funds/types';
@@ -36,7 +36,7 @@ const tableData = fundsFromFactory.map(mapFundFromApi);
 
 export const Default: Story = {
   args: {
-    columns,
+    useColumns,
     data: tableData,
     sorting: [],
     handleSorting: noop,
@@ -48,7 +48,7 @@ const techTableData = techFunds.map(mapFundFromApi);
 
 export const TechFundsOnly: Story = {
   args: {
-    columns,
+    useColumns,
     data: techTableData,
     sorting: [],
     handleSorting: noop,
@@ -67,7 +67,7 @@ const highPerformanceData = highPerformanceFunds.map(mapFundFromApi);
 
 export const HighPerformance: Story = {
   args: {
-    columns,
+    useColumns,
     data: highPerformanceData,
     sorting: [],
     handleSorting: noop,
@@ -76,7 +76,7 @@ export const HighPerformance: Story = {
 
 export const Empty: Story = {
   args: {
-    columns,
+    useColumns,
     data: [],
     sorting: [],
     handleSorting: noop,
@@ -87,7 +87,7 @@ const customApiFunds = fundFactory.buildList(3, { category: 'HEALTH' });
 
 export const WithCustomMswHandler: Story = {
   args: {
-    columns,
+    useColumns,
     data: customApiFunds.map(mapFundFromApi),
     sorting: [],
     handleSorting: noop,
