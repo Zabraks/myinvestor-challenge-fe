@@ -9,20 +9,32 @@ import {
 
 import { getVisiblePages } from '@lib/pagination';
 
-export const TablePagination = ({ pagination, setPage }) => {
-  const pages = getVisiblePages(pagination?.page, pagination?.totalPages);
+interface PaginationData {
+  page: number;
+  totalPages: number;
+}
 
-  const goToPreviousPage = (e) => {
+interface TablePaginationProps {
+  pagination?: PaginationData;
+  setPage: (page: number) => void;
+}
+
+export const TablePagination = ({ pagination, setPage }: TablePaginationProps) => {
+  if (!pagination) return null;
+
+  const pages = getVisiblePages(pagination.page, pagination.totalPages);
+
+  const goToPreviousPage = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setPage(pagination.page - 1);
   };
 
-  const goToNextPage = (e) => {
+  const goToNextPage = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setPage(pagination.page + 1);
   };
 
-  const goToPage = (e, page) => {
+  const goToPage = (e: React.MouseEvent<HTMLAnchorElement>, page: number) => {
     e.preventDefault();
     setPage(page);
   };
@@ -31,7 +43,7 @@ export const TablePagination = ({ pagination, setPage }) => {
     <div className="flex justify-end">
       <Pagination>
         <PaginationContent>
-          {pagination?.page !== 1 && (
+          {pagination.page !== 1 && (
             <PaginationItem>
               <PaginationPrevious onClick={goToPreviousPage} />
             </PaginationItem>
@@ -39,14 +51,14 @@ export const TablePagination = ({ pagination, setPage }) => {
           {pages.map((page) => (
             <PaginationItem key={`page-${page}`}>
               <PaginationLink
-                isActive={pagination?.page === page}
+                isActive={pagination.page === page}
                 onClick={(e) => goToPage(e, page)}
               >
                 {page}
               </PaginationLink>
             </PaginationItem>
           ))}
-          {pagination?.page !== pagination?.totalPages && (
+          {pagination.page !== pagination.totalPages && (
             <PaginationItem>
               <PaginationNext onClick={goToNextPage} />
             </PaginationItem>

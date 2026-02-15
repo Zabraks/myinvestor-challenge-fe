@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/Tabs/Tabs.tsx';
 import { Card, CardContent } from '@ui/Card/Card.tsx';
 import { usePortfolio } from '@features/portfolio/queries/usePortfolio';
-import EmptyPortfolio from '@features/portfolio/components/EmptyPortfolio.tsx';
+import EmptyPortfolio from '@features/portfolio/components/EmptyPortfolio/EmptyPortfolio';
 
 const Portfolio = () => {
   const { data, isLoading, isError } = usePortfolio();
@@ -19,7 +19,7 @@ const Portfolio = () => {
             <CardContent>
               {isLoading && <p>Cargando...</p>}
               {isError && <p>Error al cargar el portfolio</p>}
-              {data && data.data.length === 0 && <EmptyPortfolio />}
+              {data?.data.length === 0 && <EmptyPortfolio />}
             </CardContent>
           </Card>
         </TabsContent>

@@ -1,6 +1,5 @@
-// import { ColumnDef } from "@tanstack/react-table"
-import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu';
-import { ColumnHeader } from '@features/fundsList/components/FundsTable/ColumnHeader';
+import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu/RowActionsMenu';
+import { ColumnHeader } from '@features/fundsList/components/FundsTable/ColumnHeader/ColumnHeader';
 
 export type Payment = {
   id: string;

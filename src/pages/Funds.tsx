@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { columns } from '@/features/fundsList/components/FundsTable/columns';
 import { FundsTable } from '@features/fundsList/components/FundsTable/FundsTable';
-import { LimitPageSelector } from '@features/fundsList/components/FundsTable/LimitPageSelector';
-import { TablePagination } from '@features/fundsList/components/FundsTable/TablePagination';
+import { LimitPageSelector } from '@features/fundsList/components/FundsTable/LimitPageSelector/LimitPageSelector';
+import { TablePagination } from '@features/fundsList/components/FundsTable/TablePagination/TablePagination';
 import { useFundsList } from '@features/fundsList/queries/useFundsList';
 
 import type { SortingState } from '@tanstack/react-table';

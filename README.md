@@ -50,11 +50,67 @@ Los componentes forman parte del código del proyecto, se nutren de los estilos 
 
 Como ya hemos mencionado antes, La sinergia con Vite hace que sea la opción idonea, aparte de por su ya rapidez de por si.
 
-#### React-testing-library (TBD)
+#### React Testing Library + Tests de Integración
 
-#### playwright(TBD)
+Para los tests de componentes hemos optado por **React Testing Library** junto con **@testing-library/user-event** para simular interacciones reales del usuario.
 
-#### Storybook(TBD)
+**Estrategia de Tests de Integración para FundsTable**
+
+Hemos priorizado los tests de **integridad estructural** y **navegación** (ordenación/paginación) sobre otros aspectos por las siguientes razones:
+
+
+#### Playwright
+
+He implementado Playwright como herramienta de testing E2E y visual regression. Aunque es una tecnología relativamente nueva para mí, he aplicado los mismos principios de ingeniería de software que uso en cualquier otro código: **DRY**, **Clean Code** y **Single Responsibility**.
+
+**Arquitectura de tests:**
+
+```
+tests/
+├── e2e/                                # Tests funcionales end-to-end
+├── visual/                             # Tests de regresión visual
+│   └── __snapshots__/                  # Baselines por proyecto (desktop/mobile)
+├── fixtures/                           # Configuración reutilizable
+└── utils/                              # Utilidades compartidas
+```
+
+**Decisiones técnicas:**
+
+1. **Fixtures personalizados**: Extiendo `test` de Playwright con `fundsPage` y `mockFundsApi` para que cada test tenga la API mockeada automáticamente. Esto sigue el principio DRY - la configuración del mock se hace una vez y se reutiliza.
+
+2. **Selectores accesibles**: Priorizo `getByRole()` y `getByText()` sobre selectores CSS. Son más resistentes a cambios de estilo y promueven buenas prácticas de accesibilidad.
+
+3. **Datos determinísticos**: El generador de mocks usa seeds para producir siempre los mismos datos. Esto hace los tests reproducibles y facilita el debugging.
+
+4. **Separación de responsabilidades**: Cada archivo de test tiene un propósito claro (smoke, sorting, pagination, visual). Facilita ejecutar subconjuntos según necesidad.
+
+#### Storybook (TBD)
+
+#### MSW (Mock Service Worker) (TBD)
+
+Para el mocking de peticiones HTTP he elegido MSW
+
+#### Fishery + Faker.js (TBD)
+
+Para la generación de datos de prueba he optado por la combinación de **fishery** (factories tipadas) + **@faker-js/faker** (generación de datos realistas).
+
+**Ejemplo de uso:**
+
+```typescript
+// Generar un fondo aleatorio
+const fund = fundFactory.build();
+
+// Generar 50 fondos para probar paginación
+const funds = fundFactory.buildList(50);
+
+// Override de propiedades específicas
+const techFund = fundFactory.build({ category: 'TECH' });
+
+// Datos determinísticos para tests
+const consistentFunds = generateDeterministicFunds(10, 12345);
+```
+
+Esta arquitectura de mocking permite que los tests sean rápidos, aislados, y que reflejen escenarios realistas sin depender de un backend real.
 
 ### Librerias
 

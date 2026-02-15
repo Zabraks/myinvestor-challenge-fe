@@ -1,5 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
+interface PortfolioResponse {
+  data: unknown[];
+}
+
 export const usePortfolio = () =>
   useQuery({
     queryKey: ['portfolio'],
@@ -8,6 +12,6 @@ export const usePortfolio = () =>
       if (!res.ok) {
         throw new Error(`Failed to fetch portfolio: ${res.statusText}`);
       }
-      return res.json() as Promise<[]>;
+      return res.json() as Promise<PortfolioResponse>;
     },
   });
