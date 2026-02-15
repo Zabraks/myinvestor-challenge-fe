@@ -65,6 +65,10 @@
 
   /* Destructive / Error */
   --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Success */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
 }
 
 /* ================================

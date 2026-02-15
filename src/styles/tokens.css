@@ -58,6 +58,10 @@
   /* Destructive / Error states */
   --destructive: oklch(62.793% 0.25768 29.223);
   --destructive-foreground: oklch(1 0 0);
+
+  /* Success states */
+  --success: oklch(59.6% 0.178 143.4);
+  --success-foreground: oklch(1 0 0);
 }
 
 /* --------- Dark theme --------- */

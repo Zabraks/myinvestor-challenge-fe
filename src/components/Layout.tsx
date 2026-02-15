@@ -12,7 +12,7 @@ const Layout = () => {
           <Outlet />
         </main>
       </div>
-      <Toaster />
+      <Toaster position="top-center" />
     </FundActionDialogProvider>
   );
 };
