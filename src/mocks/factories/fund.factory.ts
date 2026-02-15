@@ -13,21 +13,6 @@ const DEFAULT_RANGES = {
   fiveYears: { min: -20, max: 80 },
 };
 
-/**
- * Factory para generar fondos de inversión con datos realistas.
- *
- * @example
- * // Generar un fondo aleatorio
- * const fund = fundFactory.build();
- *
- * @example
- * // Generar múltiples fondos
- * const funds = fundFactory.buildList(10);
- *
- * @example
- * // Generar con valores específicos (override)
- * const techFund = fundFactory.build({ category: 'TECH', currency: 'USD' });
- */
 export const fundFactory = Factory.define<ApiFund>(({ sequence }) => ({
   id: `fund-${String(sequence).padStart(3, '0')}`,
   name: `${faker.company.name()} ${faker.helpers.arrayElement(FUND_NAME_SUFFIXES)}`,
@@ -43,13 +28,9 @@ export const fundFactory = Factory.define<ApiFund>(({ sequence }) => ({
   },
 }));
 
-/**
- * Genera una lista de fondos con seed fijo para tests determinísticos.
- * Útil para snapshots y tests que requieren datos consistentes.
- */
 export const generateDeterministicFunds = (count: number, seed = 12345): ApiFund[] => {
   faker.seed(seed);
   const funds = fundFactory.buildList(count);
-  faker.seed(); // Reset seed
+  faker.seed();
   return funds;
 };

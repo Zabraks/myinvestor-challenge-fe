@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import type { GetFundsApiResponse, ApiFund } from '@domain/funds/types';
-import { generateDeterministicFunds } from './factories';
+import { generateDeterministicFunds } from '../factories';
 
 /**
  * Datos mock generados con faker + fishery.
@@ -9,7 +9,7 @@ import { generateDeterministicFunds } from './factories';
  */
 const mockFunds: ApiFund[] = generateDeterministicFunds(25);
 
-export const handlers = [
+export const fundListHandlers = [
   http.get('http://localhost:3000/funds', ({ request }) => {
     const url = new URL(request.url);
     const page = Number.parseInt(url.searchParams.get('page') || '1', 10);

@@ -18,7 +18,7 @@ export const RowActionsMenu = ({ data }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="text-icon-selected p-0 cursor-pointer">
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">abrir menu</span>
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>

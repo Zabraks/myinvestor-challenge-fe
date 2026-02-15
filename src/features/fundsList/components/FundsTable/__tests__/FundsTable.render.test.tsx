@@ -1,31 +1,29 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
 import { generateTestFunds, renderFundsTable } from './FundsTable.test-utils';
 
-describe('FundsTable - Renderizado de Datos', () => {
-  it('debe mostrar el número correcto de filas según los datos del mock', () => {
+describe('FundsTable - Render', () => {
+  it('should show exact number of rows', () => {
     const funds = generateTestFunds(5);
 
     renderFundsTable(funds);
 
-    // Header row + 5 data rows
     const rows = screen.getAllByRole('row');
-    expect(rows).toHaveLength(6); // 1 header + 5 data rows
+    expect(rows).toHaveLength(6);
   });
 
-  it('debe mostrar los datos correctamente en las celdas de la tabla', () => {
+  it('should show data in cells properly', () => {
     const funds = generateTestFunds(3);
 
     renderFundsTable(funds);
 
-    // Verificar que los nombres de los fondos aparecen en el documento
     funds.forEach((fund) => {
       expect(screen.getByText(fund.name)).toBeInTheDocument();
     });
   });
 
-  it('debe mostrar las cabeceras de columna correctamente', () => {
+  it('should show headers in column properly', () => {
     const funds = generateTestFunds(1);
 
     renderFundsTable(funds);
@@ -38,25 +36,40 @@ describe('FundsTable - Renderizado de Datos', () => {
     });
   });
 
-  it('debe renderizar los valores de categoría y moneda de cada fondo', () => {
+  it('should render category and currency values of each fund', () => {
     const funds = generateTestFunds(2);
 
     renderFundsTable(funds);
 
-    // Verificamos que cada categoría única esté presente en el documento
-    // Usamos getAllByText porque pueden existir categorías duplicadas
     const uniqueCategories = [...new Set(funds.map((f) => f.category))];
     uniqueCategories.forEach((category) => {
       expect(screen.getAllByText(category).length).toBeGreaterThan(0);
     });
   });
 
-  it('debe tener la estructura semántica correcta con roles de accesibilidad', () => {
+  it('should render action button', () => {
     const funds = generateTestFunds(2);
 
     renderFundsTable(funds);
 
-    // Verificar estructura semántica
+    const rows = screen.getAllByRole('row');
+
+    const firstDataRow = rows[1];
+
+    const actionsButton = within(firstDataRow).getByRole('button', {
+      name: /abrir menu/i,
+    });
+
+    expect(actionsButton).toBeInTheDocument();
+    expect(actionsButton).toBeVisible();
+    expect(actionsButton).toBeEnabled();
+  });
+
+  it('should have the correct semantic structure with accessibility roles', () => {
+    const funds = generateTestFunds(2);
+
+    renderFundsTable(funds);
+
     expect(screen.getByRole('table')).toBeInTheDocument();
     expect(screen.getAllByRole('columnheader').length).toBeGreaterThan(0);
     expect(screen.getAllByRole('cell').length).toBeGreaterThan(0);

@@ -1,4 +1,3 @@
-// services/funds/buyFund.adapter.ts
 import type { SellFundApiResponse } from '@services/funds/sellFund.api.types';
 import type { SellFundResult } from '@domain/funds/sell';
 
