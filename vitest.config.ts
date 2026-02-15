@@ -16,10 +16,12 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@app': resolve(__dirname, './src/app'),
       '@components': resolve(__dirname, './src/components'),
+      '@context': resolve(__dirname, './src/context'),
       '@ui': resolve(__dirname, './src/components/ui'),
       '@domain': resolve(__dirname, './src/domain'),
       '@features': resolve(__dirname, './src/features'),
       '@lib': resolve(__dirname, './src/lib'),
+      '@mocks': resolve(__dirname, './src/mocks'),
       '@pages': resolve(__dirname, './src/pages'),
       '@services': resolve(__dirname, './src/services'),
       '@styles': resolve(__dirname, './src/styles'),
@@ -27,17 +29,29 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
     coverage: {
-      reporter: ['text', 'json', 'html'],
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.test.{ts,tsx}',
+        'src/**/*.stories.{ts,tsx}',
+        'src/**/*.d.ts',
+        'src/mocks/**',
+        'src/main.tsx',
+        'src/setupTests.ts',
+        'src/**/__tests__/**',
+      ],
     },
     projects: [
       {
         extends: true,
         test: {
           name: 'unit',
+          environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: './src/setupTests.ts',
         },
       },
       {

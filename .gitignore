@@ -25,3 +25,10 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# Vitest Coverage
+coverage/
+
+# Playwright
+tests/test-results/
+tests/visual/__snapshots__/
