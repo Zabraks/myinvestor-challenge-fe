@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/funds-api.fixture';
-import { SELECTORS } from '../utils/selectors';
+import { test, expect } from '../../fixtures/funds-api.fixture';
+import { SELECTORS } from '../../utils/selectors';
 
 /**
  * Tests de Paginación - Listado de Fondos

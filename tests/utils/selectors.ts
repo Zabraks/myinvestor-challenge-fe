@@ -1,3 +1,5 @@
+import { BUY_VALIDATION_STRINGS } from '../../src/domain/funds/validation';
+
 export const SELECTORS = {
   header: {
     logo: 'MyInvestor',
@@ -35,14 +37,31 @@ export const SELECTORS = {
   },
 
   rowActions: {
-    trigger: 'Open menu',
+    trigger: 'abrir menu',
     buy: 'Comprar',
     viewDetails: 'Ver Detalle',
   },
 
   buyDialog: {
-    title: /Comprar|Buy/i,
+    title: /Comprar fondo/i,
+    inputName: /Valor/i,
+    sendButton: /Enviar/i,
     closeButton: 'Close',
+  },
+
+  toastMsg: {
+    buy: {
+      success: 'El fondo se ha comprado correctamente',
+      error: 'Ha habido un error en la petición',
+    },
+  },
+
+  validations: {
+    buy: {
+      number: BUY_VALIDATION_STRINGS.NUMBER_VALIDATION,
+      positive: BUY_VALIDATION_STRINGS.POSITIVE_VALIDATION,
+      maxValue: BUY_VALIDATION_STRINGS.MAX_VALUE_VALIDATION,
+    },
   },
 
   loading: {
