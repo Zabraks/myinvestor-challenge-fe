@@ -1,18 +1,15 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
-import {
-  FundActionDialog,
-  type FundAction,
-  type Fund,
-} from '@features/actions/FundActionDialog/FundActionDialog';
+import { createContext, useContext, useState, useMemo, type ReactNode } from 'react';
+import { FundActionDialog } from '@features/actions/FundActionDialog/FundActionDialog';
+import type { FundActionType, FundActionData } from '@domain/funds/types';
 
 interface FundActionDialogState {
   open: boolean;
-  action: FundAction | null;
-  fund: Fund | null;
+  action: FundActionType | null;
+  data: FundActionData | null;
 }
 
 interface FundActionDialogContextType {
-  openDialog: (action: FundAction, fund?: Fund) => void;
+  openDialog: (action: FundActionType, data?: FundActionData) => void;
   closeDialog: () => void;
 }
 
@@ -26,24 +23,26 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
   const [state, setState] = useState<FundActionDialogState>({
     open: false,
     action: null,
-    fund: null,
+    data: null,
   });
 
-  const openDialog = (action: FundAction, fund?: Fund) => {
-    setState({ open: true, action, fund: fund ?? null });
+  const openDialog = (action: FundActionType, data?: FundActionData) => {
+    setState({ open: true, action, data: data ?? null });
   };
 
   const closeDialog = () => {
-    setState({ open: false, action: null, fund: null });
+    setState({ open: false, action: null, data: null });
   };
 
+  const contextValue = useMemo(() => ({ openDialog, closeDialog }), []);
+
   return (
-    <FundActionDialogContext.Provider value={{ openDialog, closeDialog }}>
+    <FundActionDialogContext.Provider value={contextValue}>
       {children}
       <FundActionDialog
         open={state.open}
         action={state.action}
-        fund={state.fund}
+        data={state.data}
         onClose={closeDialog}
       />
     </FundActionDialogContext.Provider>

@@ -9,24 +9,26 @@ import {
   DropdownMenuSeparator,
 } from '@ui/DropdownMenu/DropdownMenu';
 
-export const RowActionsMenu = () => {
+export const RowActionsMenu = ({ data }) => {
   const { openDialog } = useFundActionDialog();
+
+  const rowData = data.original;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="text-icon-selected p-0 cursor-pointer">
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">abrir menu</span>
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => openDialog('buy')}>
+        <DropdownMenuItem onClick={() => openDialog('buy', rowData)}>
           <ArrowRightToLine />
           Comprar
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => openDialog('show')}>
+        <DropdownMenuItem onClick={() => openDialog('show', rowData)}>
           <Eye />
           Ver Detalle
         </DropdownMenuItem>

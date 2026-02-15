@@ -1,4 +1,4 @@
 import { setupServer } from 'msw/node';
-import { handlers } from './fundsList.handlers';
+import { fundListHandlers, buyFundHandlers } from '@mocks/handlers';
 
-export const server = setupServer(...handlers);
+export const server = setupServer(...fundListHandlers, ...buyFundHandlers);

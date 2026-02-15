@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { columns } from '@/features/fundsList/components/FundsTable/columns';
 import { FundsTable } from '@features/fundsList/components/FundsTable/FundsTable';
 import { LimitPageSelector } from '@features/fundsList/components/FundsTable/LimitPageSelector/LimitPageSelector';
 import { TablePagination } from '@features/fundsList/components/FundsTable/TablePagination/TablePagination';
@@ -26,12 +25,7 @@ const Funds = () => {
         <h2 className="text-xl font-bold">Lista de fondos</h2>
         <LimitPageSelector setPage={setPage} setLimit={setLimit} />
       </div>
-      <FundsTable
-        columns={columns}
-        data={data || []}
-        sorting={sorting}
-        handleSorting={setSorting}
-      />
+      <FundsTable data={data || []} sorting={sorting} handleSorting={setSorting} />
       <TablePagination setPage={setPage} pagination={pagination} />
     </div>
   );

@@ -4,16 +4,16 @@ import { describe, it, expect } from 'vitest';
 import { renderFundsTable } from './FundsTable.test-utils';
 
 describe('FundsTable - Estado Vacío', () => {
-  it('debe mostrar mensaje informativo cuando no hay fondos disponibles', () => {
+  it('should show an info message when there is not any available fund', () => {
     renderFundsTable([]);
 
     expect(screen.getByText('No results.')).toBeInTheDocument();
   });
 
-  it('debe renderizar solo la fila de cabecera y la de mensaje vacío', () => {
+  it('should render only header and an empty message', () => {
     renderFundsTable([]);
 
     const rows = screen.getAllByRole('row');
-    expect(rows).toHaveLength(2); // 1 header + 1 empty state row
+    expect(rows).toHaveLength(2);
   });
 });

@@ -32,6 +32,8 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
 
+  --color-destructive: var(--destructive);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
@@ -47,6 +49,26 @@
   /* Icon colors */
   --color-icon-base: var(--icon-base);
   --color-icon-selected: var(--icon-selected);
+
+  /* Button Primary */
+  --color-button-primary: var(--button-primary);
+  --color-button-primary-foreground: var(--button-primary-foreground);
+  --color-button-primary-border: var(--button-primary-border);
+
+  /* Button Secondary */
+  --color-button-secondary: var(--button-secondary);
+  --color-button-secondary-foreground: var(--button-secondary-foreground);
+  --color-button-secondary-border: var(--button-secondary-border);
+
+  /* Button Icon */
+  --color-button-icon-foreground: var(--button-icon-foreground);
+
+  /* Destructive / Error */
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Success */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
 }
 
 /* ================================

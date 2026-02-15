@@ -41,6 +41,27 @@
     /* Icon colors */
   --icon-base: var(--muted-foreground);
   --icon-selected: var(--secondary);
+
+  /* Button Primary (blue background, white text) */
+  --button-primary: var(--secondary);
+  --button-primary-foreground: oklch(1 0 0);
+  --button-primary-border: var(--secondary);
+
+  /* Button Secondary (white background, blue border, black text) */
+  --button-secondary: var(--card);
+  --button-secondary-foreground: var(--foreground);
+  --button-secondary-border: var(--secondary);
+
+  /* Button Icon */
+  --button-icon-foreground: var(--secondary);
+
+  /* Destructive / Error states */
+  --destructive: oklch(62.793% 0.25768 29.223);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Success states */
+  --success: oklch(59.6% 0.178 143.4);
+  --success-foreground: oklch(1 0 0);
 }
 
 /* --------- Dark theme --------- */

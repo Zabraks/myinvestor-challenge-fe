@@ -1,4 +1,5 @@
 import { test, expect } from '../fixtures/funds-api.fixture';
+import { SELECTORS } from '../utils/selectors';
 
 test.describe('Funds Table - Visual Regression', () => {
   test.beforeEach(async ({ fundsPage }) => {
@@ -45,9 +46,13 @@ test.describe('Funds Table - Visual States', () => {
     await fundsPage.goto('/funds');
     await expect(fundsPage.locator('tbody tr').first()).toBeVisible();
 
-    await fundsPage.locator('tbody tr').first().getByRole('button', { name: 'Open menu' }).click();
+    await fundsPage
+      .locator('tbody tr')
+      .first()
+      .getByRole('button', { name: SELECTORS.rowActions.trigger })
+      .click();
 
-    await expect(fundsPage.getByRole('menuitem', { name: 'Comprar' })).toBeVisible();
+    await expect(fundsPage.getByRole('menuitem', { name: SELECTORS.rowActions.buy })).toBeVisible();
 
     await expect(fundsPage).toHaveScreenshot('row-actions-menu-open.png', {
       animations: 'disabled',

@@ -1,3 +1,10 @@
+import type { BuyFundApiResponse } from '../../src/services/funds/buyFund.api.types';
+
+export interface MockBuyFund {
+  fundId: string;
+  quantity: number;
+}
+
 export interface MockFund {
   id: string;
   name: string;
@@ -31,6 +38,12 @@ export interface MockFundsConfig {
   seed?: number;
   delay?: number;
   shouldFail?: boolean;
+}
+
+export interface MockBuyConfig {
+  delay?: number;
+  shouldFail?: boolean;
+  onCapture?: (data: MockBuyFund) => void;
 }
 
 function seededRandom(seed: number): () => number {
@@ -144,6 +157,20 @@ export function generateMockFundsResponse(config: MockFundsConfig = {}): MockFun
       limit,
       total: totalFunds,
       totalPages: Math.ceil(totalFunds / limit),
+    },
+  };
+}
+
+export function generateMockBuyFundsResponse(config: MockBuyFund): BuyFundApiResponse {
+  return {
+    message: 'Purchase successful',
+    data: {
+      portfolio: [
+        {
+          id: config.fundId,
+          quantity: config.quantity,
+        },
+      ],
     },
   };
 }
