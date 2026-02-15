@@ -13,7 +13,6 @@ export interface FundTableItem {
   threeYears: number;
   fiveYears: number;
 }
-
 export interface ApiFund {
   id: string;
   name: string;
@@ -28,14 +27,12 @@ export interface ApiFund {
     fiveYears: number;
   };
 }
-
 export interface PaginationMeta {
   page: number;
   limit: number;
   total: number;
   totalPages: number;
 }
-
 export interface GetFundsApiResponse {
   data: ApiFund[];
   pagination: PaginationMeta;
