@@ -1,4 +1,4 @@
-import type { PortfolioItemType } from '@domain/portfolio/models';
+import type { PortfolioItem as PortfolioItemType } from '@domain/portfolio';
 import {
   Item,
   ItemContent,
@@ -8,20 +8,26 @@ import {
   ItemActions,
 } from '@ui/Item/Item';
 
-import { useInteractionMode } from '@lib/hooks/useInteractiveMode';
-import { PortfolioActionsSwipe } from '@features/actions/components/PortfolioActionsSwipe';
+import { useInteractionMode, type InteractionMode } from '@lib/hooks/useInteractiveMode';
+import { SwipeActionMenu } from '@/features/actions/components/ActionMenu/SwipeActionMenu';
 import { SwipeableRow } from '@features/actions/components/SwipeableRow';
 import { useActionMenu } from '@context/ActionMenuContext';
 import { Button } from '@ui/Button/Button';
 import { EllipsisVertical, ChartNoAxesCombined, Coins } from 'lucide-react';
+
 interface PortfolioItemProps {
   item: PortfolioItemType;
 }
 
-const BasicItem = ({ data, mode }) => {
-  const { open } = useActionMenu();
+interface BasicItemProps {
+  data: PortfolioItemType;
+  mode: InteractionMode;
+}
 
-  const openMenu = (e) => {
+const BasicItem = ({ data, mode }: BasicItemProps) => {
+  const { open } = useActionMenu<PortfolioItemType>();
+
+  const openMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     open(data, rect, 'portfolio');
   };
@@ -63,7 +69,7 @@ export const PortfolioItem = ({ item }: PortfolioItemProps) => {
   const { mode } = useInteractionMode();
 
   return mode === 'touch' ? (
-    <SwipeableRow actions={<PortfolioActionsSwipe item={item} />}>
+    <SwipeableRow actions={<SwipeActionMenu item={item} />}>
       <BasicItem data={item} mode={mode} />
     </SwipeableRow>
   ) : (

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { transferFundApi } from '@services/funds/transferFund.api';
-import type { TransferFundInput } from '@domain/funds/transfer';
-import type { Order } from '@domain/orders/models';
+import { transferFund } from '@services/fund-action';
+import type { TransferInput } from '@domain/action';
+import type { Order } from '@domain/order';
 
 import { showSuccessToast, showErrorToast } from '@features/actions/components/ActionToast';
 
@@ -9,8 +9,8 @@ export const useTransferFund = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (input: TransferFundInput) =>
-      transferFundApi({
+    mutationFn: (input: TransferInput) =>
+      transferFund({
         fromFundId: input.fromFundId,
         toFundId: input.toFundId,
         quantity: input.amount,

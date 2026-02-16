@@ -9,14 +9,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useTransferFund } from '@features/actions/queries/useTransferFund';
 import { usePortfolio } from '@features/portfolio/queries/usePortfolio';
-import type { FundActionProps } from './FundActionDialog';
-import { transferFundSchemaType, type TransferFundFormData } from '@domain/funds/validation';
+import type { FundActionFormProps } from '@features/actions/types';
+import { createTransferSchema, type TransferFormData } from '@domain/action';
 
-export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundActionProps) => {
+export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundActionFormProps) => {
   const { data: portfolio, isLoading } = usePortfolio();
+  const maxQuantity = data?.quantity ?? 0;
 
-  const form = useForm<TransferFundFormData>({
-    resolver: zodResolver(transferFundSchemaType(data.quantity)),
+  const form = useForm<TransferFormData>({
+    resolver: zodResolver(createTransferSchema(maxQuantity)),
     defaultValues: {
       amount: 0,
       fund: '',
@@ -25,12 +26,14 @@ export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundAction
 
   const { mutate: transferFund } = useTransferFund(onSuccess);
 
-  const onSubmit = (formData: TransferFundFormData) => {
+  if (!data || !fundId) return null;
+
+  const onSubmit = (formData: TransferFormData) => {
     transferFund({
       fromFundId: fundId,
       fromFundName: data.name,
       toFundId: formData.fund,
-      toFundName: portfolio?.items.find((item) => item.id === formData.fund)?.name,
+      toFundName: portfolio?.items.find((item) => item.id === formData.fund)?.name ?? '',
       amount: formData.amount,
     });
   };

@@ -3,7 +3,7 @@ import { Badge } from '@ui/Badge/Badge';
 
 import { ChevronsDown, Coins } from 'lucide-react';
 
-import type { OrderViewModel } from '@services/orders/orderToView.api.types';
+import type { OrderView } from '@domain/order';
 
 //TODO darle una vuelta a esto
 const TONE_CLASSES = {
@@ -12,7 +12,7 @@ const TONE_CLASSES = {
   green: 'text-green-700',
 };
 
-export const OrderItem = ({ item }: { item: OrderViewModel }) => {
+export const OrderItem = ({ item }: { item: OrderView }) => {
   return (
     <Item className="border-b-2 border-b-secondary rounded-none gap-1">
       <ItemHeader>

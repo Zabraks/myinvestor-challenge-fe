@@ -1,4 +1,4 @@
-import type { BuyFundApiResponse } from '../../src/services/funds/buyFund.api.types';
+import type { FundActionResponse } from '../../src/services/fund-action';
 
 export interface MockBuyFund {
   fundId: string;
@@ -161,7 +161,7 @@ export function generateMockFundsResponse(config: MockFundsConfig = {}): MockFun
   };
 }
 
-export function generateMockBuyFundsResponse(config: MockBuyFund): BuyFundApiResponse {
+export function generateMockBuyFundsResponse(config: MockBuyFund): FundActionResponse {
   return {
     message: 'Purchase successful',
     data: {

@@ -4,8 +4,7 @@ import { http, HttpResponse } from 'msw';
 import { FundsTable } from './FundsTable';
 import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
 import { fundFactory } from '@/mocks/factories';
-import { mapFundFromApi } from '@/domain/funds/mappers/mappers';
-import type { GetFundsApiResponse } from '@/domain/funds/types';
+import { mapFundFromApi, type GetFundsApiResponse } from '@domain/fund';
 import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
 
 // Función noop para handlers en stories

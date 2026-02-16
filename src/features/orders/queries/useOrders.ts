@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Order } from '@domain/orders/models';
+import type { Order } from '@domain/order';
 
 export function useOrders() {
   return useQuery<Order[]>({

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@ui/Card/Card.tsx';
 
 import { useOrders } from '@features/orders/queries/useOrders';
 
-import { mapOrderToView } from '@services/orders/orderToView.mapper';
+import { mapOrderToView } from '@domain/order';
 import { OctagonX } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getFundById } from '@services/funds/getFundById.api';
-import type { FundTableItem } from '@domain/funds/types';
+import { getFundById } from '@services/fund';
+import type { Fund } from '@domain/fund';
 
 interface UseFundDetailsParams {
   fundId: string;
-  initialData?: FundTableItem;
+  initialData?: Fund;
 }
 
 export function useFundDetails({ fundId, initialData }: UseFundDetailsParams) {

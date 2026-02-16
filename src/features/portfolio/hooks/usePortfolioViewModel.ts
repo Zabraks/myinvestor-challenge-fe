@@ -1,12 +1,7 @@
 import { usePortfolio } from '../queries/usePortfolio';
 import { useFundsCatalog } from '@features/portfolio/queries/useFundsCatalog';
-import { sortByName } from '@domain/portfolio/utils/sortByName';
-import { formatValue } from '@domain/portfolio/utils/formatValue';
-import { groupByCategory } from '@domain/portfolio/utils/groupByCategory';
-import { CATEGORY_LABELS } from '@/domain/portfolio/constants';
-import type { CategoryKey } from '@/domain/portfolio/constants';
-
-import type { FundTableItem } from '@/domain/funds/types';
+import { sortByName, groupByCategory, formatCurrency } from '@domain/portfolio';
+import { CATEGORY_LABELS, type CategoryKey, type Fund } from '@domain/fund';
 
 export function usePortfolioViewModel() {
   const portfolioQuery = usePortfolio();
@@ -24,7 +19,7 @@ export function usePortfolioViewModel() {
     return { isLoading: portfolioQuery.isLoading || fundsQuery.isLoading };
   }
 
-  const fundsById = new Map(fundsQuery.data.map((fund: FundTableItem) => [fund.id, fund]));
+  const fundsById = new Map(fundsQuery.data.map((fund: Fund) => [fund.id, fund]));
 
   const enriched = portfolioQuery.data.items.map((item) => {
     const fund = fundsById.get(item.id);
@@ -35,7 +30,7 @@ export function usePortfolioViewModel() {
       ...item,
       name: fund?.name ?? 'fondo desconocido',
       category: CATEGORY_LABELS[rawCategory] ?? rawCategory ?? 'Otros',
-      totalValue: formatValue(item.totalValue),
+      totalValue: formatCurrency(item.totalValue),
     };
   });
 

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPortfolioApi } from '@services/portfolio/getPortfolio.api';
-import type { PortfolioResponseDto } from '@/services/portfolio/portfolio.dto';
+import { getPortfolio } from '@services/portfolio';
+import type { Portfolio } from '@domain/portfolio';
 
 export const usePortfolio = () =>
-  useQuery<PortfolioResponseDto>({
+  useQuery<Portfolio>({
     queryKey: ['portfolio'],
-    queryFn: getPortfolioApi,
+    queryFn: getPortfolio,
   });

@@ -1,11 +1,11 @@
 import { ItemGroup } from '@ui/Item/Item';
 import { OrderItem } from '@features/orders/components/OrderItem';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
-import type { OrderViewModel } from '@services/orders/orderToView.api.types';
+import type { OrderView } from '@domain/order';
 
 import { Logs } from 'lucide-react';
 
-export const OrderList = ({ items }: { items: OrderViewModel[] }) => {
+export const OrderList = ({ items }: { items: OrderView[] }) => {
   return (
     <ItemGroup className="gap-1">
       {items.length ? (

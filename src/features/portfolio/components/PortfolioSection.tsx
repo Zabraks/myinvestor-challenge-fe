@@ -11,7 +11,6 @@ import { OctagonX } from 'lucide-react';
 export const PortfolioSection = () => {
   const navigate = useNavigate();
   const { isLoading, isError, data: enrichedPortfolio } = usePortfolioViewModel();
-
   return (
     <Card className="bg-card">
       <CardHeader>

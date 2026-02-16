@@ -4,11 +4,11 @@ import { Button } from '@ui/Button/Button';
 import { useFundDetails } from '@features/actions/queries/useFundDetails';
 import { getCoin } from '@lib/utils';
 import { FundDetailsSkeleton } from './FundDetailsSkeleton';
-import type { FundActionProps } from './FundActionDialog';
+import type { FundActionFormProps } from '@features/actions/types';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
 import { OctagonX } from 'lucide-react';
 
-export const FundDetails = ({ fundId }: FundActionProps) => {
+export const FundDetails = ({ fundId }: FundActionFormProps) => {
   const {
     data: fundDetails,
     isLoading,

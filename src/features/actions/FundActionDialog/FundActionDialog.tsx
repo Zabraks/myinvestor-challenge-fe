@@ -6,13 +6,13 @@ import { SellFundForm } from '@features/actions/components/SellFundForm';
 import { FundDetails } from '@features/actions/components/FundDetails';
 import { TransferFundForm } from '@features/actions/components/TransferFundForm';
 
-import type { FundActionType, FundActionData } from '@domain/funds/types';
+import type { ActionType, ActionData } from '@domain/action';
 import type { FundActionFormProps } from '@features/actions/types';
 
 interface FundActionDialogProps {
   readonly open: boolean;
-  readonly action: FundActionType | null;
-  readonly data: FundActionData | null;
+  readonly action: ActionType | null;
+  readonly data: ActionData | null;
   readonly fundId: string | null;
   readonly onClose: () => void;
 }
@@ -22,7 +22,7 @@ type ActionConfig = {
   component: ComponentType<FundActionFormProps> | ComponentType<Pick<FundActionFormProps, 'data'>>;
 };
 
-const ACTION_CONFIG: Record<FundActionType, ActionConfig> = {
+const ACTION_CONFIG: Record<ActionType, ActionConfig> = {
   buy: {
     title: 'Comprar fondo',
     component: BuyFundForm,

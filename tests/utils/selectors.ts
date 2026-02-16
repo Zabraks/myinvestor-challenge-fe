@@ -1,4 +1,4 @@
-import { BUY_VALIDATION_STRINGS } from '../../src/domain/funds/validation';
+import { MESSAGES } from '../../src/domain/action';
 
 export const SELECTORS = {
   header: {
@@ -58,9 +58,9 @@ export const SELECTORS = {
 
   validations: {
     buy: {
-      number: BUY_VALIDATION_STRINGS.NUMBER_VALIDATION,
-      positive: BUY_VALIDATION_STRINGS.POSITIVE_VALIDATION,
-      maxValue: BUY_VALIDATION_STRINGS.MAX_VALUE_VALIDATION,
+      number: MESSAGES.numberRequired,
+      positive: MESSAGES.positive,
+      maxValue: MESSAGES.buyMax,
     },
   },
 

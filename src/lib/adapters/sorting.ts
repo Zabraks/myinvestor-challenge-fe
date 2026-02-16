@@ -1,5 +1,5 @@
 import type { SortingState } from '@tanstack/react-table';
-import type { BackendSort } from '@domain/funds/sorting';
+import type { BackendSort } from '@domain/fund';
 
 export function adaptSorting(sorting: SortingState): BackendSort | undefined {
   const sort = sorting?.length && sorting[0];

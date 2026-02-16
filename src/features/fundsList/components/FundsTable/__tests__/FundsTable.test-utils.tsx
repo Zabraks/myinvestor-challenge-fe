@@ -5,14 +5,14 @@ import type { SortingState } from '@tanstack/react-table';
 import { FundsTable } from '../FundsTable';
 import { TablePagination } from '../TablePagination/TablePagination';
 import { generateDeterministicFunds } from '@/mocks/factories';
-import { mapFundFromApi } from '@/domain/funds/mappers/mappers';
-import type { FundTableItem } from '@/domain/funds/types';
+import { mapFundFromApi } from '@domain/fund';
+import type { Fund } from '@domain/fund';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';
-import { ActionMenu } from '@features/actions/components/ActionMenu';
+import { ActionMenu } from '@/features/actions/components/ActionMenu/ActionMenu';
 
 export interface FundsTableIntegrationProps {
-  initialData: FundTableItem[];
+  initialData: Fund[];
   pageSize?: number;
 }
 
@@ -30,8 +30,8 @@ export const FundsTableIntegration = ({
     if (sorting.length > 0) {
       const { id, desc } = sorting[0];
       data.sort((a, b) => {
-        const aValue = a[id as keyof FundTableItem];
-        const bValue = b[id as keyof FundTableItem];
+        const aValue = a[id as keyof Fund];
+        const bValue = b[id as keyof Fund];
 
         if (typeof aValue === 'string' && typeof bValue === 'string') {
           return desc ? bValue.localeCompare(aValue) : aValue.localeCompare(bValue);
@@ -64,12 +64,12 @@ export const FundsTableIntegration = ({
   );
 };
 
-export const generateTestFunds = (count: number): FundTableItem[] => {
+export const generateTestFunds = (count: number): Fund[] => {
   const apiFunds = generateDeterministicFunds(count);
   return apiFunds.map(mapFundFromApi);
 };
 
-export const renderFundsTable = (funds: FundTableItem[], pageSize = 10) => {
+export const renderFundsTable = (funds: Fund[], pageSize = 10) => {
   return render(<FundsTableIntegration initialData={funds} pageSize={pageSize} />);
 };
 

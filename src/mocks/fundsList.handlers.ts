@@ -1,12 +1,7 @@
 import { http, HttpResponse } from 'msw';
-import type { GetFundsApiResponse, ApiFund } from '@domain/funds/types';
+import type { GetFundsApiResponse, ApiFund } from '@domain/fund';
 import { generateDeterministicFunds } from './factories';
 
-/**
- * Datos mock generados con faker + fishery.
- * Usamos seed fijo para que los tests sean determinísticos y reproducibles.
- * Total: 25 fondos para probar paginación realista.
- */
 const mockFunds: ApiFund[] = generateDeterministicFunds(25);
 
 export const handlers = [

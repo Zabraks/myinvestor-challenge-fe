@@ -5,7 +5,7 @@ import { ActionMenuProvider } from '@context/ActionMenuContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@lib/queryClient.ts';
 import { Toaster } from '@ui/Sonner/Sonner';
-import { ActionMenu } from '@/features/actions/components/ActionMenu';
+import { ActionMenu } from '@/features/actions/components/ActionMenu/ActionMenu';
 
 const Layout = () => {
   return (

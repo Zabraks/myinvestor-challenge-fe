@@ -1,10 +1,8 @@
 import { Fragment } from 'react';
-import type { PortfolioItemType } from '@domain/portfolio/models';
+import type { PortfolioItem as PortfolioItemType, CategoryGroup } from '@domain/portfolio';
 import { ItemGroup } from '@ui/Item/Item';
 
 import { PortfolioItem } from '@features/portfolio/components/PortfolioItem';
-
-import type { CategoryGroup } from '@domain/portfolio/utils/groupByCategory';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
 import { BanknoteX } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

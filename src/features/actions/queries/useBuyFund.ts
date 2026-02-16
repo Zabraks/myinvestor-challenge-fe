@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { buyFundApi } from '@services/funds/buyFund.api';
-import type { FundActionResult, FundActionInput } from '@domain/funds/types';
-import type { BuyFundInput } from '@domain/funds/buy';
-import type { Order } from '@domain/orders/models';
+import { buyFund } from '@services/fund-action';
+import type { ActionResult, ActionInput } from '@domain/action';
+import type { Order } from '@domain/order';
 
 import { showSuccessToast, showErrorToast } from '@features/actions/components/ActionToast';
 
@@ -13,8 +12,8 @@ interface UseBuyFundOptions {
 export const useBuyFund = ({ onSuccess }: UseBuyFundOptions) => {
   const queryClient = useQueryClient();
 
-  return useMutation<FundActionResult, Error, FundActionInput>({
-    mutationFn: (input: BuyFundInput) => buyFundApi(input.fundId, { quantity: input.amount }),
+  return useMutation<ActionResult, Error, ActionInput>({
+    mutationFn: (input: ActionInput) => buyFund(input.fundId, { quantity: input.amount }),
     onSuccess: (_data, variables) => {
       const newOrder: Order = {
         id: crypto.randomUUID(),

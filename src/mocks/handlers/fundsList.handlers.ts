@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import type { GetFundsApiResponse, ApiFund } from '@domain/funds/types';
+import type { GetFundsApiResponse, ApiFund } from '@domain/fund';
 import { generateDeterministicFunds } from '../factories';
 
 /**

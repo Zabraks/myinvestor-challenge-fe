@@ -1,6 +1,6 @@
 import { Factory } from 'fishery';
 import { faker } from '@faker-js/faker';
-import type { ApiFund, Category, Currency } from '@domain/funds/types';
+import type { ApiFund, Category, Currency } from '@domain/fund';
 
 const CATEGORIES: Category[] = ['GLOBAL', 'TECH', 'HEALTH', 'MONEY_MARKET'];
 const CURRENCIES: Currency[] = ['USD', 'EUR'];
