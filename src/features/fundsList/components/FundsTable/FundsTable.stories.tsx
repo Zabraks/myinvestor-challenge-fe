@@ -6,6 +6,7 @@ import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useC
 import { fundFactory } from '@/mocks/factories';
 import { mapFundFromApi, type GetFundsApiResponse } from '@domain/fund';
 import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
+import { ActionMenuProvider } from '@/context/ActionMenuContext';
 
 // Función noop para handlers en stories
 const noop = () => {};
@@ -18,11 +19,13 @@ const meta: Meta<typeof FundsTable> = {
   },
   decorators: [
     (Story) => (
-      <FundActionDialogProvider>
-        <div className="w-full max-w-6xl">
-          <Story />
-        </div>
-      </FundActionDialogProvider>
+      <ActionMenuProvider>
+        <FundActionDialogProvider>
+          <div className="w-full max-w-6xl">
+            <Story />
+          </div>
+        </FundActionDialogProvider>
+      </ActionMenuProvider>
     ),
   ],
 };

@@ -96,7 +96,7 @@ function generateFund(index: number, random: () => number): ApiFund {
   const currencyIndex = Math.floor(random() * CURRENCIES.length);
 
   return {
-    id: `fund-${String(index + 1).padStart(3, '0')}`,
+    id: String(index + 1).padStart(3, '0'),
     name: FUND_NAMES[nameIndex],
     category: CATEGORIES[categoryIndex],
     currency: CURRENCIES[currencyIndex],
@@ -227,9 +227,9 @@ export function generateMockPortfolioResponse(
   // Default portfolio items que corresponden a fondos del catálogo mock
   const funds = generateMockFunds(25, 12345);
   const defaultItems: PortfolioItemDto[] = [
-    { id: 'fund-001', name: funds[0].name, quantity: 100, totalValue: 15000.5 },
-    { id: 'fund-002', name: funds[1].name, quantity: 50, totalValue: 7500.25 },
-    { id: 'fund-003', name: funds[2].name, quantity: 75, totalValue: 11250.75 },
+    { id: '1', name: funds[0].name, quantity: 100, totalValue: 15000.5 },
+    { id: '2', name: funds[1].name, quantity: 50, totalValue: 7500.25 },
+    { id: '3', name: funds[2].name, quantity: 75, totalValue: 11250.75 },
   ];
 
   return {

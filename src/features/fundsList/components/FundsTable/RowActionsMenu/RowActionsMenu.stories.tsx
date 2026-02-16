@@ -1,6 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RowActionsMenu } from './RowActionsMenu';
 import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
+import { ActionMenuProvider } from '@/context/ActionMenuContext';
+
+// Mock de data de fila para TanStack Table
+const mockRowData = {
+  original: {
+    id: '1',
+    name: 'Tech Growth Fund',
+    category: 'Technology',
+    currency: 'USD',
+    profitability: {
+      YTD: 15.5,
+      oneYear: 25.3,
+      threeYears: 45.2,
+      fiveYears: 80.1,
+    },
+  },
+};
 
 /**
  * RowActionsMenu es un menú desplegable que muestra las acciones disponibles
@@ -13,11 +30,16 @@ const meta: Meta<typeof RowActionsMenu> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    data: mockRowData,
+  },
   decorators: [
     (Story) => (
-      <FundActionDialogProvider>
-        <Story />
-      </FundActionDialogProvider>
+      <ActionMenuProvider>
+        <FundActionDialogProvider>
+          <Story />
+        </FundActionDialogProvider>
+      </ActionMenuProvider>
     ),
   ],
 };
@@ -38,11 +60,13 @@ export const Default: Story = {};
 export const InTableContext: Story = {
   decorators: [
     (Story) => (
-      <FundActionDialogProvider>
-        <div className="flex items-center justify-end p-4 border rounded">
-          <Story />
-        </div>
-      </FundActionDialogProvider>
+      <ActionMenuProvider>
+        <FundActionDialogProvider>
+          <div className="flex items-center justify-end p-4 border rounded">
+            <Story />
+          </div>
+        </FundActionDialogProvider>
+      </ActionMenuProvider>
     ),
   ],
 };
