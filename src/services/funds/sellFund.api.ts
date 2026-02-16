@@ -2,12 +2,13 @@ import type {
   FundActionApiRequest,
   FundActionApiResponse,
 } from '@services/funds/fundAction.api.types';
-import { mapSellFundFromApi } from '@services/funds/sellFund.adapter';
+import { mapFundActionFromApi } from '@services/funds/fundAction.adapter';
+import type { FundActionResult } from '@domain/funds/types';
 
 export const sellFundApi = async (
   fundId: string,
   payload: FundActionApiRequest
-): Promise<FundActionApiResponse> => {
+): Promise<FundActionResult> => {
   const res = await fetch(`http://localhost:3000/funds/${fundId}/sell`, {
     method: 'POST',
     headers: {
@@ -22,5 +23,5 @@ export const sellFundApi = async (
 
   const data: FundActionApiResponse = await res.json();
 
-  return mapSellFundFromApi(data);
+  return mapFundActionFromApi(data);
 };

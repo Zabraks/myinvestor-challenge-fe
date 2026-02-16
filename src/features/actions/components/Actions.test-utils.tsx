@@ -3,6 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@lib/queryClient';
 import { Toaster } from '@ui/Sonner/Sonner';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { ActionMenuProvider } from '@context/ActionMenuContext';
 
 import userEvent from '@testing-library/user-event';
 
@@ -19,10 +20,12 @@ export const renderFundsTableWithProvider = () => {
 
   const result = render(
     <QueryClientProvider client={queryClient}>
-      <FundActionDialogProvider>
-        <Toaster />
-        <FundsTableIntegration initialData={funds} pageSize={pageSize} />
-      </FundActionDialogProvider>
+      <ActionMenuProvider>
+        <FundActionDialogProvider>
+          <Toaster />
+          <FundsTableIntegration initialData={funds} pageSize={pageSize} />
+        </FundActionDialogProvider>
+      </ActionMenuProvider>
     </QueryClientProvider>
   );
 

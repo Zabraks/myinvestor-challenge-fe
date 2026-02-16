@@ -1,4 +1,4 @@
-import { mapFundFromApi } from '@domain/funds/mappers';
+import { mapFundFromApi } from '@/domain/funds/mappers/mappers';
 import type { GetFundsApiResponse, FundTableItem, PaginationMeta } from '@domain/funds/types';
 
 interface GetFundsResponse {

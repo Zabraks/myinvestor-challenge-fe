@@ -1,6 +1,6 @@
 //TODO: cambiar nombre por FundData
 import type { FundTableItem } from '@domain/funds/types';
-import { mapFundFromApi } from '@domain/funds/mappers';
+import { mapFundFromApi } from '@/domain/funds/mappers/mappers';
 import type { GetFundByIdApiResponse } from './getFundById.api.types';
 
 export async function getFundById(id: string): Promise<FundTableItem> {

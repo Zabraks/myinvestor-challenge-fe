@@ -1,5 +1,5 @@
 import type { BuyFundApiRequest, BuyFundApiResponse } from './buyFund.api.types';
-import { mapBuyFundFromApi } from './buyFund.adapter';
+import { mapFundActionFromApi } from './fundAction.adapter';
 
 export const buyFundApi = async (fundId: string, payload: BuyFundApiRequest) => {
   const res = await fetch(`http://localhost:3000/funds/${fundId}/buy`, {
@@ -16,5 +16,5 @@ export const buyFundApi = async (fundId: string, payload: BuyFundApiRequest) => 
 
   const data: BuyFundApiResponse = await res.json();
 
-  return mapBuyFundFromApi(data);
+  return mapFundActionFromApi(data);
 };

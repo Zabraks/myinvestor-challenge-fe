@@ -20,7 +20,7 @@ describe('buyFundSchema', () => {
   });
 
   it('should fail if value is a negative value', () => {
-    const result = sellFundSchemaType(DEFAULT_SCHEMA_VALUE).safeParse({ amount: 0 });
+    const result = sellFundSchemaType(DEFAULT_SCHEMA_VALUE).safeParse({ amount: -10 });
 
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -42,7 +42,7 @@ describe('buyFundSchema', () => {
   });
 
   it('should fail if value is not a number', () => {
-    const result = sellFundSchemaType(DEFAULT_SCHEMA_VALUE).safeParse({ amount: '100' });
+    const result = sellFundSchemaType(DEFAULT_SCHEMA_VALUE).safeParse({ amount: 'test' });
 
     expect(result.success).toBe(false);
   });

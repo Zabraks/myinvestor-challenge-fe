@@ -2,7 +2,7 @@ import type {
   TransferFundApiRequest,
   TransferFundApiResponse,
 } from '@services/funds/transferFund.api.types';
-import { mapTransferFundFromApi } from '@services/funds/transferFund.adapter';
+import { mapFundActionFromApi } from '@services/funds/fundAction.adapter';
 
 export const transferFundApi = async (payload: TransferFundApiRequest) => {
   const res = await fetch(`http://localhost:3000/funds/transfer`, {
@@ -19,5 +19,5 @@ export const transferFundApi = async (payload: TransferFundApiRequest) => {
 
   const data: TransferFundApiResponse = await res.json();
 
-  return mapTransferFundFromApi(data);
+  return mapFundActionFromApi(data);
 };

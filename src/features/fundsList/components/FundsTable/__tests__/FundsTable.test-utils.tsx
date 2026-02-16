@@ -5,9 +5,11 @@ import type { SortingState } from '@tanstack/react-table';
 import { FundsTable } from '../FundsTable';
 import { TablePagination } from '../TablePagination/TablePagination';
 import { generateDeterministicFunds } from '@/mocks/factories';
-import { mapFundFromApi } from '@/domain/funds/mappers';
+import { mapFundFromApi } from '@/domain/funds/mappers/mappers';
 import type { FundTableItem } from '@/domain/funds/types';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { ActionMenuProvider } from '@context/ActionMenuContext';
+import { ActionMenu } from '@features/actions/components/ActionMenu';
 
 export interface FundsTableIntegrationProps {
   initialData: FundTableItem[];
@@ -50,12 +52,15 @@ export const FundsTableIntegration = ({
   const pagination = totalPages > 1 ? { page, totalPages } : undefined;
 
   return (
-    <FundActionDialogProvider>
-      <div>
-        <FundsTable data={paginatedData} sorting={sorting} handleSorting={setSorting} />
-        <TablePagination pagination={pagination} setPage={setPage} />
-      </div>
-    </FundActionDialogProvider>
+    <ActionMenuProvider>
+      <FundActionDialogProvider>
+        <div>
+          <FundsTable data={paginatedData} sorting={sorting} handleSorting={setSorting} />
+          <TablePagination pagination={pagination} setPage={setPage} />
+        </div>
+        <ActionMenu />
+      </FundActionDialogProvider>
+    </ActionMenuProvider>
   );
 };
 

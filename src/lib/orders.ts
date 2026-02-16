@@ -35,8 +35,14 @@ export function getOrderSign(type: OrderType) {
 }
 
 export function formatDate(date: string) {
+  const parsedDate = new Date(date);
+
+  if (isNaN(parsedDate.getTime())) {
+    return '---';
+  }
+
   return new Intl.DateTimeFormat('es-ES', {
     dateStyle: 'medium',
     timeStyle: 'short',
-  }).format(new Date(date));
+  }).format(new Date(parsedDate));
 }
