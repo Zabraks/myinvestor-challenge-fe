@@ -1,7 +1,8 @@
-import type { FundActionType, FundActionData } from '@domain/funds/types';
+import type { ActionType, ActionData } from '@domain/action';
 
 export interface FundActionFormProps {
-  action: FundActionType;
-  data: FundActionData;
-  onSuccess: () => void;
+  action: ActionType;
+  data?: ActionData;
+  onSuccess?: () => void;
+  fundId?: string | null;
 }

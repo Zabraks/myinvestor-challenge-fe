@@ -7,23 +7,26 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useBuyFund } from '@features/actions/queries/useBuyFund';
-import { buyFundSchema, type BuyFundFormData } from '@domain/funds/validation';
+import { buySchema, type BuyFormData } from '@domain/action';
 import type { FundActionFormProps } from '@features/actions/types';
 
 export const BuyFundForm = ({ action, onSuccess, data }: FundActionFormProps) => {
-  const form = useForm<BuyFundFormData>({
-    resolver: zodResolver(buyFundSchema),
+  const form = useForm<BuyFormData>({
+    resolver: zodResolver(buySchema),
     defaultValues: {
       amount: 0,
     },
   });
 
-  const { mutate: buyFund } = useBuyFund({ onSuccess });
+  const { mutate: buyFund } = useBuyFund({ onSuccess: onSuccess });
 
-  const onSubmit = (formData: BuyFundFormData) => {
+  if (!data) return null;
+
+  const onSubmit = (formData: BuyFormData) => {
     buyFund({
       fundId: data.id,
       amount: formData.amount,
+      fundName: data.name,
     });
   };
 

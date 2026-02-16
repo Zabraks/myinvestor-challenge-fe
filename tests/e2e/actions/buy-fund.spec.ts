@@ -1,10 +1,7 @@
 import { test, expect } from '../../fixtures/funds-api.fixture';
 import { SELECTORS } from '../../utils/selectors';
 import type { MockBuyFund } from '../../utils/mock-data';
-/**
- * Tests de Accion - Comprar fondo
- *
- */
+
 test.describe('Actions - Buy fund', () => {
   test.beforeEach(async ({ fundsPage }) => {
     await fundsPage.goto('/funds');
@@ -30,10 +27,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(input).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and buy a fund successfully', async ({
-    fundsPage,
-    mockBuyApi,
-  }) => {
+  test('should buyFund form and buy a fund successfully', async ({ fundsPage, mockBuyApi }) => {
     let capturedPayload: MockBuyFund | null = null;
 
     await mockBuyApi({
@@ -57,7 +51,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(toastMsg).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and see a toast error message when api fails', async ({
+  test('should buyFund form and see a toast error message when api fails', async ({
     fundsPage,
     mockBuyApi,
   }) => {
@@ -79,7 +73,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(toastMsg).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and see a validation error when clear the input', async ({
+  test('should buyFund form and see a validation error when clear the input', async ({
     fundsPage,
   }) => {
     const dialog = fundsPage.getByRole('dialog');
@@ -96,7 +90,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(dialog).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and see a validation error when type a negative value', async ({
+  test('should buyFund form and see a validation error when type a negative value', async ({
     fundsPage,
   }) => {
     const dialog = fundsPage.getByRole('dialog');
@@ -113,7 +107,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(dialog).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and see a validation error when type zero value', async ({
+  test('should buyFund form and see a validation error when type zero value', async ({
     fundsPage,
   }) => {
     const dialog = fundsPage.getByRole('dialog');
@@ -130,7 +124,7 @@ test.describe('Actions - Buy fund', () => {
     await expect(dialog).toBeVisible();
   });
 
-  test('should open dialog with buyFund form and see a validation error when a value up to max limit', async ({
+  test('should buyFund form and see a validation error when a value up to max limit', async ({
     fundsPage,
   }) => {
     const dialog = fundsPage.getByRole('dialog');

@@ -5,8 +5,7 @@ import { actionFactory } from '@mocks/factories';
 import { http, HttpResponse } from 'msw';
 import { server } from '@/mocks/server';
 import { queryClient } from '@lib/queryClient';
-
-import { BUY_VALIDATION_STRINGS } from '@domain/funds/validation';
+import { MESSAGES } from '@domain/action';
 
 import {
   renderFundsTableWithProvider,
@@ -15,7 +14,7 @@ import {
   sendForm,
 } from './Actions.test-utils';
 
-import type { BuyFundApiResponse } from '@/services/funds/buyFund.api.types';
+import type { FundActionResponse } from '@services/fund-action';
 
 describe('BuyFundForm', () => {
   beforeEach(() => {
@@ -43,7 +42,7 @@ describe('BuyFundForm', () => {
           data: {
             portfolio: [{ id: capturedFundId, quantity: capturedPayload.quantity }],
           },
-        }) as BuyFundApiResponse;
+        }) as FundActionResponse;
 
         return HttpResponse.json(mockResponse);
       })
@@ -74,7 +73,7 @@ describe('BuyFundForm', () => {
     await updateInput(user);
     await sendForm(user);
 
-    const errorMsg = await screen.findByText(BUY_VALIDATION_STRINGS.NUMBER_VALIDATION);
+    const errorMsg = await screen.findByText(MESSAGES.numberRequired);
     expect(errorMsg).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).toBeInTheDocument();
   });
@@ -86,7 +85,7 @@ describe('BuyFundForm', () => {
     await updateInput(user, '-100');
     await sendForm(user);
 
-    const errorMsg = await screen.findByText(BUY_VALIDATION_STRINGS.POSITIVE_VALIDATION);
+    const errorMsg = await screen.findByText(MESSAGES.positive);
     expect(errorMsg).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).toBeInTheDocument();
   });
@@ -98,7 +97,7 @@ describe('BuyFundForm', () => {
     await updateInput(user, '1000000');
     await sendForm(user);
 
-    const errorMsg = await screen.findByText(BUY_VALIDATION_STRINGS.MAX_VALUE_VALIDATION);
+    const errorMsg = await screen.findByText(MESSAGES.buyMax);
     expect(errorMsg).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).toBeInTheDocument();
   });
@@ -110,7 +109,7 @@ describe('BuyFundForm', () => {
     await updateInput(user, 'test');
     await sendForm(user);
 
-    const errorMsg = await screen.findByText(BUY_VALIDATION_STRINGS.NUMBER_VALIDATION);
+    const errorMsg = await screen.findByText(MESSAGES.numberRequired);
     expect(errorMsg).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).toBeInTheDocument();
   });

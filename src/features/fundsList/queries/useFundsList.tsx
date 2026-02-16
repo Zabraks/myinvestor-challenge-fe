@@ -1,8 +1,15 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { getFunds } from '@services/funds/getFunds.api';
+import type { SortingState } from '@tanstack/react-table';
+import { getFunds } from '@services/fund';
 import { adaptSorting } from '@lib/adapters/sorting';
 
-export const useFundsList = ({ page, limit, sorting }) => {
+interface UseFundsListParams {
+  page: number;
+  limit: number;
+  sorting: SortingState;
+}
+
+export const useFundsList = ({ page, limit, sorting }: UseFundsListParams) => {
   const backendSort = adaptSorting(sorting);
 
   return useQuery({

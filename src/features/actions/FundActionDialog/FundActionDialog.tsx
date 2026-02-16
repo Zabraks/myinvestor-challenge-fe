@@ -4,13 +4,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/Dialog/Dia
 import { BuyFundForm } from '@features/actions/components/BuyFundForm';
 import { SellFundForm } from '@features/actions/components/SellFundForm';
 import { FundDetails } from '@features/actions/components/FundDetails';
-import type { FundActionType, FundActionData } from '@domain/funds/types';
+import { TransferFundForm } from '@features/actions/components/TransferFundForm';
+
+import type { ActionType, ActionData } from '@domain/action';
 import type { FundActionFormProps } from '@features/actions/types';
 
 interface FundActionDialogProps {
   readonly open: boolean;
-  readonly action: FundActionType | null;
-  readonly data: FundActionData | null;
+  readonly action: ActionType | null;
+  readonly data: ActionData | null;
+  readonly fundId: string | null;
   readonly onClose: () => void;
 }
 
@@ -19,7 +22,7 @@ type ActionConfig = {
   component: ComponentType<FundActionFormProps> | ComponentType<Pick<FundActionFormProps, 'data'>>;
 };
 
-const ACTION_CONFIG: Record<FundActionType, ActionConfig> = {
+const ACTION_CONFIG: Record<ActionType, ActionConfig> = {
   buy: {
     title: 'Comprar fondo',
     component: BuyFundForm,
@@ -28,13 +31,17 @@ const ACTION_CONFIG: Record<FundActionType, ActionConfig> = {
     title: 'Vender fondo',
     component: SellFundForm,
   },
+  transfer: {
+    title: 'Traspasar fondo',
+    component: TransferFundForm,
+  },
   show: {
     title: 'Detalles del fondo',
     component: FundDetails,
   },
 };
 
-export function FundActionDialog({ open, action, data, onClose }: FundActionDialogProps) {
+export function FundActionDialog({ open, action, data, fundId, onClose }: FundActionDialogProps) {
   if (!data || !action) return null;
 
   const config = ACTION_CONFIG[action];
@@ -46,7 +53,7 @@ export function FundActionDialog({ open, action, data, onClose }: FundActionDial
         <DialogHeader>
           <DialogTitle>{config.title}</DialogTitle>
         </DialogHeader>
-        <ContentComponent data={data} onSuccess={onClose} action={action} />
+        <ContentComponent data={data} onSuccess={onClose} action={action} fundId={fundId} />
       </DialogContent>
     </Dialog>
   );

@@ -1,4 +1,4 @@
-import { BUY_VALIDATION_STRINGS } from '../../src/domain/funds/validation';
+import { MESSAGES } from '../../src/domain/action';
 
 export const SELECTORS = {
   header: {
@@ -39,7 +39,9 @@ export const SELECTORS = {
   rowActions: {
     trigger: 'abrir menu',
     buy: 'Comprar',
-    viewDetails: 'Ver Detalle',
+    sell: 'Vender',
+    transfer: 'Traspasar',
+    viewDetails: 'Ver detalle',
   },
 
   buyDialog: {
@@ -49,18 +51,101 @@ export const SELECTORS = {
     closeButton: 'Close',
   },
 
+  sellDialog: {
+    title: /Vender fondo/i,
+    inputName: /Valor/i,
+    sendButton: /Enviar/i,
+    closeButton: 'Close',
+  },
+
+  transferDialog: {
+    title: /Traspasar fondo/i,
+    inputName: /Valor/i,
+    fundSelect: /Traspasar a/i,
+    sendButton: /Enviar/i,
+    closeButton: 'Close',
+  },
+
+  detailDialog: {
+    title: /Detalles del fondo/i,
+    closeButton: 'Close',
+  },
+
+  portfolio: {
+    tabs: {
+      funds: 'Fondos',
+      orders: 'Órdenes',
+    },
+    card: {
+      title: 'Mis fondos',
+    },
+    item: {
+      role: 'listitem',
+      participaciones: 'Participaciones:',
+      valor: 'Valor',
+    },
+    emptyState: {
+      title: 'Aún no tienes fondos en tu cartera',
+      description: 'Explora el listado de fondos y comienza a invertir.',
+      button: 'Ver fondos disponibles',
+    },
+    error: {
+      title: 'Error',
+      description: 'Ha habido un error al obtener tu porfolio',
+      button: 'Volver a intentarlo',
+    },
+  },
+
+  orders: {
+    card: {
+      title: 'Ordenes',
+    },
+    emptyState: {
+      title: 'Aún no se han registrado operaciones',
+      description: 'No hay registros de ordenes de compra, venta o traspaso con tus fondos',
+    },
+    error: {
+      title: 'Error',
+      description: 'Ha habido un error al obtener el listado de ordenes',
+    },
+    types: {
+      buy: 'Compra',
+      sell: 'Venta',
+      transfer: 'Traspaso',
+    },
+  },
+
   toastMsg: {
     buy: {
       success: 'El fondo se ha comprado correctamente',
+      error: 'Ha habido un error en la petición',
+    },
+    sell: {
+      success: 'El fondo se ha vendido correctamente',
+      error: 'Ha habido un error en la petición',
+    },
+    transfer: {
+      success: 'El fondo se ha transferido correctamente',
       error: 'Ha habido un error en la petición',
     },
   },
 
   validations: {
     buy: {
-      number: BUY_VALIDATION_STRINGS.NUMBER_VALIDATION,
-      positive: BUY_VALIDATION_STRINGS.POSITIVE_VALIDATION,
-      maxValue: BUY_VALIDATION_STRINGS.MAX_VALUE_VALIDATION,
+      number: MESSAGES.numberRequired,
+      positive: MESSAGES.positive,
+      maxValue: MESSAGES.buyMax,
+    },
+    sell: {
+      number: MESSAGES.numberRequired,
+      positive: MESSAGES.positive,
+      maxValue: (max: number) => MESSAGES.sellMax(max),
+    },
+    transfer: {
+      number: MESSAGES.numberRequired,
+      positive: MESSAGES.positive,
+      maxValue: (max: number) => MESSAGES.transferMax(max),
+      fundRequired: MESSAGES.fundRequired,
     },
   },
 

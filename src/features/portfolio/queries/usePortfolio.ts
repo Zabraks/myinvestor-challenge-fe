@@ -1,17 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-
-interface PortfolioResponse {
-  data: unknown[];
-}
+import { getPortfolio } from '@services/portfolio';
+import type { Portfolio } from '@domain/portfolio';
 
 export const usePortfolio = () =>
-  useQuery({
+  useQuery<Portfolio>({
     queryKey: ['portfolio'],
-    queryFn: async () => {
-      const res = await fetch('http://localhost:3000/portfolio');
-      if (!res.ok) {
-        throw new Error(`Failed to fetch portfolio: ${res.statusText}`);
-      }
-      return res.json() as Promise<PortfolioResponse>;
-    },
+    queryFn: getPortfolio,
   });

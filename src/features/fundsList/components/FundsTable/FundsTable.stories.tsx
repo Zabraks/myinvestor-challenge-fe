@@ -4,9 +4,9 @@ import { http, HttpResponse } from 'msw';
 import { FundsTable } from './FundsTable';
 import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
 import { fundFactory } from '@/mocks/factories';
-import { mapFundFromApi } from '@/domain/funds/mappers';
-import type { GetFundsApiResponse } from '@/domain/funds/types';
+import { mapFundFromApi, type GetFundsApiResponse } from '@domain/fund';
 import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
+import { ActionMenuProvider } from '@/context/ActionMenuContext';
 
 // Función noop para handlers en stories
 const noop = () => {};
@@ -19,11 +19,13 @@ const meta: Meta<typeof FundsTable> = {
   },
   decorators: [
     (Story) => (
-      <FundActionDialogProvider>
-        <div className="w-full max-w-6xl">
-          <Story />
-        </div>
-      </FundActionDialogProvider>
+      <ActionMenuProvider>
+        <FundActionDialogProvider>
+          <div className="w-full max-w-6xl">
+            <Story />
+          </div>
+        </FundActionDialogProvider>
+      </ActionMenuProvider>
     ),
   ],
 };
