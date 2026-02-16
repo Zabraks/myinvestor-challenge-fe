@@ -1,11 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Configuración de Playwright para tests E2E y Visual Regression.
+ * Configuración de Playwright para tests E2E.
  *
  * Decisiones técnicas:
- * - Separamos tests por proyecto (desktop, mobile, visual) para ejecutarlos de forma independiente
- * - Los snapshots se guardan por proyecto/dispositivo para mantener comparaciones consistentes
+ * - Separamos tests por proyecto (desktop, mobile) para ejecutarlos de forma independiente
  * - Usamos webServer para levantar la app automáticamente antes de los tests
  */
 export default defineConfig({
@@ -21,10 +20,6 @@ export default defineConfig({
   /* Timeout para expect() - evita falsos positivos por renders lentos */
   expect: {
     timeout: 10 * 1000,
-    /* Configuración de snapshots visuales */
-    toHaveScreenshot: {
-      maxDiffPixelRatio: 0.01, // Tolerancia del 1% para diferencias menores (antialiasing, etc.)
-    },
   },
 
   /* Sin reintentos en desarrollo para feedback rápido */
@@ -48,7 +43,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
 
-  /* Proyectos: Desktop, Mobile y Visual Regression */
+  /* Proyectos: Desktop, Mobile y Visual (desktop + mobile) */
   projects: [
     {
       name: 'desktop-chrome',

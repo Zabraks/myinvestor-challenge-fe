@@ -1,34 +1,13 @@
-import type { FundActionResponse } from '../../src/services/fund-action';
+import type { ApiFund, GetFundsApiResponse, Category, Currency } from '../../src/domain/fund';
+import type { FundActionResponse, TransferFundActionRequest } from '../../src/services/fund-action';
+import type { PortfolioItemDto, PortfolioResponseDto } from '../../src/services/portfolio';
 
-export interface MockBuyFund {
+export interface CapturedFundAction {
   fundId: string;
   quantity: number;
 }
 
-export interface MockFund {
-  id: string;
-  name: string;
-  category: 'GLOBAL' | 'TECH' | 'HEALTH' | 'MONEY_MARKET';
-  currency: 'USD' | 'EUR';
-  value: number;
-  symbol: string;
-  profitability: {
-    YTD: number;
-    oneYear: number;
-    threeYears: number;
-    fiveYears: number;
-  };
-}
-
-export interface MockFundsResponse {
-  data: MockFund[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
-}
+export type CapturedTransferAction = TransferFundActionRequest;
 
 export interface MockFundsConfig {
   page?: number;
@@ -43,7 +22,32 @@ export interface MockFundsConfig {
 export interface MockBuyConfig {
   delay?: number;
   shouldFail?: boolean;
-  onCapture?: (data: MockBuyFund) => void;
+  onCapture?: (data: CapturedFundAction) => void;
+}
+
+export interface MockSellConfig {
+  delay?: number;
+  shouldFail?: boolean;
+  onCapture?: (data: CapturedFundAction) => void;
+}
+
+export interface MockTransferConfig {
+  delay?: number;
+  shouldFail?: boolean;
+  onCapture?: (data: CapturedTransferAction) => void;
+}
+
+export interface MockPortfolioFullConfig {
+  delay?: number;
+  shouldFail?: boolean;
+  items?: PortfolioItemDto[];
+  empty?: boolean;
+}
+
+export interface MockFundDetailConfig {
+  delay?: number;
+  shouldFail?: boolean;
+  fundId?: string;
 }
 
 function seededRandom(seed: number): () => number {
@@ -82,11 +86,11 @@ const FUND_NAMES = [
   'Nuveen Dividend Value',
 ];
 
-const CATEGORIES: MockFund['category'][] = ['GLOBAL', 'TECH', 'HEALTH', 'MONEY_MARKET'];
-const CURRENCIES: MockFund['currency'][] = ['USD', 'EUR'];
+const CATEGORIES: Category[] = ['GLOBAL', 'TECH', 'HEALTH', 'MONEY_MARKET'];
+const CURRENCIES: Currency[] = ['USD', 'EUR'];
 const SYMBOLS = ['VTI', 'BGAF', 'FGRO', 'PIMX', 'JPEQ', 'GSTK', 'MSHC', 'TRPC', 'QQQ', 'SCHX'];
 
-function generateFund(index: number, random: () => number): MockFund {
+function generateFund(index: number, random: () => number): ApiFund {
   const nameIndex = index % FUND_NAMES.length;
   const categoryIndex = Math.floor(random() * CATEGORIES.length);
   const currencyIndex = Math.floor(random() * CURRENCIES.length);
@@ -107,19 +111,19 @@ function generateFund(index: number, random: () => number): MockFund {
   };
 }
 
-export function generateMockFunds(count: number, seed = 12345): MockFund[] {
+export function generateMockFunds(count: number, seed = 12345): ApiFund[] {
   const random = seededRandom(seed);
   return Array.from({ length: count }, (_, i) => generateFund(i, random));
 }
 
-export function generateMockFundsResponse(config: MockFundsConfig = {}): MockFundsResponse {
+export function generateMockFundsResponse(config: MockFundsConfig = {}): GetFundsApiResponse {
   const { page = 1, limit = 10, sort, totalFunds = 25, seed = 12345 } = config;
 
   let funds = generateMockFunds(totalFunds, seed);
 
   if (sort) {
     const [field, direction] = sort.split(':') as [
-      keyof MockFund | 'YTD' | 'oneYear',
+      keyof ApiFund | 'YTD' | 'oneYear',
       'asc' | 'desc',
     ];
 
@@ -128,11 +132,11 @@ export function generateMockFundsResponse(config: MockFundsConfig = {}): MockFun
       let bValue: number | string;
 
       if (['YTD', 'oneYear', 'threeYears', 'fiveYears'].includes(field)) {
-        aValue = a.profitability[field as keyof MockFund['profitability']];
-        bValue = b.profitability[field as keyof MockFund['profitability']];
+        aValue = a.profitability[field as keyof ApiFund['profitability']];
+        bValue = b.profitability[field as keyof ApiFund['profitability']];
       } else {
-        aValue = a[field as keyof MockFund] as number | string;
-        bValue = b[field as keyof MockFund] as number | string;
+        aValue = a[field as keyof ApiFund] as number | string;
+        bValue = b[field as keyof ApiFund] as number | string;
       }
 
       if (typeof aValue === 'number' && typeof bValue === 'number') {
@@ -161,7 +165,7 @@ export function generateMockFundsResponse(config: MockFundsConfig = {}): MockFun
   };
 }
 
-export function generateMockBuyFundsResponse(config: MockBuyFund): FundActionResponse {
+export function generateMockBuyFundsResponse(config: CapturedFundAction): FundActionResponse {
   return {
     message: 'Purchase successful',
     data: {
@@ -173,6 +177,70 @@ export function generateMockBuyFundsResponse(config: MockBuyFund): FundActionRes
       ],
     },
   };
+}
+
+export function generateMockSellFundsResponse(config: CapturedFundAction): FundActionResponse {
+  return {
+    message: 'Sale successful',
+    data: {
+      portfolio: [
+        {
+          id: config.fundId,
+          quantity: config.quantity,
+        },
+      ],
+    },
+  };
+}
+
+export function generateMockTransferFundsResponse(
+  config: CapturedTransferAction
+): FundActionResponse {
+  return {
+    message: 'Transfer successful',
+    data: {
+      portfolio: [
+        {
+          id: config.fromFundId,
+          quantity: config.quantity,
+        },
+        {
+          id: config.toFundId,
+          quantity: config.quantity,
+        },
+      ],
+    },
+  };
+}
+
+export function generateMockPortfolioResponse(
+  config?: MockPortfolioFullConfig
+): PortfolioResponseDto {
+  if (config?.empty) {
+    return { data: [] };
+  }
+
+  if (config?.items) {
+    return { data: config.items };
+  }
+
+  // Default portfolio items que corresponden a fondos del catálogo mock
+  const funds = generateMockFunds(25, 12345);
+  const defaultItems: PortfolioItemDto[] = [
+    { id: 'fund-001', name: funds[0].name, quantity: 100, totalValue: 15000.5 },
+    { id: 'fund-002', name: funds[1].name, quantity: 50, totalValue: 7500.25 },
+    { id: 'fund-003', name: funds[2].name, quantity: 75, totalValue: 11250.75 },
+  ];
+
+  return {
+    data: defaultItems,
+  };
+}
+
+export function generateMockFundDetailResponse(fundId: string): { data: ApiFund } {
+  const funds = generateMockFunds(25, 12345);
+  const fund = funds.find((f) => f.id === fundId) ?? funds[0];
+  return { data: fund };
 }
 
 export const TEST_SCENARIOS = {
