@@ -8,80 +8,65 @@ import {
   ItemActions,
 } from '@ui/Item/Item';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from '@ui/DropdownMenu/DropdownMenu';
-
-import { Button } from '@ui/Button/Button';
-
-import { EllipsisVertical, Eye, ArrowRightToLine, ChartNoAxesCombined } from 'lucide-react';
-
 import { useInteractionMode } from '@lib/hooks/useInteractiveMode';
-import { useFundActionDialog } from '@context/FundActionDialogContext';
 import { PortfolioActionsSwipe } from '@features/actions/components/PortfolioActionsSwipe';
 import { SwipeableRow } from '@features/actions/components/SwipeableRow';
-
+import { useActionMenu } from '@context/ActionMenuContext';
+import { Button } from '@ui/Button/Button';
+import { EllipsisVertical, ChartNoAxesCombined, Coins } from 'lucide-react';
 interface PortfolioItemProps {
   item: PortfolioItemType;
 }
 
-//TODO Refactor
-export const PortfolioItem = ({ item }: PortfolioItemProps) => {
-  const { openDialog } = useFundActionDialog();
-  const { mode } = useInteractionMode();
+const BasicItem = ({ data, mode }) => {
+  const { open } = useActionMenu();
 
-  return mode === 'touch' ? (
-    <SwipeableRow actions={<PortfolioActionsSwipe item={item} />}>
-      <Item key={item.name} variant="outline" role="listitem">
-        <ItemMedia variant="icon">
-          <ChartNoAxesCombined />
-        </ItemMedia>
-        <ItemContent>
-          <ItemTitle className="line-clamp-1">{item.name}</ItemTitle>
-        </ItemContent>
-        <ItemContent className="flex flex-col text-end">
-          <ItemDescription>{item.totalValue}</ItemDescription>
-          <ItemDescription>{item.quantity} Participaciones</ItemDescription>
-        </ItemContent>
-      </Item>
-    </SwipeableRow>
-  ) : (
-    <Item key={item.name} variant="outline" role="listitem">
+  const openMenu = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    open(data, rect, 'portfolio');
+  };
+
+  return (
+    <Item variant="outline" role="listitem">
       <ItemMedia variant="icon">
         <ChartNoAxesCombined />
       </ItemMedia>
       <ItemContent>
-        <ItemTitle className="line-clamp-1">{item.name}</ItemTitle>
+        <ItemTitle className="line-clamp-1 text-md font-bold">{data.name}</ItemTitle>
+        <ItemDescription className="flex">
+          <span>Participaciones: </span>
+          <span className="pl-1.5 font-bold">{data.quantity}</span> <Coins className="w-3" />
+        </ItemDescription>
       </ItemContent>
-      <ItemContent className="flex flex-col text-end">
-        <ItemDescription>{item.totalValue}</ItemDescription>
-        <ItemDescription>{item.quantity} Participaciones</ItemDescription>
+      <ItemContent className="flex flex-col text-end items-end">
+        <span>Valor</span>
+        <ItemDescription className="font-bold">{data.totalValue}</ItemDescription>
       </ItemContent>
-      <ItemActions>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-icon-selected p-0 cursor-pointer">
-              <span className="sr-only">Open menu</span>
-              <EllipsisVertical />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => openDialog('buy', item.id, item)}>
-              <ArrowRightToLine />
-              Comprar
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => openDialog('show', item.id, item)}>
-              <Eye />
-              Ver Detalle
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </ItemActions>
+      {mode === 'mouse' && (
+        <ItemActions>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-icon-selected p-0 cursor-pointer"
+            onClick={openMenu}
+          >
+            <span className="sr-only">abrir menu</span>
+            <EllipsisVertical />
+          </Button>
+        </ItemActions>
+      )}
     </Item>
+  );
+};
+
+export const PortfolioItem = ({ item }: PortfolioItemProps) => {
+  const { mode } = useInteractionMode();
+
+  return mode === 'touch' ? (
+    <SwipeableRow actions={<PortfolioActionsSwipe item={item} />}>
+      <BasicItem data={item} mode={mode} />
+    </SwipeableRow>
+  ) : (
+    <BasicItem data={item} mode={mode} />
   );
 };

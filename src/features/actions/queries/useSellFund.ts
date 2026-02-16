@@ -4,7 +4,6 @@ import type { FundActionResult, FundActionInput } from '@domain/funds/types';
 import { showSuccessToast, showErrorToast } from '@features/actions/components/ActionToast';
 import type { SellFundInput } from '@domain/funds/sell';
 import type { Order } from '@domain/orders/models';
-import { toast } from 'sonner';
 
 interface UseSellFundOptions {
   onSuccess: () => void;

@@ -4,35 +4,19 @@ import { Field, FieldDescription, FieldError, FieldLabel } from '@ui/Field/Field
 import { Input } from '@ui/Input/Input';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@ui/Select/Select';
 
-import * as z from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useTransferFund } from '@features/actions/queries/useTransferFund';
 import { usePortfolio } from '@features/portfolio/queries/usePortfolio';
 import type { FundActionProps } from './FundActionDialog';
+import { transferFundSchemaType, type TransferFundFormData } from '@domain/funds/validation';
 
 export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundActionProps) => {
   const { data: portfolio, isLoading } = usePortfolio();
 
-  const formSchema = z.object({
-    amount: z
-      .number({
-        required_error: 'El campo debe ser obligatorio',
-        invalid_type_error: 'El valor introducido ha de ser un número',
-      })
-      .nonnegative('La cantidad no puede ser negativa')
-      .max(data.quantity, 'El valor no puede ser superior a la cantidad disponible'),
-    fund: z
-      .string({
-        required_error: 'El campo debe ser obligatorio',
-        invalid_type_error: 'Ha de elegir un fondo de los disponibles',
-      })
-      .min(1, 'Ha de elegir un fondo de los disponibles'),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TransferFundFormData>({
+    resolver: zodResolver(transferFundSchemaType(data.quantity)),
     defaultValues: {
       amount: 0,
       fund: '',
@@ -41,7 +25,7 @@ export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundAction
 
   const { mutate: transferFund } = useTransferFund(onSuccess);
 
-  const onSubmit = (formData: z.infer<typeof formSchema>) => {
+  const onSubmit = (formData: TransferFundFormData) => {
     transferFund({
       fromFundId: fundId,
       fromFundName: data.name,

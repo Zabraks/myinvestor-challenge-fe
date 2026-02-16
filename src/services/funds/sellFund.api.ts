@@ -1,5 +1,3 @@
-import type { SellFundApiRequest, SellFundApiResponse } from '@services/funds/sellFund.api.types';
-import type { SellFundResult } from '@domain/funds/sell';
 import type {
   FundActionApiRequest,
   FundActionApiResponse,

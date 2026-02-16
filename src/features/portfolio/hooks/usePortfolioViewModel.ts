@@ -1,6 +1,7 @@
 import { usePortfolio } from '../queries/usePortfolio';
 import { useFundsCatalog } from '@features/portfolio/queries/useFundsCatalog';
 import { sortByName } from '@domain/portfolio/utils/sortByName';
+import { formatValue } from '@domain/portfolio/utils/formatValue';
 import { groupByCategory } from '@domain/portfolio/utils/groupByCategory';
 import { CATEGORY_LABELS } from '@/domain/portfolio/constants';
 import type { CategoryKey } from '@/domain/portfolio/constants';
@@ -34,6 +35,7 @@ export function usePortfolioViewModel() {
       ...item,
       name: fund?.name ?? 'fondo desconocido',
       category: CATEGORY_LABELS[rawCategory] ?? rawCategory ?? 'Otros',
+      totalValue: formatValue(item.totalValue),
     };
   });
 

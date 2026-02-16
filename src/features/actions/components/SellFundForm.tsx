@@ -12,8 +12,8 @@ import { sellFundSchemaType, type SellFundFormData } from '@domain/funds/validat
 import type { FundActionFormProps } from '@features/actions/types';
 
 export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) => {
-  const maxPosition = data.position ?? 0;
-  const sellFundSchema = useMemo(() => sellFundSchemaType(maxPosition), [maxPosition]);
+  const maxQuantity = data.quantity ?? 0;
+  const sellFundSchema = useMemo(() => sellFundSchemaType(maxQuantity), [maxQuantity]);
 
   const form = useForm<SellFundFormData>({
     resolver: zodResolver(sellFundSchema),
@@ -26,7 +26,7 @@ export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) =
 
   const onSubmit = (formData: SellFundFormData) => {
     sellFund({
-      fundId: fundId,
+      fundId: data.id,
       amount: formData.amount,
       fundName: data.name,
     });

@@ -1,7 +1,7 @@
 import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from '@ui/Item/Item';
 import { Badge } from '@ui/Badge/Badge';
 
-import { ChevronsDown } from 'lucide-react';
+import { ChevronsDown, Coins } from 'lucide-react';
 
 import type { OrderViewModel } from '@services/orders/orderToView.api.types';
 
@@ -26,13 +26,13 @@ export const OrderItem = ({ item }: { item: OrderViewModel }) => {
             <ItemTitle className="line-clamp-1">{item.fundDestinationName}</ItemTitle>
           </>
         )}
-        <ItemDescription>
+        <div>
           <Badge variant={item.tone}>{item.type}</Badge>
-        </ItemDescription>
+        </div>
       </ItemContent>
       <ItemContent className="flex flex-col text-end">
-        <ItemDescription className={`font-bold text-lg ${TONE_CLASSES[item.tone]}`}>
-          {item.quantityLabel}
+        <ItemDescription className={`flex font-bold items-end text-lg ${TONE_CLASSES[item.tone]}`}>
+          {item.quantityLabel} <Coins className="pl-1 w-5.5" />
         </ItemDescription>
       </ItemContent>
     </Item>

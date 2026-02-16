@@ -6,7 +6,7 @@ import { PortfolioSection } from '@features/portfolio/components/PortfolioSectio
 const Portfolio = () => {
   return (
     <div className="flex flex-col justify-center gap-4">
-      <Tabs defaultValue="overview" className="w-full max-w-md">
+      <Tabs defaultValue="portfolio" className="w-full max-w-lg">
         <TabsList className="justify-start w-full mb-4">
           <TabsTrigger value="portfolio">Fondos</TabsTrigger>
           <TabsTrigger value="orders">Órdenes</TabsTrigger>

@@ -14,7 +14,7 @@ export const PortfolioList = ({ items }: { items: CategoryGroup<PortfolioItemTyp
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-6">
+    <div className="flex w-full flex-col gap-6">
       <ItemGroup className="gap-4">
         {items.length ? (
           items.map(({ nameCategory, items: subItems }) => (

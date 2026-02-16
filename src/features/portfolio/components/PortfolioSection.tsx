@@ -13,7 +13,7 @@ export const PortfolioSection = () => {
   const { isLoading, isError, data: enrichedPortfolio } = usePortfolioViewModel();
 
   return (
-    <Card className="bg-card ">
+    <Card className="bg-card">
       <CardHeader>
         <h2 className="font-bold">Mis fondos</h2>
       </CardHeader>

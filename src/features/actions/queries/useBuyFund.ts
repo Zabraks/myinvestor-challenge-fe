@@ -3,7 +3,6 @@ import { buyFundApi } from '@services/funds/buyFund.api';
 import type { FundActionResult, FundActionInput } from '@domain/funds/types';
 import type { BuyFundInput } from '@domain/funds/buy';
 import type { Order } from '@domain/orders/models';
-import { toast } from 'sonner';
 
 import { showSuccessToast, showErrorToast } from '@features/actions/components/ActionToast';
 

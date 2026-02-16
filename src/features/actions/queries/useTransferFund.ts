@@ -2,9 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transferFundApi } from '@services/funds/transferFund.api';
 import type { TransferFundInput } from '@domain/funds/transfer';
 import type { Order } from '@domain/orders/models';
-import { toast } from 'sonner';
 
-export const useTransferFund = (closeDialog: () => void) => {
+import { showSuccessToast, showErrorToast } from '@features/actions/components/ActionToast';
+
+export const useTransferFund = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -29,11 +30,11 @@ export const useTransferFund = (closeDialog: () => void) => {
       queryClient.setQueryData<Order[]>(['orders'], (old = []) => [newOrder, ...old]);
 
       queryClient.invalidateQueries({ queryKey: ['portfolio'] });
-      toast.success('El fondo se ha transferido correctamente correctamente');
-      closeDialog();
+      showSuccessToast('El fondo se ha transferido correctamente');
+      onSuccess();
     },
     onError: () => {
-      toast.error('Ha habido un error en la petición');
+      showErrorToast('Ha habido un error en la petición');
     },
   });
 };

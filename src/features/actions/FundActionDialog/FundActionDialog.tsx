@@ -4,6 +4,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/Dialog/Dia
 import { BuyFundForm } from '@features/actions/components/BuyFundForm';
 import { SellFundForm } from '@features/actions/components/SellFundForm';
 import { FundDetails } from '@features/actions/components/FundDetails';
+import { TransferFundForm } from '@features/actions/components/TransferFundForm';
+
 import type { FundActionType, FundActionData } from '@domain/funds/types';
 import type { FundActionFormProps } from '@features/actions/types';
 
@@ -11,6 +13,7 @@ interface FundActionDialogProps {
   readonly open: boolean;
   readonly action: FundActionType | null;
   readonly data: FundActionData | null;
+  readonly fundId: string | null;
   readonly onClose: () => void;
 }
 
@@ -28,13 +31,17 @@ const ACTION_CONFIG: Record<FundActionType, ActionConfig> = {
     title: 'Vender fondo',
     component: SellFundForm,
   },
+  transfer: {
+    title: 'Traspasar fondo',
+    component: TransferFundForm,
+  },
   show: {
     title: 'Detalles del fondo',
     component: FundDetails,
   },
 };
 
-export function FundActionDialog({ open, action, data, onClose }: FundActionDialogProps) {
+export function FundActionDialog({ open, action, data, fundId, onClose }: FundActionDialogProps) {
   if (!data || !action) return null;
 
   const config = ACTION_CONFIG[action];
@@ -46,7 +53,7 @@ export function FundActionDialog({ open, action, data, onClose }: FundActionDial
         <DialogHeader>
           <DialogTitle>{config.title}</DialogTitle>
         </DialogHeader>
-        <ContentComponent data={data} onSuccess={onClose} action={action} />
+        <ContentComponent data={data} onSuccess={onClose} action={action} fundId={fundId} />
       </DialogContent>
     </Dialog>
   );

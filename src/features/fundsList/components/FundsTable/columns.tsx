@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu';
+import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu/RowActionsMenu';
 import { ColumnHeader } from '@features/fundsList/components/FundsTable/ColumnHeader';
 
 export type Payment = {

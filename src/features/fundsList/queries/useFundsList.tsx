@@ -7,8 +7,7 @@ export const useFundsList = ({ page, limit, sorting }) => {
 
   return useQuery({
     queryKey: ['FundsList', page, limit, backendSort?.field, backendSort?.direction],
-    queryFn: () =>
-      getFunds({ page, limit, field: backendSort?.field, direction: backendSort?.direction }),
+    queryFn: () => getFunds(page, limit, backendSort?.field, backendSort?.direction),
     placeholderData: keepPreviousData,
   });
 };

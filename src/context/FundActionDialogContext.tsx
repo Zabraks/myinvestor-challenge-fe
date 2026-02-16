@@ -6,6 +6,7 @@ interface FundActionDialogState {
   open: boolean;
   action: FundActionType | null;
   data: FundActionData | null;
+  id: string | null;
 }
 
 interface FundActionDialogContextType {
@@ -28,7 +29,7 @@ export function FundActionDialogProvider({ children }: FundActionDialogProviderP
   });
 
   const openDialog = (action: FundActionType, data?: FundActionData) => {
-    setState({ open: true, action, data: data ?? null });
+    setState({ open: true, action, data: data ?? null, id: data.id });
   };
 
   const closeDialog = () => {

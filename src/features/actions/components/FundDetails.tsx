@@ -5,11 +5,34 @@ import { useFundDetails } from '@features/actions/queries/useFundDetails';
 import { getCoin } from '@lib/utils';
 import { FundDetailsSkeleton } from './FundDetailsSkeleton';
 import type { FundActionProps } from './FundActionDialog';
+import { InfoSection } from '@ui/InfoSection/InfoSection';
+import { OctagonX } from 'lucide-react';
 
 export const FundDetails = ({ fundId }: FundActionProps) => {
-  const { data: fundDetails, isLoading } = useFundDetails({
+  const {
+    data: fundDetails,
+    isLoading,
+    isError,
+  } = useFundDetails({
     fundId,
   });
+
+  if (isError)
+    return (
+      <div className="flex flex-col gap-4 items-center">
+        <InfoSection
+          title="Error"
+          description="Ha habido un error al obtener el listado de ordenes. Intentalo de nuevo o ponte en contacto con el
+              administrador"
+          icon={<OctagonX />}
+        />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cerrar</Button>
+          </DialogClose>
+        </DialogFooter>
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-4 items-center">

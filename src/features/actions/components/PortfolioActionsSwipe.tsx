@@ -10,12 +10,7 @@ export const PortfolioActionsSwipe = ({ item }: { item: PortfolioItemType }) => 
 
   return (
     <ItemGroup className="grid grid-cols-4 h-full w-full items-center justify-end bg-secondary">
-      <Item
-        variant="action"
-        role="listitem"
-        size="sm"
-        onClick={() => openDialog('buy', item.id, item)}
-      >
+      <Item variant="action" role="listitem" size="sm" onClick={() => openDialog('buy', item)}>
         <ItemMedia variant="iconAction">
           <ArrowRightToLine />
         </ItemMedia>
@@ -24,12 +19,7 @@ export const PortfolioActionsSwipe = ({ item }: { item: PortfolioItemType }) => 
         </ItemContent>
       </Item>
 
-      <Item
-        variant="action"
-        role="listitem"
-        size="sm"
-        onClick={() => openDialog('sell', item.id, item)}
-      >
+      <Item variant="action" role="listitem" size="sm" onClick={() => openDialog('sell', item)}>
         <ItemMedia variant="iconAction">
           <ArrowRightFromLine />
         </ItemMedia>
@@ -38,12 +28,7 @@ export const PortfolioActionsSwipe = ({ item }: { item: PortfolioItemType }) => 
         </ItemContent>
       </Item>
 
-      <Item
-        variant="action"
-        role="listitem"
-        size="sm"
-        onClick={() => openDialog('transfer', item.id, item)}
-      >
+      <Item variant="action" role="listitem" size="sm" onClick={() => openDialog('transfer', item)}>
         <ItemMedia variant="iconAction">
           <Shuffle />
         </ItemMedia>
@@ -52,7 +37,7 @@ export const PortfolioActionsSwipe = ({ item }: { item: PortfolioItemType }) => 
         </ItemContent>
       </Item>
 
-      <Item variant="action" role="listitem" size="sm" onClick={() => openDialog('show', item.id)}>
+      <Item variant="action" role="listitem" size="sm" onClick={() => openDialog('show', item)}>
         <ItemMedia variant="iconAction">
           <Eye />
         </ItemMedia>
