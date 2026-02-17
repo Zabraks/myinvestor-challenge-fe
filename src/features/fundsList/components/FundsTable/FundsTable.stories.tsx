@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { http, HttpResponse } from 'msw';
 import { FundsTable } from './FundsTable';
 import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
-import { fundFactory } from '@/mocks/factories';
+import { fundFactory } from '@mocks/factories';
 import { mapFundFromApi, type GetFundsApiResponse } from '@domain/fund';
-import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
-import { ActionMenuProvider } from '@/context/ActionMenuContext';
+import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { ActionMenuProvider } from '@context/ActionMenuContext';
 
 // Función noop para handlers en stories
 const noop = () => {};

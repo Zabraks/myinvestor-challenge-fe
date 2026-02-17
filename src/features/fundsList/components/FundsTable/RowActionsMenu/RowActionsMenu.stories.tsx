@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RowActionsMenu } from './RowActionsMenu';
-import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
-import { ActionMenuProvider } from '@/context/ActionMenuContext';
+import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { ActionMenuProvider } from '@context/ActionMenuContext';
 
-// Mock de data de fila para TanStack Table
 const mockRowData = {
   original: {
     id: '1',
@@ -19,10 +18,6 @@ const mockRowData = {
   },
 };
 
-/**
- * RowActionsMenu es un menú desplegable que muestra las acciones disponibles
- * para un fondo en la tabla. Permite comprar un fondo o ver sus detalles.
- */
 const meta: Meta<typeof RowActionsMenu> = {
   title: 'Features/FundsList/RowActionsMenu',
   component: RowActionsMenu,

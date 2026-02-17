@@ -27,7 +27,7 @@ describe('mapFundFromApi', () => {
       symbol: 'GEF',
       value: 120.45,
       currency: 'USD',
-      category: 'GLOBAL',
+      category: 'Global',
       YTD: 0.05,
       oneYear: 0.12,
       threeYears: 0.35,

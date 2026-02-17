@@ -14,6 +14,7 @@ export default defineConfig({
       '@ui': resolve(__dirname, './src/components/ui'),
       '@domain': resolve(__dirname, './src/domain'),
       '@features': resolve(__dirname, './src/features'),
+      '@hooks': resolve(__dirname, './src/hooks'),
       '@lib': resolve(__dirname, './src/lib'),
       '@pages': resolve(__dirname, './src/pages'),
       '@services': resolve(__dirname, './src/services'),

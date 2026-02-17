@@ -1,4 +1,4 @@
-import { test as base, type Page, type Route } from '@playwright/test';
+import { test as base, type Page, type Route, type Locator } from '@playwright/test';
 import {
   generateMockFundsResponse,
   generateMockBuyFundsResponse,
@@ -22,11 +22,12 @@ interface FundsFixtures {
   mockTransferApi: (config?: MockTransferConfig) => Promise<void>;
   mockPortfolioApi: (config?: MockPortfolioFullConfig) => Promise<void>;
   mockFundDetailApi: (config?: MockFundDetailConfig) => Promise<void>;
+  swipeItem: (locator: Locator) => Promise<void>;
 }
 
 export const test = base.extend<FundsFixtures>({
   fundsPage: async ({ page }, use) => {
-    await page.route('**/localhost:3000/funds', (route) => handleFundsRoute(route));
+    await page.route('**/localhost:3000/funds?*', (route) => handleFundsRoute(route));
     await page.route('**/localhost:3000/funds/**', (route) => handleFundDetailRoute(route));
     await page.route('**/localhost:3000/funds/*/buy', (route) => handleBuyFundRoute(route));
     await page.route('**/localhost:3000/funds/*/sell', (route) => handleSellFundRoute(route));
@@ -36,8 +37,10 @@ export const test = base.extend<FundsFixtures>({
   },
 
   mockFundsApi: async ({ page }, use) => {
+    const fundsPattern = '**/localhost:3000/funds?*';
     const configureMock = async (config?: MockFundsConfig) => {
-      await page.route('**/localhost:3000/funds', (route) => handleFundsRoute(route, config));
+      await page.unroute(fundsPattern);
+      await page.route(fundsPattern, (route) => handleFundsRoute(route, config));
     };
 
     await use(configureMock);
@@ -94,6 +97,22 @@ export const test = base.extend<FundsFixtures>({
     };
 
     await use(configureMock);
+  },
+
+  swipeItem: async ({ page }, use) => {
+    await use(async (locator: Locator) => {
+      const box = await locator.boundingBox();
+      if (box) {
+        const startX = box.x - 1;
+        const endX = box.x * 0.01;
+        const y = box.y + box.height / 2;
+
+        await page.mouse.move(startX, y);
+        await page.mouse.down();
+        await page.mouse.move(endX, y, { steps: 10 });
+        await page.mouse.up();
+      }
+    });
   },
 });
 

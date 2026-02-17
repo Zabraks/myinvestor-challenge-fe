@@ -3,13 +3,18 @@ import { MESSAGES } from '../../src/domain/action';
 export const SELECTORS = {
   header: {
     logo: 'MyInvestor',
-    nav: {
-      funds: 'Lista de fondos',
-      portfolio: 'Mi cartera',
+  },
+  menu: {
+    funds: {
+      title: 'Fondos',
+    },
+    portfolio: {
+      title: 'Portfolio',
     },
   },
 
   fundsTable: {
+    title: 'Lista de fondos',
     table: 'table',
     headers: {
       name: 'Nombre',
@@ -33,6 +38,7 @@ export const SELECTORS = {
 
   limitSelector: {
     trigger: 'combobox',
+    name: 'Mostrar valores',
     options: ['10', '25', '50', '100'],
   },
 
@@ -42,6 +48,13 @@ export const SELECTORS = {
     sell: 'Vender',
     transfer: 'Traspasar',
     viewDetails: 'Ver detalle',
+  },
+
+  swipeActions: {
+    buy: 'Comprar',
+    sell: 'Vender',
+    transfer: 'Traspasar',
+    viewDetails: 'Detalle',
   },
 
   buyDialog: {
@@ -81,7 +94,8 @@ export const SELECTORS = {
     },
     item: {
       role: 'listitem',
-      participaciones: 'Participaciones:',
+      units: 'Participaciones:',
+      unitsWithSpace: 'Participaciones: ',
       valor: 'Valor',
     },
     emptyState: {

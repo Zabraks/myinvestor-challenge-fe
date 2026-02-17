@@ -15,6 +15,13 @@ export const useColumns = () => {
       {
         accessorKey: 'name',
         header: ({ column }) => <ColumnHeader column={column} title="Nombre" />,
+        cell: ({ row }) => {
+          return (
+            <div>
+              <span className="font-bold">{row.original.name}</span>
+            </div>
+          );
+        },
       },
       {
         accessorKey: 'category',

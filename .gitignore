@@ -31,4 +31,3 @@ coverage/
 
 # Playwright
 tests/test-results/
-tests/visual/__snapshots__/

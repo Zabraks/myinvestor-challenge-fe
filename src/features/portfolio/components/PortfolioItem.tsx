@@ -8,8 +8,8 @@ import {
   ItemActions,
 } from '@ui/Item/Item';
 
-import { useInteractionMode, type InteractionMode } from '@lib/hooks/useInteractiveMode';
-import { SwipeActionMenu } from '@/features/actions/components/ActionMenu/SwipeActionMenu';
+import { useInteractionMode, type InteractionMode } from '@hooks/useInteractiveMode';
+import { SwipeActionMenu } from '@features/actions/components/ActionMenu/SwipeActionMenu';
 import { SwipeableRow } from '@features/actions/components/SwipeableRow';
 import { useActionMenu } from '@context/ActionMenuContext';
 import { Button } from '@ui/Button/Button';

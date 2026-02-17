@@ -20,7 +20,7 @@ const Funds = () => {
   const { pagination, data } = response || {};
 
   return (
-    <div className="flex flex-col justify-between gap-3">
+    <div className="flex flex-col justify-between gap-3 overflow-auto w-full md:bg-card md:p-4 md:border md:shadow md:rounded-2xl ">
       <div className="flex justify-between">
         <h2 className="text-xl font-bold">Lista de fondos</h2>
         <LimitPageSelector setPage={setPage} setLimit={setLimit} />
