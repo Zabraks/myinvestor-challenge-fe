@@ -25,13 +25,6 @@ export const WithValue: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    placeholder: 'Input deshabilitado',
-    disabled: true,
-  },
-};
-
 export const Invalid: Story = {
   args: {
     placeholder: 'Input con error',

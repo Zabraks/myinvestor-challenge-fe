@@ -45,61 +45,6 @@ export const Horizontal: Story = {
   ),
 };
 
-export const Vertical: Story = {
-  args: {
-    orientation: 'vertical',
-  },
-  render: (args) => (
-    <div className="flex h-5 items-center space-x-4 text-sm">
-      <span>Blog</span>
-      <Separator {...args} />
-      <span>Docs</span>
-      <Separator {...args} />
-      <span>Código</span>
-    </div>
-  ),
-};
-
-export const InNavigation: Story = {
-  render: () => (
-    <nav className="flex items-center space-x-4 text-sm">
-      <span className="cursor-pointer font-medium text-foreground">Inicio</span>
-      <Separator orientation="vertical" className="h-4" />
-      <span className="cursor-pointer text-muted-foreground hover:text-foreground">Fondos</span>
-      <Separator orientation="vertical" className="h-4" />
-      <span className="cursor-pointer text-muted-foreground hover:text-foreground">Cartera</span>
-      <Separator orientation="vertical" className="h-4" />
-      <span className="cursor-pointer text-muted-foreground hover:text-foreground">Perfil</span>
-    </nav>
-  ),
-};
-
-export const InCard: Story = {
-  render: () => (
-    <div className="w-full max-w-sm rounded-lg border p-4">
-      <div className="flex items-center justify-between">
-        <span className="font-medium">Fondo MyInvestor Value</span>
-        <span className="text-sm text-muted-foreground">ES0000000001</span>
-      </div>
-      <Separator className="my-3" />
-      <div className="grid grid-cols-2 gap-2 text-sm">
-        <div>
-          <span className="text-muted-foreground">Valor liquidativo</span>
-          <p className="font-medium">124.56 €</p>
-        </div>
-        <div>
-          <span className="text-muted-foreground">Rentabilidad YTD</span>
-          <p className="font-medium text-green-600">+8.45%</p>
-        </div>
-      </div>
-      <Separator className="my-3" />
-      <div className="flex justify-end gap-2">
-        <button className="text-sm text-primary hover:underline">Ver detalles</button>
-      </div>
-    </div>
-  ),
-};
-
 export const MultipleHorizontal: Story = {
   render: () => (
     <div className="w-full max-w-md space-y-4">

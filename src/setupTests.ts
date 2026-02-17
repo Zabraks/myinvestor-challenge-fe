@@ -13,7 +13,7 @@ afterEach(() => {
 afterAll(() => server.close());
 
 /* eslint-disable @typescript-eslint/no-empty-function */
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(globalThis, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
     matches: false,

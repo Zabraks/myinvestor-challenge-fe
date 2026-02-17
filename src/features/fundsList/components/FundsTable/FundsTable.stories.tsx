@@ -54,24 +54,6 @@ export const TechFundsOnly: Story = {
   },
 };
 
-const highPerformanceFunds = fundFactory.buildList(5, {
-  profitability: {
-    YTD: 25.5,
-    oneYear: 45.2,
-    threeYears: 120.8,
-    fiveYears: 250.3,
-  },
-});
-const highPerformanceData = highPerformanceFunds.map(mapFundFromApi);
-
-export const HighPerformance: Story = {
-  args: {
-    data: highPerformanceData,
-    sorting: [],
-    handleSorting: noop,
-  },
-};
-
 export const Empty: Story = {
   args: {
     data: [],

@@ -8,7 +8,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      options: ['default', 'outline', 'ghost', 'link'],
       description: 'Variante visual del botón',
     },
     size: {
@@ -35,19 +35,6 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: 'destructive',
-    children: 'Eliminar',
-  },
-};
 
 export const Outline: Story = {
   args: {
@@ -101,8 +88,6 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button variant="default">Default</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="destructive">Destructive</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="link">Link</Button>

@@ -8,7 +8,6 @@ import {
   FieldContent,
   FieldSet,
   FieldLegend,
-  FieldSeparator,
 } from './Field';
 
 const meta: Meta<typeof Field> = {
@@ -77,20 +76,6 @@ export const WithError: Story = {
   ),
 };
 
-export const Horizontal: Story = {
-  args: {
-    orientation: 'horizontal',
-  },
-  render: (args) => (
-    <Field {...args}>
-      <FieldLabel htmlFor="toggle" className="flex-1">
-        Activar notificaciones
-      </FieldLabel>
-      <input id="toggle" type="checkbox" className="h-4 w-4" />
-    </Field>
-  ),
-};
-
 export const FieldGroupExample: Story = {
   render: () => (
     <FieldGroup>
@@ -134,7 +119,6 @@ export const FieldSetExample: Story = {
             <FieldDescription>Este será tu identificador público.</FieldDescription>
           </FieldContent>
         </Field>
-        <FieldSeparator />
         <Field>
           <FieldLabel htmlFor="bio">Biografía</FieldLabel>
           <FieldContent>
@@ -147,27 +131,5 @@ export const FieldSetExample: Story = {
         </Field>
       </FieldGroup>
     </FieldSet>
-  ),
-};
-
-export const WithMultipleErrors: Story = {
-  render: (args) => (
-    <Field {...args} data-invalid="true">
-      <FieldLabel htmlFor="complex-password">Contraseña</FieldLabel>
-      <FieldContent>
-        <input
-          id="complex-password"
-          type="password"
-          className="flex h-9 w-full rounded-md border border-destructive bg-transparent px-3 py-1 text-sm"
-        />
-        <FieldError
-          errors={[
-            { message: 'Debe tener al menos 8 caracteres' },
-            { message: 'Debe incluir al menos un número' },
-            { message: 'Debe incluir al menos un carácter especial' },
-          ]}
-        />
-      </FieldContent>
-    </Field>
   ),
 };

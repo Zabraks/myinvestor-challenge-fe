@@ -40,10 +40,3 @@ export const SortedDescending: Story = {
     title: 'Rentabilidad',
   },
 };
-
-export const LongTitle: Story = {
-  args: {
-    column: createMockColumn(false),
-    title: 'Rentabilidad Acumulada Últimos 12 Meses',
-  },
-};

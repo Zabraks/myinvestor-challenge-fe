@@ -3,6 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { fundFactory } from '@mocks/factories';
+import { mapFundFromApi } from '@domain/fund';
 import { http, HttpResponse } from 'msw';
 import { server } from '@mocks/server';
 import { queryClient } from '@lib/queryClient';
@@ -28,24 +29,12 @@ describe('FundDetails', () => {
   };
 
   it('should show fund details in dialog', async () => {
-    const mockFund = fundFactory.build({
-      id: '1',
-      name: 'Unique Test Fund XYZ',
-      symbol: 'UTX',
-      category: 'TECH',
-      currency: 'EUR',
-      value: 12500.5,
-      profitability: {
-        YTD: 5.25,
-        oneYear: 12.5,
-        threeYears: 35.0,
-        fiveYears: 65.0,
-      },
-    });
+    const apiFund = fundFactory.build();
+    const mappedFund = mapFundFromApi(apiFund);
 
     server.use(
       http.get('http://localhost:3000/funds/:id', () => {
-        return HttpResponse.json({ data: mockFund });
+        return HttpResponse.json({ data: apiFund });
       })
     );
 
@@ -56,11 +45,20 @@ describe('FundDetails', () => {
     expect(dialog).toBeInTheDocument();
     expect(screen.getByText(/Detalles del fondo/i)).toBeInTheDocument();
 
-    expect(await within(dialog).findByText(/Unique Test Fund XYZ/i)).toBeInTheDocument();
-    expect(within(dialog).getByText(/UTX/i)).toBeInTheDocument();
+    expect(await within(dialog).findByText(new RegExp(mappedFund.name))).toBeInTheDocument();
+    expect(within(dialog).getByText(new RegExp(mappedFund.symbol))).toBeInTheDocument();
+    expect(within(dialog).getByText(mappedFund.category)).toBeInTheDocument();
+    expect(within(dialog).getByText(new RegExp(String(mappedFund.value)))).toBeInTheDocument();
 
     expect(within(dialog).getByText(/Rentabilidad/i)).toBeInTheDocument();
     expect(within(dialog).getByText(/Año hasta la fecha/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/1 año/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/3 años/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/5 años/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(mappedFund.YTD)).toBeInTheDocument();
+    expect(within(dialog).getByText(mappedFund.oneYear)).toBeInTheDocument();
+    expect(within(dialog).getByText(mappedFund.threeYears)).toBeInTheDocument();
+    expect(within(dialog).getByText(mappedFund.fiveYears)).toBeInTheDocument();
   });
 
   it('should show error state when API fails', async () => {
@@ -93,11 +91,12 @@ describe('FundDetails', () => {
   });
 
   it('should close dialog when clicking close button', async () => {
-    const mockFund = fundFactory.build({ name: 'Closable Fund ABC' });
+    const apiFund = fundFactory.build();
+    const mappedFund = mapFundFromApi(apiFund);
 
     server.use(
       http.get('http://localhost:3000/funds/:id', () => {
-        return HttpResponse.json({ data: mockFund });
+        return HttpResponse.json({ data: apiFund });
       })
     );
 
@@ -105,7 +104,7 @@ describe('FundDetails', () => {
     await openFundDetails(user);
 
     const dialog = await screen.findByRole('dialog');
-    await within(dialog).findByText(/Closable Fund ABC/i);
+    await within(dialog).findByText(new RegExp(mappedFund.name));
 
     const closeButton = within(dialog).getByRole('button', { name: /Cerrar/i });
     await user.click(closeButton);

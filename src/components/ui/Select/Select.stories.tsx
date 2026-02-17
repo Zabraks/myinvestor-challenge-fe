@@ -1,14 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-  SelectSeparator,
-} from './Select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './Select';
 
 const meta: Meta<typeof Select> = {
   title: 'UI/Select',
@@ -64,31 +55,6 @@ export const WithLabel: Story = {
   ),
 };
 
-export const WithGroups: Story = {
-  render: () => (
-    <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Selecciona una fruta" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Frutas tropicales</SelectLabel>
-          <SelectItem value="mango">Mango</SelectItem>
-          <SelectItem value="papaya">Papaya</SelectItem>
-          <SelectItem value="pineapple">Piña</SelectItem>
-        </SelectGroup>
-        <SelectSeparator />
-        <SelectGroup>
-          <SelectLabel>Frutas de temporada</SelectLabel>
-          <SelectItem value="apple">Manzana</SelectItem>
-          <SelectItem value="pear">Pera</SelectItem>
-          <SelectItem value="orange">Naranja</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  ),
-};
-
 export const WithDefaultValue: Story = {
   render: () => (
     <Select defaultValue="medium">
@@ -118,57 +84,26 @@ export const Disabled: Story = {
   ),
 };
 
-export const WithDisabledItems: Story = {
-  render: () => (
-    <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Selecciona un plan" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="free">Gratuito</SelectItem>
-        <SelectItem value="basic">Básico</SelectItem>
-        <SelectItem value="pro" disabled>
-          Pro (No disponible)
-        </SelectItem>
-        <SelectItem value="enterprise" disabled>
-          Enterprise (No disponible)
-        </SelectItem>
-      </SelectContent>
-    </Select>
-  ),
-};
-
 export const Funds: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <label htmlFor="fund-type" className="text-sm font-medium">
-        Tipo de fondo
+        Fondo
       </label>
       <Select>
         <SelectTrigger id="fund-type">
           <SelectValue placeholder="Selecciona tipo de fondo" />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Renta Variable</SelectLabel>
-            <SelectItem value="rv-global">RV Global</SelectItem>
-            <SelectItem value="rv-europa">RV Europa</SelectItem>
-            <SelectItem value="rv-usa">RV USA</SelectItem>
-          </SelectGroup>
-          <SelectSeparator />
-          <SelectGroup>
-            <SelectLabel>Renta Fija</SelectLabel>
-            <SelectItem value="rf-corto">RF Corto Plazo</SelectItem>
-            <SelectItem value="rf-largo">RF Largo Plazo</SelectItem>
-            <SelectItem value="rf-corporativa">RF Corporativa</SelectItem>
-          </SelectGroup>
-          <SelectSeparator />
-          <SelectGroup>
-            <SelectLabel>Mixtos</SelectLabel>
-            <SelectItem value="mixto-conservador">Mixto Conservador</SelectItem>
-            <SelectItem value="mixto-moderado">Mixto Moderado</SelectItem>
-            <SelectItem value="mixto-agresivo">Mixto Agresivo</SelectItem>
-          </SelectGroup>
+          <SelectItem value="rv-global">RV Global</SelectItem>
+          <SelectItem value="rv-europa">RV Europa</SelectItem>
+          <SelectItem value="rv-usa">RV USA</SelectItem>
+          <SelectItem value="rf-corto">RF Corto Plazo</SelectItem>
+          <SelectItem value="rf-largo">RF Largo Plazo</SelectItem>
+          <SelectItem value="rf-corporativa">RF Corporativa</SelectItem>
+          <SelectItem value="mixto-conservador">Mixto Conservador</SelectItem>
+          <SelectItem value="mixto-moderado">Mixto Moderado</SelectItem>
+          <SelectItem value="mixto-agresivo">Mixto Agresivo</SelectItem>
         </SelectContent>
       </Select>
     </div>

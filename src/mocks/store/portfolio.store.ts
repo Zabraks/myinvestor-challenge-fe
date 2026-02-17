@@ -4,7 +4,6 @@ import type { Category } from '@domain/fund';
 import { generateDeterministicFunds } from '@mocks/factories';
 
 const CATEGORIES: Category[] = ['GLOBAL', 'TECH', 'HEALTH', 'MONEY_MARKET'];
-const FUND_NAME_SUFFIXES = ['Fund', 'ETF', 'Index', 'Growth', 'Income'];
 
 let portfolioItems: PortfolioItemDto[] = [];
 
@@ -22,7 +21,7 @@ function generateInitialPortfolio(seed = 12345): PortfolioItemDto[] {
       if (fund) {
         items.push({
           id: fund.id,
-          name: `${category} ${faker.company.name()} ${faker.helpers.arrayElement(FUND_NAME_SUFFIXES)}`,
+          name: fund.name,
           quantity: faker.number.int({ min: 10, max: 500 }),
           totalValue: faker.number.float({ min: 1000, max: 50000, fractionDigits: 2 }),
         });

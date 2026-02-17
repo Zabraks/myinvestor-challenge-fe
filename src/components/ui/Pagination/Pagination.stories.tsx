@@ -6,7 +6,6 @@ import {
   PaginationLink,
   PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
 } from './Pagination';
 
 const meta: Meta<typeof Pagination> = {
@@ -45,38 +44,6 @@ export const Default: Story = {
   ),
 };
 
-export const WithEllipsis: Story = {
-  render: () => (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">10</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-  ),
-};
-
 export const FirstPage: Story = {
   render: () => (
     <Pagination>
@@ -91,12 +58,6 @@ export const FirstPage: Story = {
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">20</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationNext href="#" />
@@ -114,12 +75,6 @@ export const LastPage: Story = {
           <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
           <PaginationLink href="#">18</PaginationLink>
         </PaginationItem>
         <PaginationItem>
@@ -129,44 +84,6 @@ export const LastPage: Story = {
           <PaginationLink href="#" isActive>
             20
           </PaginationLink>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-  ),
-};
-
-export const ManyPages: Story = {
-  render: () => (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">49</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            50
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">51</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">100</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
