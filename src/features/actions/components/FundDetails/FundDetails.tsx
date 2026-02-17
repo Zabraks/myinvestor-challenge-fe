@@ -14,7 +14,7 @@ export const FundDetails = ({ fundId }: FundActionFormProps) => {
     isLoading,
     isError,
   } = useFundDetails({
-    fundId,
+    fundId: fundId ?? '',
   });
 
   if (isError)
@@ -50,7 +50,7 @@ export const FundDetails = ({ fundId }: FundActionFormProps) => {
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-lg text-right">Valor</span>
-              <span>{`${fundDetails?.value} ${getCoin(fundDetails?.currency)}`}</span>
+              <span>{`${fundDetails?.value} ${fundDetails ? getCoin(fundDetails.currency) : ''}`}</span>
             </div>
           </div>
           <div className="flex flex-col w-full text-left">

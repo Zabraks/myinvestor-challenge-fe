@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu/RowActionsMenu';
 import { ColumnHeader } from '@features/fundsList/components/FundsTable/ColumnHeader/ColumnHeader';
+import type { ColumnDef } from '@tanstack/react-table';
+import type { Fund } from '@domain/fund';
 
 export type Payment = {
   id: string;
@@ -9,7 +11,7 @@ export type Payment = {
   email: string;
 };
 
-export const useColumns = () => {
+export const useColumns = (): ColumnDef<Fund>[] => {
   return useMemo(
     () => [
       {

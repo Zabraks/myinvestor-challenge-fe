@@ -18,7 +18,7 @@ export const BuyFundForm = ({ action, onSuccess, data }: FundActionFormProps) =>
     },
   });
 
-  const { mutate: buyFund } = useBuyFund({ onSuccess: onSuccess });
+  const { mutate: buyFund } = useBuyFund({ onSuccess: onSuccess ?? (() => {}) });
 
   if (!data) return null;
 

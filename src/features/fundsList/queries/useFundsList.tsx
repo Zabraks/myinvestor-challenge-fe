@@ -16,5 +16,6 @@ export const useFundsList = ({ page, limit, sorting }: UseFundsListParams) => {
     queryKey: ['FundsList', page, limit, backendSort?.field, backendSort?.direction],
     queryFn: () => getFunds(page, limit, backendSort?.field, backendSort?.direction),
     placeholderData: keepPreviousData,
+    staleTime: 5 * 60 * 1000,
   });
 };

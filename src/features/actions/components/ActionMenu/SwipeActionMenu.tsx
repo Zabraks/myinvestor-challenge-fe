@@ -1,10 +1,10 @@
 import { Item, ItemContent, ItemMedia, ItemTitle, ItemGroup } from '@ui/Item/Item';
 
-import type { PortfolioItem } from '@domain/portfolio';
+import type { DisplayPortfolioItem } from '@domain/portfolio';
 import { useFundActionDialog } from '@context/FundActionDialogContext';
 import { OPTIONS_MENU } from './const';
 
-export const SwipeActionMenu = ({ item }: { item: PortfolioItem }) => {
+export const SwipeActionMenu = ({ item }: { item: DisplayPortfolioItem }) => {
   const { openDialog } = useFundActionDialog();
 
   return (

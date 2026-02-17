@@ -1,3 +1,5 @@
+import type { CategoryLabel } from './fund.constants';
+
 export type Category = 'GLOBAL' | 'TECH' | 'HEALTH' | 'MONEY_MARKET';
 export type Currency = 'USD' | 'EUR';
 export type SortDirection = 'asc' | 'desc';
@@ -10,7 +12,7 @@ export interface BackendSort {
 export interface Fund {
   id: string;
   name: string;
-  category: Category;
+  category: CategoryLabel;
   currency: Currency;
   value: number;
   symbol: string;

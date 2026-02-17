@@ -28,7 +28,7 @@
 
   /* Neutral */
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(54.951% 0.00122 14.37);
+  --muted-foreground: oklch(39.793% 0.00005 271.152);
 
   /* Borders */
   --border: oklch(0.922 0 0);

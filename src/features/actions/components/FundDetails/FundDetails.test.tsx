@@ -79,7 +79,7 @@ describe('FundDetails', () => {
         <FundActionDialogProvider>
           <Dialog open>
             <DialogContent>
-              <FundDetails fundId="1" />
+              <FundDetails fundId="1" action="show" />
             </DialogContent>
           </Dialog>
         </FundActionDialogProvider>

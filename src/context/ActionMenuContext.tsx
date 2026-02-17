@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useMemo, useCallback } from 'react';
 
 type Origin = 'table' | 'portfolio';
 
-interface ActionMenuState<T> {
+interface ActionMenuState<T = unknown> {
   isOpen: boolean;
   data: T | null;
   anchorRect: DOMRect | null;
@@ -13,31 +13,34 @@ interface ActionMenuState<T> {
 
 export const ActionMenuContext = createContext<ActionMenuState | null>(null);
 
-export function ActionMenuProvider<T>({ children }: { children: React.ReactNode }) {
+export function ActionMenuProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<{
-    data: T | null;
+    data: unknown;
     anchorRect: DOMRect | null;
     origin: Origin | null;
   }>({ data: null, anchorRect: null, origin: null });
 
-  const open = (data, rect, origin) => {
+  const open = useCallback((data: unknown, rect: DOMRect, origin: Origin) => {
     setState({ data, anchorRect: rect, origin });
-  };
+  }, []);
 
-  return (
-    <ActionMenuContext.Provider
-      value={{
-        isOpen: !!state.data,
-        data: state.data,
-        anchorRect: state.anchorRect,
-        origin: state.origin,
-        open,
-        close: () => setState({ data: null, anchorRect: null, origin: null }),
-      }}
-    >
-      {children}
-    </ActionMenuContext.Provider>
+  const close = useCallback(() => {
+    setState({ data: null, anchorRect: null, origin: null });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      isOpen: !!state.data,
+      data: state.data,
+      anchorRect: state.anchorRect,
+      origin: state.origin,
+      open,
+      close,
+    }),
+    [state.data, state.anchorRect, state.origin, open, close]
   );
+
+  return <ActionMenuContext.Provider value={value}>{children}</ActionMenuContext.Provider>;
 }
 
 export const useActionMenu = <T,>() => {
