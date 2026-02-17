@@ -13,7 +13,7 @@ function generateInitialPortfolio(seed = 12345): PortfolioItemDto[] {
   const items: PortfolioItemDto[] = [];
   const funds = generateDeterministicFunds(25);
 
-  CATEGORIES.forEach((category, categoryIndex) => {
+  CATEGORIES.forEach((_category, categoryIndex) => {
     for (let i = 0; i < 2; i++) {
       const fundIndex = categoryIndex * 2 + i;
       const fund = funds[fundIndex];
