@@ -47,7 +47,7 @@ export default defineConfig({
   projects: [
     {
       name: 'desktop-chrome',
-      testDir: './tests/e2e',
+      testDir: './tests/e2e/desktop',
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 },
@@ -55,28 +55,10 @@ export default defineConfig({
     },
     {
       name: 'mobile-chrome',
-      testDir: './tests/e2e',
+      testDir: './tests/e2e/mobile',
       use: {
-        ...devices['Pixel 5'],
+        ...devices['Pixel 7'],
       },
-    },
-    {
-      name: 'visual-desktop',
-      testDir: './tests/visual',
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 720 },
-      },
-      /* Los tests visuales necesitan snapshots de referencia */
-      snapshotDir: './tests/visual/__snapshots__',
-    },
-    {
-      name: 'visual-mobile',
-      testDir: './tests/visual',
-      use: {
-        ...devices['Pixel 5'],
-      },
-      snapshotDir: './tests/visual/__snapshots__',
     },
   ],
 

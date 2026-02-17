@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 import { Separator } from '@ui/Separator/Separator';
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
@@ -36,7 +36,7 @@ const itemVariants = cva(
         outline: 'border-border',
         action: 'border-border rounded-none text-primary-foreground font-bold justify-center',
         muted: 'bg-muted/50',
-        selected: 'bg-transparent bg-terciary/50 border-border',
+        selected: 'bg-transparent bg-secondary/5 border-border border-secondary/50',
       },
       size: {
         default: 'gap-4 p-4 ',

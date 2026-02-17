@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useMemo, type ReactNode } from 'react';
-import { FundActionDialog } from '@features/actions/FundActionDialog/FundActionDialog';
+import { FundActionDialog } from '@features/actions/components/FundActionDialog/FundActionDialog';
 import type { ActionType, ActionData } from '@domain/action';
 
 interface FundActionDialogState {

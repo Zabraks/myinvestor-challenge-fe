@@ -16,7 +16,7 @@ export const OrderSection = () => {
   const dataMapped = data.map(mapOrderToView);
 
   return (
-    <Card>
+    <Card className="md:min-w-4xl">
       <CardHeader>
         <h2 className="font-bold">Ordenes</h2>
       </CardHeader>

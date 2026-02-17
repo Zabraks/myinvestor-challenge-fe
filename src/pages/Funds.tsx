@@ -10,7 +10,6 @@ const Funds = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const columns = useColumns();
 
   const { data: response } = useFundsList({
     page,
@@ -21,7 +20,7 @@ const Funds = () => {
   const { pagination, data } = response || {};
 
   return (
-    <div className="flex flex-col justify-between gap-3 overflow-auto">
+    <div className="flex flex-col justify-between gap-3 overflow-auto w-full md:bg-card md:p-4 md:border md:shadow md:rounded-2xl ">
       <div className="flex justify-between">
         <h2 className="text-xl font-bold">Lista de fondos</h2>
         <LimitPageSelector setPage={setPage} setLimit={setLimit} />

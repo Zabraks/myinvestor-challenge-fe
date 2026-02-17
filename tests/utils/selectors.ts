@@ -33,6 +33,7 @@ export const SELECTORS = {
 
   limitSelector: {
     trigger: 'combobox',
+    name: 'Mostrar valores',
     options: ['10', '25', '50', '100'],
   },
 
@@ -42,6 +43,13 @@ export const SELECTORS = {
     sell: 'Vender',
     transfer: 'Traspasar',
     viewDetails: 'Ver detalle',
+  },
+
+  swipeActions: {
+    buy: 'Comprar',
+    sell: 'Vender',
+    transfer: 'Traspasar',
+    viewDetails: 'Detalle',
   },
 
   buyDialog: {
@@ -82,6 +90,7 @@ export const SELECTORS = {
     item: {
       role: 'listitem',
       participaciones: 'Participaciones:',
+      participacionesWithSpace: 'Participaciones: ',
       valor: 'Valor',
     },
     emptyState: {

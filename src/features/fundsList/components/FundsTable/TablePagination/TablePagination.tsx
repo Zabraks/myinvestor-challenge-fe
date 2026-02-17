@@ -7,7 +7,7 @@ import {
   PaginationPrevious,
 } from '@ui/Pagination/Pagination';
 
-import { getVisiblePages } from '@lib/pagination';
+import { getVisiblePages } from '@/lib/pagination/pagination';
 
 interface PaginationData {
   page: number;

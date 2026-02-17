@@ -20,6 +20,7 @@ export default defineConfig({
       '@ui': resolve(__dirname, './src/components/ui'),
       '@domain': resolve(__dirname, './src/domain'),
       '@features': resolve(__dirname, './src/features'),
+      '@hooks': resolve(__dirname, './src/hooks'),
       '@lib': resolve(__dirname, './src/lib'),
       '@mocks': resolve(__dirname, './src/mocks'),
       '@pages': resolve(__dirname, './src/pages'),

@@ -26,6 +26,7 @@
       "@ui/*": ["./src/components/ui/*"],
       "@domain/*": ["./src/domain/*"],
       "@features/*": ["./src/features/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@lib/*": ["./src/lib/*"],
       "@mocks/*": ["./src/mocks/*"],
       "@pages/*": ["./src/pages/*"],

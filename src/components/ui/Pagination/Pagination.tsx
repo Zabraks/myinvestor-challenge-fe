@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 
-import { cn } from '@lib/utils';
+import { cn } from '@/lib/utils/utils';
 import type { ButtonProps } from '@ui/Button/Button';
 import { buttonVariants } from '@ui/Button/Button';
 
@@ -17,7 +17,7 @@ Pagination.displayName = 'Pagination';
 
 const PaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<'ul'>>(
   ({ className, ...props }, ref) => (
-    <ul ref={ref} className={cn('flex flex-row items-center gap-1', className)} {...props} />
+    <ul ref={ref} className={cn('flex flex-row items-center gap-2', className)} {...props} />
   )
 );
 PaginationContent.displayName = 'PaginationContent';
@@ -38,7 +38,7 @@ const PaginationLink = ({ className, isActive, size = 'icon', ...props }: Pagina
     aria-current={isActive ? 'page' : undefined}
     className={cn(
       buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
+        variant: isActive ? 'default' : 'ghost',
         size,
       }),
       className
@@ -54,12 +54,11 @@ const PaginationPrevious = ({
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to previous page"
-    size="default"
-    className={cn('gap-1 pl-2.5', className)}
+    size="icon"
+    className={cn('gap-1', className)}
     {...props}
   >
     <ChevronLeft className="text-icon-selected font-bold h-4 w-4 " />
-    <span>Anterior</span>
   </PaginationLink>
 );
 PaginationPrevious.displayName = 'PaginationPrevious';
@@ -67,11 +66,10 @@ PaginationPrevious.displayName = 'PaginationPrevious';
 const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to next page"
-    size="default"
-    className={cn('gap-1 pr-2.5', className)}
+    size="icon"
+    className={cn('gap-1', className)}
     {...props}
   >
-    <span>Next</span>
     <ChevronRight className="text-icon-selected font-bold h-4 w-4" />
   </PaginationLink>
 );
