@@ -1,20 +1,15 @@
 import { http, HttpResponse } from 'msw';
-import { actionFactory, generateDeterministicFunds } from '@mocks/factories';
-import { buyFund, getPortfolioItems } from '@mocks/store/portfolio.store';
+import { actionFactory } from '@mocks/factories';
+import { sellFund, getPortfolioItems } from '@mocks/store/portfolio.store';
 import type { FundActionResponse, FundActionRequest } from '@services/fund-action';
 
-const mockFunds = generateDeterministicFunds(25);
-
-export const buyFundHandlers = [
-  http.post('http://localhost:3000/funds/:id/buy', async ({ params, request }) => {
+export const sellFundHandlers = [
+  http.post('http://localhost:3000/funds/:id/sell', async ({ params, request }) => {
     const { id } = params;
     const fundId = id as string;
     const body = (await request.json()) as FundActionRequest;
 
-    const fund = mockFunds.find((f) => f.id === fundId);
-    const fundName = fund?.name ?? 'Unknown Fund';
-
-    buyFund(fundId, fundName, body.quantity);
+    sellFund(fundId, body.quantity);
 
     const portfolio = getPortfolioItems();
 

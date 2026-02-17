@@ -1,4 +1,18 @@
 import { setupServer } from 'msw/node';
-import { fundListHandlers, buyFundHandlers } from '@mocks/handlers';
+import {
+  fundListHandlers,
+  fundDetailHandlers,
+  buyFundHandlers,
+  sellFundHandlers,
+  transferFundHandlers,
+  portfolioHandlers,
+} from '@mocks/handlers';
 
-export const server = setupServer(...fundListHandlers, ...buyFundHandlers);
+export const server = setupServer(
+  ...fundListHandlers,
+  ...fundDetailHandlers,
+  ...buyFundHandlers,
+  ...sellFundHandlers,
+  ...transferFundHandlers,
+  ...portfolioHandlers
+);
