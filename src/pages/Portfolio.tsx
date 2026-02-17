@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/Tabs/Tabs.tsx';
 
 import { OrderSection } from '@features/orders/components/OrderSection';
-import { PortfolioSection } from '@/features/portfolio/components/PortfolioSection/PortfolioSection';
+import { PortfolioSection } from '@features/portfolio/components/PortfolioSection/PortfolioSection';
 
 const Portfolio = () => {
   return (

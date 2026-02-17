@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
-import { server } from '@/mocks/server';
+import { server } from '@mocks/server';
 import { queryClient } from '@lib/queryClient';
 import { MESSAGES } from '@domain/action';
 import { Toaster } from '@ui/Sonner/Sonner';

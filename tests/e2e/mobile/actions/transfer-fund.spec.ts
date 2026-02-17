@@ -8,7 +8,8 @@ test.describe('Actions - Transfer fund', () => {
   test.beforeEach(async ({ fundsPage, swipeItem }) => {
     await fundsPage.goto('/portfolio');
 
-    const fundItem = fundsPage.getByRole('listitem').first();
+    const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+    const fundItem = portfolioPanel.getByRole('listitem').first();
     await swipeItem(fundItem);
 
     const transferButton = fundsPage.getByText(SELECTORS.swipeActions.transfer).first();

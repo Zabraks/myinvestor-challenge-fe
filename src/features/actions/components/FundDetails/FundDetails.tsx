@@ -2,7 +2,7 @@ import { DialogFooter, DialogClose } from '@ui/Dialog/Dialog';
 import { Button } from '@ui/Button/Button';
 
 import { useFundDetails } from '@features/actions/queries/useFundDetails';
-import { getCoin } from '@/lib/utils/utils';
+import { getCoin } from '@lib/utils/utils';
 import { FundDetailsSkeleton } from './FundDetailsSkeleton';
 import type { FundActionFormProps } from '@features/actions/types';
 import { InfoSection } from '@ui/InfoSection/InfoSection';

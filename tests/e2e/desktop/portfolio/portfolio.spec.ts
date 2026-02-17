@@ -11,7 +11,8 @@ test.describe('Portfolio - Funds section', () => {
     const cardTitle = fundsPage.getByRole('heading', { name: SELECTORS.portfolio.card.title });
     await expect(cardTitle).toBeVisible();
 
-    const portfolioItems = fundsPage.getByRole('listitem');
+    const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+    const portfolioItems = portfolioPanel.getByRole('listitem');
     await expect(portfolioItems).toHaveCount(3);
   });
 
@@ -20,12 +21,13 @@ test.describe('Portfolio - Funds section', () => {
   }) => {
     await fundsPage.goto('/portfolio');
 
-    const firstItem = fundsPage.getByRole('listitem').first();
+    const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+    const firstItem = portfolioPanel.getByRole('listitem').first();
 
     await expect(firstItem).toBeVisible();
 
-    const participacionesLabel = firstItem.getByText(SELECTORS.portfolio.item.participaciones);
-    await expect(participacionesLabel).toBeVisible();
+    const unitsLabel = firstItem.getByText(SELECTORS.portfolio.item.units);
+    await expect(unitsLabel).toBeVisible();
 
     const valorLabel = firstItem.getByText(SELECTORS.portfolio.item.valor);
     await expect(valorLabel).toBeVisible();
@@ -36,8 +38,7 @@ test.describe('Portfolio - Funds section', () => {
 
     const categoryHeaders = fundsPage.locator('h3');
 
-    const count = await categoryHeaders.count();
-    expect(count).toBeGreaterThan(0);
+    await expect(categoryHeaders.first()).toBeVisible();
   });
 
   test('should show error message when portfolio API fails', async ({
@@ -102,7 +103,8 @@ test.describe('Portfolio - Funds section', () => {
   test('should allow opening action menu on portfolio item', async ({ fundsPage }) => {
     await fundsPage.goto('/portfolio');
 
-    const firstItem = fundsPage.getByRole('listitem').first();
+    const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+    const firstItem = portfolioPanel.getByRole('listitem').first();
     const actionButton = firstItem.getByRole('button', {
       name: SELECTORS.rowActions.trigger,
     });

@@ -40,7 +40,8 @@ test.describe('Portfolio - Orders section', () => {
 
       await mockSellApi({});
 
-      const firstItem = fundsPage.getByRole('listitem').first();
+      const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+      const firstItem = portfolioPanel.getByRole('listitem').first();
       const actionButton = firstItem.getByRole('button', {
         name: SELECTORS.rowActions.trigger,
       });
@@ -77,7 +78,8 @@ test.describe('Portfolio - Orders section', () => {
 
       await mockTransferApi({});
 
-      const firstItem = fundsPage.getByRole('listitem').first();
+      const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+      const firstItem = portfolioPanel.getByRole('listitem').first();
       const actionButton = firstItem.getByRole('button', {
         name: SELECTORS.rowActions.trigger,
       });
@@ -123,7 +125,8 @@ test.describe('Portfolio - Orders section', () => {
       await mockTransferApi({});
       await mockSellApi({});
 
-      const firstItem = fundsPage.getByRole('listitem').first();
+      const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+      const firstItem = portfolioPanel.getByRole('listitem').first();
       const actionButton = firstItem.getByRole('button', {
         name: SELECTORS.rowActions.trigger,
       });

@@ -20,10 +20,8 @@ test.describe('Portfolio - Funds section', () => {
   }) => {
     await fundsPage.goto('/portfolio');
 
-    const participacionesLabel = fundsPage
-      .getByText(SELECTORS.portfolio.item.participaciones)
-      .first();
-    await expect(participacionesLabel).toBeVisible();
+    const unitsLabel = fundsPage.getByText(SELECTORS.portfolio.item.units).first();
+    await expect(unitsLabel).toBeVisible();
 
     const valorLabel = fundsPage.getByText(SELECTORS.portfolio.item.valor).first();
     await expect(valorLabel).toBeVisible();
@@ -32,12 +30,9 @@ test.describe('Portfolio - Funds section', () => {
   test('should display portfolio with category headers', async ({ fundsPage }) => {
     await fundsPage.goto('/portfolio');
 
-    await expect(fundsPage.getByRole('listitem').first()).toBeVisible();
-
     const categoryHeaders = fundsPage.locator('h3');
 
-    const count = await categoryHeaders.count();
-    expect(count).toBeGreaterThan(0);
+    await expect(categoryHeaders.first()).toBeVisible();
   });
 
   test('should show error message when portfolio API fails', async ({
@@ -102,7 +97,8 @@ test.describe('Portfolio - Funds section', () => {
   test('should allow opening action menu on portfolio item', async ({ fundsPage, swipeItem }) => {
     await fundsPage.goto('/portfolio');
 
-    const firstItem = fundsPage.getByRole('listitem').first();
+    const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+    const firstItem = portfolioPanel.getByRole('listitem').first();
     await expect(firstItem).toBeVisible();
 
     await swipeItem(firstItem);

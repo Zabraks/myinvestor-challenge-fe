@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 
 import { actionFactory } from '@mocks/factories';
 import { http, HttpResponse } from 'msw';
-import { server } from '@/mocks/server';
+import { server } from '@mocks/server';
 import { queryClient } from '@lib/queryClient';
 import { MESSAGES } from '@domain/action';
 

@@ -2,8 +2,8 @@ import { Card, CardContent, CardHeader } from '@ui/Card/Card.tsx';
 
 import { usePortfolioViewModel } from '@features/portfolio/hooks/usePortfolioViewModel';
 
-import { PortfolioList } from '@/features/portfolio/components/PortfolioList';
-import { PortfolioSkeleton } from '@/features/portfolio/components/PortfolioSkeleton';
+import { PortfolioList } from '@features/portfolio/components/PortfolioList';
+import { PortfolioSkeleton } from '@features/portfolio/components/PortfolioSkeleton';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
 import { useNavigate } from 'react-router-dom';
 import { OctagonX } from 'lucide-react';

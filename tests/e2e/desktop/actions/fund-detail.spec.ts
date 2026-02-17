@@ -110,7 +110,8 @@ test.describe('Actions - Fund detail', () => {
     test.beforeEach(async ({ fundsPage }) => {
       await fundsPage.goto('/portfolio');
 
-      const firstPortfolioItem = fundsPage.getByRole('listitem').first();
+      const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+      const firstPortfolioItem = portfolioPanel.getByRole('listitem').first();
       const actionButton = firstPortfolioItem.getByRole('button', {
         name: SELECTORS.rowActions.trigger,
       });

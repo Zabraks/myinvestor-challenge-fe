@@ -26,7 +26,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   /* Ejecutar tests en paralelo - máximo de workers según entorno */
-  workers: process.env.CI ? 1 : undefined,
+  workers: 4,
 
   /* Reporter: lista en desarrollo, HTML en CI para análisis detallado */
   reporter: process.env.CI ? 'html' : 'list',

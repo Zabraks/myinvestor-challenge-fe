@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Layout from '@/components/Layout';
+import Layout from '@components/Layout';
 
 import Portfolio from '@pages/Portfolio.tsx';
 import Funds from '@pages/Funds.tsx';

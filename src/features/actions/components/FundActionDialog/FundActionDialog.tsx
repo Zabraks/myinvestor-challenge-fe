@@ -1,10 +1,10 @@
 import type { ComponentType } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/Dialog/Dialog';
 
-import { BuyFundForm } from '@/features/actions/components/BuyFundForm/BuyFundForm';
-import { SellFundForm } from '@/features/actions/components/SellFundForm/SellFundForm';
-import { FundDetails } from '@/features/actions/components/FundDetails/FundDetails';
-import { TransferFundForm } from '@/features/actions/components/TransferFundForm/TransferFundForm';
+import { BuyFundForm } from '@features/actions/components/BuyFundForm/BuyFundForm';
+import { SellFundForm } from '@features/actions/components/SellFundForm/SellFundForm';
+import { FundDetails } from '@features/actions/components/FundDetails/FundDetails';
+import { TransferFundForm } from '@features/actions/components/TransferFundForm/TransferFundForm';
 
 import type { ActionType, ActionData } from '@domain/action';
 import type { FundActionFormProps } from '@features/actions/types';

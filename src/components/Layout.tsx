@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '@ui/Header/Header.tsx';
 import { Toaster } from '@ui/Sonner/Sonner';
-import { ActionMenu } from '@/features/actions/components/ActionMenu/ActionMenu';
+import { ActionMenu } from '@features/actions/components/ActionMenu/ActionMenu';
 import { Menu } from '@features/Menu/Menu';
 
 const Layout = () => {

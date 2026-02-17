@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
-import { server } from '@/mocks/server';
+import { server } from '@mocks/server';
 import { Toaster } from '@ui/Sonner/Sonner';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';

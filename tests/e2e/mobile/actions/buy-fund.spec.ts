@@ -149,7 +149,8 @@ test.describe('Actions - Buy fund', () => {
     test.beforeEach(async ({ fundsPage, swipeItem }) => {
       await fundsPage.goto('/portfolio');
 
-      const fundItem = fundsPage.getByRole('listitem').first();
+      const portfolioPanel = fundsPage.getByRole('tabpanel', { name: /fondos/i });
+      const fundItem = portfolioPanel.getByRole('listitem').first();
       await swipeItem(fundItem);
 
       const buyButton = fundsPage.getByText(SELECTORS.swipeActions.buy).first();

@@ -4,12 +4,12 @@ import type { SortingState } from '@tanstack/react-table';
 
 import { FundsTable } from '../FundsTable';
 import { TablePagination } from '../TablePagination/TablePagination';
-import { generateDeterministicFunds } from '@/mocks/factories';
+import { generateDeterministicFunds } from '@mocks/factories';
 import { mapFundFromApi } from '@domain/fund';
 import type { Fund } from '@domain/fund';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';
-import { ActionMenu } from '@/features/actions/components/ActionMenu/ActionMenu';
+import { ActionMenu } from '@features/actions/components/ActionMenu/ActionMenu';
 
 export interface FundsTableIntegrationProps {
   initialData: Fund[];

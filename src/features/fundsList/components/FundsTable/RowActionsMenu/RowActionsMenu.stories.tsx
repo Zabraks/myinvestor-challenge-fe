@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RowActionsMenu } from './RowActionsMenu';
-import { FundActionDialogProvider } from '@/context/FundActionDialogContext';
-import { ActionMenuProvider } from '@/context/ActionMenuContext';
+import { FundActionDialogProvider } from '@context/FundActionDialogContext';
+import { ActionMenuProvider } from '@context/ActionMenuContext';
 
 const mockRowData = {
   original: {

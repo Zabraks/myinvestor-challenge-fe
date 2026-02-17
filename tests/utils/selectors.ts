@@ -3,13 +3,18 @@ import { MESSAGES } from '../../src/domain/action';
 export const SELECTORS = {
   header: {
     logo: 'MyInvestor',
-    nav: {
-      funds: 'Lista de fondos',
-      portfolio: 'Mi cartera',
+  },
+  menu: {
+    funds: {
+      title: 'Fondos',
+    },
+    portfolio: {
+      title: 'Portfolio',
     },
   },
 
   fundsTable: {
+    title: 'Lista de fondos',
     table: 'table',
     headers: {
       name: 'Nombre',
@@ -89,8 +94,8 @@ export const SELECTORS = {
     },
     item: {
       role: 'listitem',
-      participaciones: 'Participaciones:',
-      participacionesWithSpace: 'Participaciones: ',
+      units: 'Participaciones:',
+      unitsWithSpace: 'Participaciones: ',
       valor: 'Valor',
     },
     emptyState: {

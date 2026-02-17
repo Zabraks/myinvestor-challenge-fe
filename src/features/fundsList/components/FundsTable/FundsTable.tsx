@@ -1,6 +1,6 @@
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@ui/Table/Table';
-import { useColumns } from '@/features/fundsList/components/FundsTable/hooks/useColumns';
+import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
 
 export const FundsTable = ({ data, sorting, handleSorting }) => {
   const columns = useColumns();
