@@ -11,7 +11,6 @@ import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';
 import { generateDeterministicFunds } from '@mocks/factories';
 import { generatePortfolioWithCategories } from '@mocks/factories/portfolio.factory';
-
 import App from '@app/App';
 
 const mockFunds = generateDeterministicFunds(10);

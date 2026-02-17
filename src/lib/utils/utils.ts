@@ -10,3 +10,9 @@ export function cn(...inputs: ClassValue[]) {
 export function getCoin(currency: Currency) {
   return currency === 'EUR' ? '€' : '$';
 }
+
+export function getProfitabilityColor(value: number): string {
+  if (value > 0) return 'text-green-600';
+  if (value < 0) return 'text-red-600';
+  return '';
+}

@@ -16,7 +16,7 @@ export const PortfolioSection = () => {
       <CardHeader>
         <h2 className="font-bold">Mis fondos</h2>
       </CardHeader>
-      <CardContent>
+      <CardContent className="md:w-rull">
         {isLoading && <PortfolioSkeleton />}
         {isError && (
           <InfoSection

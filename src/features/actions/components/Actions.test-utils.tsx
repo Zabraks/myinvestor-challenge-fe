@@ -6,6 +6,7 @@ import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';
 
 import userEvent from '@testing-library/user-event';
+import type { UserEvent } from '@testing-library/user-event';
 
 import {
   generateTestFunds,
@@ -35,7 +36,7 @@ export const renderFundsTableWithProvider = () => {
   };
 };
 
-export const getBuyFundForm = async (user) => {
+export const getBuyFundForm = async (user: UserEvent) => {
   const rows = screen.getAllByRole('row');
 
   const firstDataRow = rows[1];
@@ -49,13 +50,13 @@ export const getBuyFundForm = async (user) => {
   await user.click(buyOption);
 };
 
-export const updateInput = async (user, value?: string) => {
+export const updateInput = async (user: UserEvent, value?: string) => {
   const input = await screen.findByLabelText(/Valor/i);
   await user.clear(input);
   value && (await user.type(input, value));
 };
 
-export const sendForm = async (user) => {
+export const sendForm = async (user: UserEvent) => {
   const sendButton = screen.getByRole('button', { name: /Enviar/i });
   await user.click(sendButton);
 };

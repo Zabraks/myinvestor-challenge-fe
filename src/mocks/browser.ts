@@ -1,4 +1,18 @@
 import { setupWorker } from 'msw/browser';
-import { fundListHandlers, buyFundHandlers } from '@mocks/handlers';
+import {
+  fundListHandlers,
+  fundDetailHandlers,
+  buyFundHandlers,
+  sellFundHandlers,
+  transferFundHandlers,
+  portfolioHandlers,
+} from '@mocks/handlers';
 
-export const worker = setupWorker(...fundListHandlers, ...buyFundHandlers);
+export const worker = setupWorker(
+  ...fundListHandlers,
+  ...fundDetailHandlers,
+  ...buyFundHandlers,
+  ...sellFundHandlers,
+  ...transferFundHandlers,
+  ...portfolioHandlers
+);

@@ -16,6 +16,7 @@ export default defineConfig({
       '@features': resolve(__dirname, './src/features'),
       '@hooks': resolve(__dirname, './src/hooks'),
       '@lib': resolve(__dirname, './src/lib'),
+      '@mocks': resolve(__dirname, './src/mocks'),
       '@pages': resolve(__dirname, './src/pages'),
       '@services': resolve(__dirname, './src/services'),
       '@styles': resolve(__dirname, './src/styles'),

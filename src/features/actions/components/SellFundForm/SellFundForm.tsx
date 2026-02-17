@@ -22,7 +22,7 @@ export const SellFundForm = ({ action, onSuccess, data }: FundActionFormProps) =
     },
   });
 
-  const { mutate: sellFund } = useSellFund({ onSuccess: onSuccess });
+  const { mutate: sellFund } = useSellFund({ onSuccess: onSuccess ?? (() => {}) });
 
   if (!data) return null;
 

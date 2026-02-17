@@ -1,7 +1,8 @@
 import { Factory } from 'fishery';
 import { faker } from '@faker-js/faker';
+import type { FundActionResponse } from '@/services';
 
-export const actionFactory = Factory.define(({ params }) => {
+export const actionFactory = Factory.define(({ params }: { params: FundActionResponse }) => {
   const previousBalance = faker.number.int({ min: 0, max: 1000 });
   const totalQuantity = (params.data?.portfolio?.[0]?.quantity ?? 0) + previousBalance;
 

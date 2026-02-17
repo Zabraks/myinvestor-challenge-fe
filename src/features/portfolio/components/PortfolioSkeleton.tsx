@@ -3,7 +3,7 @@ import { Skeleton } from '@ui/Skeleton/Skeleton';
 
 export const PortfolioSkeleton = ({ size = 3 }) => {
   return (
-    <div className="flex w-full max-w-md flex-col gap-6">
+    <div className="flex w-full flex-col gap-6">
       <ItemGroup className="gap-4">
         {[...Array(size)].map((_item, key) => (
           <Item key={`skeleton-item-${key}`} variant="outline" role="listitem">

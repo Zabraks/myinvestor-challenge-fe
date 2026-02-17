@@ -1,22 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import type { Row } from '@tanstack/react-table';
 import { RowActionsMenu } from './RowActionsMenu';
 import { FundActionDialogProvider } from '@context/FundActionDialogContext';
 import { ActionMenuProvider } from '@context/ActionMenuContext';
+import type { Fund } from '@domain/fund';
+
+const mockFund: Fund = {
+  id: '1',
+  name: 'Tech Growth Fund',
+  category: 'Salud',
+  currency: 'USD',
+  value: 15000,
+  symbol: 'TGF',
+  YTD: 15.5,
+  oneYear: 25.3,
+  threeYears: 45.2,
+  fiveYears: 80.1,
+};
 
 const mockRowData = {
-  original: {
-    id: '1',
-    name: 'Tech Growth Fund',
-    category: 'Technology',
-    currency: 'USD',
-    profitability: {
-      YTD: 15.5,
-      oneYear: 25.3,
-      threeYears: 45.2,
-      fiveYears: 80.1,
-    },
-  },
-};
+  original: mockFund,
+} as Row<Fund>;
 
 const meta: Meta<typeof RowActionsMenu> = {
   title: 'Features/FundsList/RowActionsMenu',
@@ -29,13 +34,20 @@ const meta: Meta<typeof RowActionsMenu> = {
     data: mockRowData,
   },
   decorators: [
-    (Story) => (
-      <ActionMenuProvider>
-        <FundActionDialogProvider>
-          <Story />
-        </FundActionDialogProvider>
-      </ActionMenuProvider>
-    ),
+    (Story) => {
+      const queryClient = new QueryClient({
+        defaultOptions: { queries: { retry: false } },
+      });
+      return (
+        <QueryClientProvider client={queryClient}>
+          <ActionMenuProvider>
+            <FundActionDialogProvider>
+              <Story />
+            </FundActionDialogProvider>
+          </ActionMenuProvider>
+        </QueryClientProvider>
+      );
+    },
   ],
 };
 
@@ -54,14 +66,21 @@ export const Default: Story = {};
  */
 export const InTableContext: Story = {
   decorators: [
-    (Story) => (
-      <ActionMenuProvider>
-        <FundActionDialogProvider>
-          <div className="flex items-center justify-end p-4 border rounded">
-            <Story />
-          </div>
-        </FundActionDialogProvider>
-      </ActionMenuProvider>
-    ),
+    (Story) => {
+      const queryClient = new QueryClient({
+        defaultOptions: { queries: { retry: false } },
+      });
+      return (
+        <QueryClientProvider client={queryClient}>
+          <ActionMenuProvider>
+            <FundActionDialogProvider>
+              <div className="flex items-center justify-end p-4 border rounded">
+                <Story />
+              </div>
+            </FundActionDialogProvider>
+          </ActionMenuProvider>
+        </QueryClientProvider>
+      );
+    },
   ],
 };

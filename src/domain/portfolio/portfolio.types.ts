@@ -5,6 +5,11 @@ export interface PortfolioItem {
   totalValue: number;
 }
 
+export interface DisplayPortfolioItem extends Omit<PortfolioItem, 'totalValue'> {
+  category: string;
+  totalValue: string;
+}
+
 export interface Portfolio {
   items: PortfolioItem[];
 }

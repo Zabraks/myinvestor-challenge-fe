@@ -24,7 +24,7 @@ export const TransferFundForm = ({ action, onSuccess, data, fundId }: FundAction
     },
   });
 
-  const { mutate: transferFund } = useTransferFund(onSuccess);
+  const { mutate: transferFund } = useTransferFund(onSuccess ?? (() => {}));
 
   if (!data || !fundId) return null;
 

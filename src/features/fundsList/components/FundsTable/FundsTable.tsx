@@ -1,8 +1,16 @@
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@ui/Table/Table';
 import { useColumns } from '@features/fundsList/components/FundsTable/hooks/useColumns';
+import type { Fund } from '@domain/fund';
+import type { SortingState, OnChangeFn } from '@tanstack/react-table';
 
-export const FundsTable = ({ data, sorting, handleSorting }) => {
+interface FundsTableProps {
+  data: Fund[];
+  sorting: SortingState;
+  handleSorting: OnChangeFn<SortingState>;
+}
+
+export const FundsTable = ({ data, sorting, handleSorting }: FundsTableProps) => {
   const columns = useColumns();
 
   const table = useReactTable({

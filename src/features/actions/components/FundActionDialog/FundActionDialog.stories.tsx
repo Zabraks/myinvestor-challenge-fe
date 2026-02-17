@@ -1,77 +1,47 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { FundActionDialog } from './FundActionDialog';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@ui/Dialog/Dialog';
+import { Button } from '@ui/Button/Button';
 
-/**
- * FundActionDialog es un diálogo modal que se muestra para realizar
- * diferentes acciones sobre un fondo: comprar, vender, traspasar o ver detalles.
- */
-const meta: Meta<typeof FundActionDialog> = {
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false } },
+});
+
+const meta: Meta = {
   title: 'Features/Actions/FundActionDialog',
-  component: FundActionDialog,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {
-    onClose: () => undefined,
-    fund: {
-      id: '1',
-      name: 'Fondo de Inversión Global',
-      value: 15.5,
-      YTD: 8.5,
-    },
-  },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;
-type Story = StoryObj<typeof FundActionDialog>;
+type Story = StoryObj;
 
-/**
- * Diálogo para comprar un fondo.
- */
-export const BuyAction: Story = {
-  args: {
-    open: true,
-    action: 'buy',
-  },
-};
+export const Default: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
 
-/**
- * Diálogo para vender un fondo.
- */
-export const SellAction: Story = {
-  args: {
-    open: true,
-    action: 'sell',
-  },
-};
-
-/**
- * Diálogo para traspasar un fondo.
- */
-export const TransferAction: Story = {
-  args: {
-    open: true,
-    action: 'transfer',
-  },
-};
-
-/**
- * Diálogo para ver detalles de un fondo.
- */
-export const ShowDetails: Story = {
-  args: {
-    open: true,
-    action: 'show',
-  },
-};
-
-/**
- * Diálogo cerrado (no visible).
- */
-export const Closed: Story = {
-  args: {
-    open: false,
-    action: 'buy',
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button>Abrir diálogo</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Acción sobre fondo</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">Este es un diálogo de ejemplo.</p>
+        </DialogContent>
+      </Dialog>
+    );
   },
 };

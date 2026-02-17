@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/funds-api.fixture';
 import { SELECTORS } from '../../../utils/selectors';
-import type { MockBuyFund } from '../../../utils/mock-data';
+import type { CapturedFundAction } from '../../../utils/mock-data';
 
 test.describe('Actions - Buy fund', () => {
   test.describe('from Funds page', () => {
@@ -31,7 +31,7 @@ test.describe('Actions - Buy fund', () => {
     });
 
     test('should buyFund form and buy a fund successfully', async ({ fundsPage, mockBuyApi }) => {
-      let capturedPayload: MockBuyFund | null = null;
+      let capturedPayload: CapturedFundAction | null = null;
 
       await mockBuyApi({
         onCapture: (data) => {
@@ -49,7 +49,8 @@ test.describe('Actions - Buy fund', () => {
 
       const toastMsg = fundsPage.getByText(SELECTORS.toastMsg.buy.success);
 
-      expect(capturedPayload.quantity).toBe(100);
+      expect(capturedPayload).not.toBeNull();
+      expect(capturedPayload!.quantity).toBe(100);
       await expect(dialog).toBeHidden();
       await expect(toastMsg).toBeVisible();
     });
@@ -170,7 +171,7 @@ test.describe('Actions - Buy fund', () => {
     });
 
     test('should buyFund form and buy a fund successfully', async ({ fundsPage, mockBuyApi }) => {
-      let capturedPayload: MockBuyFund | null = null;
+      let capturedPayload: CapturedFundAction | null = null;
 
       await mockBuyApi({
         onCapture: (data) => {
@@ -188,7 +189,8 @@ test.describe('Actions - Buy fund', () => {
 
       const toastMsg = fundsPage.getByText(SELECTORS.toastMsg.buy.success);
 
-      expect(capturedPayload.quantity).toBe(100);
+      expect(capturedPayload).not.toBeNull();
+      expect(capturedPayload!.quantity).toBe(100);
       await expect(dialog).toBeHidden();
       await expect(toastMsg).toBeVisible();
     });

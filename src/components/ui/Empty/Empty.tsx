@@ -1,4 +1,3 @@
-//TODO: adoptar componentes para InfoSection
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@lib/utils/utils';

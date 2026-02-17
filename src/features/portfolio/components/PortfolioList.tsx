@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import type { PortfolioItem as PortfolioItemType, CategoryGroup } from '@domain/portfolio';
+import type { DisplayPortfolioItem, CategoryGroup } from '@domain/portfolio';
 import { ItemGroup } from '@ui/Item/Item';
 
 import { PortfolioItem } from '@features/portfolio/components/PortfolioItem';
@@ -8,7 +8,7 @@ import { BanknoteX } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { SubHeader } from '@ui/SubHeader/SubHeader';
 
-export const PortfolioList = ({ items }: { items: CategoryGroup<PortfolioItemType>[] }) => {
+export const PortfolioList = ({ items }: { items: CategoryGroup<DisplayPortfolioItem>[] }) => {
   const navigate = useNavigate();
 
   return (

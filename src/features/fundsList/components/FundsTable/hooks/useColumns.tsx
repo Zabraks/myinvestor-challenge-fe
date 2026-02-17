@@ -1,6 +1,9 @@
 import { useMemo } from 'react';
 import { RowActionsMenu } from '@features/fundsList/components/FundsTable/RowActionsMenu/RowActionsMenu';
 import { ColumnHeader } from '@features/fundsList/components/FundsTable/ColumnHeader/ColumnHeader';
+import { getProfitabilityColor } from '@lib/utils/utils';
+import type { ColumnDef } from '@tanstack/react-table';
+import type { Fund } from '@domain/fund';
 
 export type Payment = {
   id: string;
@@ -9,18 +12,14 @@ export type Payment = {
   email: string;
 };
 
-export const useColumns = () => {
+export const useColumns = (): ColumnDef<Fund>[] => {
   return useMemo(
     () => [
       {
         accessorKey: 'name',
         header: ({ column }) => <ColumnHeader column={column} title="Nombre" />,
         cell: ({ row }) => {
-          return (
-            <div>
-              <span className="font-bold">{row.original.name}</span>
-            </div>
-          );
+          return <span className="font-bold">{row.original.name}</span>;
         },
       },
       {
@@ -38,18 +37,34 @@ export const useColumns = () => {
       {
         accessorKey: 'YTD',
         header: ({ column }) => <ColumnHeader column={column} title="2026" />,
+        cell: ({ row }) => {
+          const value = row.original.YTD;
+          return <span className={getProfitabilityColor(value)}>{`${value} %`}</span>;
+        },
       },
       {
         accessorKey: 'oneYear',
         header: ({ column }) => <ColumnHeader column={column} title="1A" />,
+        cell: ({ row }) => {
+          const value = row.original.oneYear;
+          return <span className={getProfitabilityColor(value)}>{`${value} %`}</span>;
+        },
       },
       {
         accessorKey: 'threeYears',
         header: ({ column }) => <ColumnHeader column={column} title="3A" />,
+        cell: ({ row }) => {
+          const value = row.original.threeYears;
+          return <span className={getProfitabilityColor(value)}>{`${value} %`}</span>;
+        },
       },
       {
         accessorKey: 'fiveYears',
         header: ({ column }) => <ColumnHeader column={column} title="5A" />,
+        cell: ({ row }) => {
+          const value = row.original.fiveYears;
+          return <span className={getProfitabilityColor(value)}>{`${value} %`}</span>;
+        },
       },
       {
         id: 'actions',

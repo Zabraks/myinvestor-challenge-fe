@@ -61,7 +61,7 @@ describe('adaptSorting', () => {
       const result = adaptSorting(sorting);
 
       expect(result).toEqual({
-        field: 'YTD',
+        field: 'profitability.YTD',
         direction: 'desc',
       });
     });
@@ -98,13 +98,25 @@ describe('adaptSorting', () => {
     });
   });
 
-  describe('field name preservation', () => {
-    it('should preserve exact field names with camelCase', () => {
-      const sorting: SortingState = [{ id: 'threeYears', desc: false }];
+  describe('field name mapping', () => {
+    it('should map profitability fields to API format', () => {
+      const ytdSorting: SortingState = [{ id: 'YTD', desc: false }];
+      const oneYearSorting: SortingState = [{ id: 'oneYear', desc: false }];
+      const threeYearsSorting: SortingState = [{ id: 'threeYears', desc: false }];
+      const fiveYearsSorting: SortingState = [{ id: 'fiveYears', desc: false }];
+
+      expect(adaptSorting(ytdSorting)?.field).toBe('profitability.YTD');
+      expect(adaptSorting(oneYearSorting)?.field).toBe('profitability.oneYear');
+      expect(adaptSorting(threeYearsSorting)?.field).toBe('profitability.threeYears');
+      expect(adaptSorting(fiveYearsSorting)?.field).toBe('profitability.fiveYears');
+    });
+
+    it('should preserve non-profitability field names', () => {
+      const sorting: SortingState = [{ id: 'name', desc: false }];
 
       const result = adaptSorting(sorting);
 
-      expect(result?.field).toBe('threeYears');
+      expect(result?.field).toBe('name');
     });
 
     it('should preserve exact field names with special characters', () => {

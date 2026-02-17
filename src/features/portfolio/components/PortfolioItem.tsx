@@ -1,4 +1,4 @@
-import type { PortfolioItem as PortfolioItemType } from '@domain/portfolio';
+import type { DisplayPortfolioItem } from '@domain/portfolio';
 import {
   Item,
   ItemContent,
@@ -16,16 +16,16 @@ import { Button } from '@ui/Button/Button';
 import { EllipsisVertical, ChartNoAxesCombined, Coins } from 'lucide-react';
 
 interface PortfolioItemProps {
-  item: PortfolioItemType;
+  item: DisplayPortfolioItem;
 }
 
 interface BasicItemProps {
-  data: PortfolioItemType;
+  data: DisplayPortfolioItem;
   mode: InteractionMode;
 }
 
 const BasicItem = ({ data, mode }: BasicItemProps) => {
-  const { open } = useActionMenu<PortfolioItemType>();
+  const { open } = useActionMenu<DisplayPortfolioItem>();
 
   const openMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
