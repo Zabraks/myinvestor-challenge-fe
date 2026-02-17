@@ -1,7 +1,7 @@
 //TODO: adoptar componentes para InfoSection
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils/utils';
+import { cn } from '@lib/utils/utils';
 
 function Empty({ className, ...props }: React.ComponentProps<'div'>) {
   return (

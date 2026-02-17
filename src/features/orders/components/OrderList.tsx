@@ -1,6 +1,6 @@
 import { ItemGroup } from '@ui/Item/Item';
-import { OrderItem } from '@features/orders/components/OrderItem';
 import { InfoSection } from '@ui/InfoSection/InfoSection';
+import { OrderItem } from '@features/orders/components/OrderItem';
 import type { OrderView } from '@domain/order';
 
 import { Logs } from 'lucide-react';
