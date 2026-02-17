@@ -40,8 +40,6 @@ export const Default: Story = {
     data: {
       id: 'fund-1',
       name: 'Fondo Global Tech',
-      value: 125.5,
-      YTD: 8.5,
       quantity: 100,
     },
     onSuccess: () => {},

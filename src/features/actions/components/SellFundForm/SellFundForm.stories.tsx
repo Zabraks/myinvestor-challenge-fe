@@ -39,8 +39,6 @@ export const Default: Story = {
     data: {
       id: 'fund-2',
       name: 'Fondo Salud Europa',
-      value: 89.25,
-      YTD: 3.2,
       quantity: 10,
     },
     onSuccess: () => {},
@@ -53,8 +51,6 @@ export const SingleUnit: Story = {
     data: {
       id: 'fund-3',
       name: 'Fondo Monetario Seguro',
-      value: 10.05,
-      YTD: 0.5,
       quantity: 1,
     },
     onSuccess: () => {},
